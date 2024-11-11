@@ -10,17 +10,17 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-	container: {
-		center: true,
-		padding: "2rem",
-        screens: {
-			sm: "100%",     // Full width pour les petits écrans
-			md: "728px",    // Largeur fixe pour les écrans moyens
-			lg: "600px",    // Largeur fixe pour les écrans larges
-			xl: "600px",   // Largeur fixe pour les très grands écrans
-			"2xl": "600px" // Largeur fixe pour les écrans XXL
-		  },
-	},
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        sm: "100%", // Full width pour les petits écrans
+        md: "728px", // Largeur fixe pour les écrans moyens
+        lg: "600px", // Largeur fixe pour les écrans larges
+        xl: "600px", // Largeur fixe pour les très grands écrans
+        "2xl": "600px", // Largeur fixe pour les écrans XXL
+      },
+    },
     extend: {
       colors: {
         background: "hsl(var(--background))",
@@ -84,7 +84,7 @@ export default {
       },
     },
   },
-  plugins: [addVariablesForColors],
+  plugins: [addVariablesForColors, require("@tailwindcss/typography")],
 } satisfies Config;
 
 // Define the plugin function with types

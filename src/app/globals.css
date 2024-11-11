@@ -2,6 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
+.markdown-body {
+  @apply text-base text-foreground leading-relaxed;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+  @apply text-lg font-bold my-4;
+}
+
+.markdown-body p {
+  @apply mb-4;
+}
+
+.markdown-body a {
+  @apply text-blue-500 underline;
+}
+
+.markdown-body ul {
+  @apply list-disc pl-5 my-2;
+}
+
+.markdown-body ol {
+  @apply list-decimal pl-5 my-2;
+}
+
+/* Styles pour le code inline */
+.markdown-body code {
+  @apply bg-gray-200 text-gray-800 px-1 py-0.5 rounded text-sm font-mono;
+}
+
+/* Styles pour les blocs de code */
+.markdown-body pre {
+  @apply bg-gray-900 text-white p-4 rounded-lg overflow-x-auto font-mono text-sm;
+}
+
+/* Styles pour les tables */
+.markdown-body table {
+  @apply w-full border-collapse my-4;
+}
+
+.markdown-body thead {
+  @apply bg-gray-100;
+}
+
+.markdown-body th,
+.markdown-body td {
+  @apply border border-gray-300 px-4 py-2 text-left;
+}
+
+.markdown-body tbody tr:nth-child(even) {
+  @apply bg-gray-50;
+}
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;

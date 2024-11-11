@@ -8,6 +8,7 @@ import { Send } from "lucide-react";
 import { AuroraBackground } from "@/components/ui/aurora-background";
 import { Weather } from "@/components/weather";
 import { ModeToggle } from '@/components/ui/theme-switch';
+import ReactMarkdown from 'react-markdown';
 
 export default function Home() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
@@ -38,14 +39,14 @@ export default function Home() {
             ) : (
               <div className="flex flex-col space-y-4 pt-[9vh] md:pt-[5vh] pb-[30vh]">
                 {messages.map((message) => (
-                  <div key={message.id} className={`flex container ${message.role === "user" ? "justify-end" : "justify-start"} items-end gap-2`}>
+                  <div key={message.id} className={`flex container ${message.role === "user" ? "justify-end" : "justify-start"} items-end gap-2 p-0`}>
                     {message.role === "assistant" && (
                       <Avatar className="hidden md:flex h-8 w-8">
                         <AvatarFallback className='dark:text-foreground'>AI</AvatarFallback>
                       </Avatar>
                     )}
-                    <div className={`max-w-[90%] rounded-2xl px-4 py-2 ${message.role === "user" ? "bg-white/10 text-foreground" : "bg-zinc-800/10 text-foreground"} backdrop-blur-md`}>
-                      <p>{message.content}</p>
+                    <div className={`max-w-[80%] rounded-2xl px-4 py-2 ${message.role === "user" ? "bg-black/15 dark:bg-white/15 text-foreground" : "bg-black/5 dark:bg-white/5 text-foreground"} backdrop-blur-md markdown-body`}>
+                      <ReactMarkdown>{message.content}</ReactMarkdown>
                       {message.toolInvocations?.map(toolInvocation => {
                         const { toolName, toolCallId, state } = toolInvocation;
 
