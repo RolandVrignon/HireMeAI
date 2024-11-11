@@ -3,40 +3,41 @@
 import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
-
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { motion } from "framer-motion"
 
 export function ModeToggle() {
-  const { setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
+  const isDark = theme === "dark"
+
+  const toggleTheme = () => {
+    setTheme(isDark ? "light" : "dark")
+  }
 
   return (
-    <div className="absolute top-10 right-10">
-    <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon">
-            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-            </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => setTheme("light")}>
-            Light
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme("dark")}>
-            Dark
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setTheme("system")}>
-            System
-            </DropdownMenuItem>
-        </DropdownMenuContent>
-        </DropdownMenu>
-    </div>
+    <motion.button
+      className={`w-16 h-8 rounded-full p-1 transition-colors duration-200 ${
+        isDark ? "bg-background/20 backdrop-blur-md" : "bg-gray-200"
+      }`}
+      onClick={toggleTheme}
+      aria-label="Toggle dark mode"
+    >
+      <motion.div
+        className="w-6 h-6 rounded-full bg-white shadow-md flex items-center justify-center"
+        animate={{
+          x: isDark ? "130%" : "0%",
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 700,
+          damping: 30,
+        }}
+      >
+        {isDark ? (
+          <Moon className="w-4 h-4 text-blue-600" />
+        ) : (
+          <Sun className="w-4 h-4 text-yellow-500" />
+        )}
+      </motion.div>
+    </motion.button>
   )
 }
