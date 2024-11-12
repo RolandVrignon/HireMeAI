@@ -1,12 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import { Message } from 'ai/react';
 import MessageItem from './MessageItem';
+import PromptCarousel from './PromptCarousel';
 
 interface MessageListProps {
     messages: Message[];
+    onPromptSelect: (content: string) => void;
+    onSubmit: () => void;
+    isLoading: boolean;
 }
 
-const MessageList: React.FC<MessageListProps> = ({ messages }) => {
+const MessageList: React.FC<MessageListProps> = ({ messages, onPromptSelect, onSubmit, isLoading }) => {
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const [autoScroll, setAutoScroll] = React.useState(true);
@@ -41,14 +45,20 @@ const MessageList: React.FC<MessageListProps> = ({ messages }) => {
     };
 
     return (
-        <div 
+        <div
             ref={containerRef}
             onScroll={handleScroll}
-            className="flex container flex-col space-y-4 pt-[9vh] md:pt-[5vh] pb-[30vh] overflow-y-auto h-full"
+            className="flex flex-col space-y-4 pt-[9vh] md:pt-[5vh] pb-[30vh] overflow-y-auto h-full"
         >
             {messages.map((message) => (
                 <MessageItem key={message.id} message={message} />
             ))}
+            {!isLoading && (
+                <div className="container">
+                    <PromptCarousel onPromptSelect={onPromptSelect} onSubmit={onSubmit} />
+                </div>
+            )
+            }
             <div ref={messagesEndRef} />
         </div>
     );

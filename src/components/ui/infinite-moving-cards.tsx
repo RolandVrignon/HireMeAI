@@ -2,13 +2,15 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
-import { Badge } from '@/components/ui/badge';
+import { ArrowRightIcon } from 'lucide-react';
+import { HoverBorderGradient } from "./hover-border-gradient";
 
 export const InfiniteMovingCards = ({
   items,
   direction = "left",
   speed = "fast",
   pauseOnHover = true,
+  onPromptSelect,
   className,
 }: {
   items: {
@@ -18,34 +20,21 @@ export const InfiniteMovingCards = ({
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
   pauseOnHover?: boolean;
+  onPromptSelect: (content: string) => void;
   className?: string;
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
+  const [duplicatedItems, setDuplicatedItems] = useState(items);
 
   useEffect(() => {
-    addAnimation();
-  }, []);
-  
-  const [start, setStart] = useState(false);
-  
-  function addAnimation() {
-    if (containerRef.current && scrollerRef.current) {
-      const scrollerContent = Array.from(scrollerRef.current.children);
-
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
-      });
-
+    setDuplicatedItems([...items, ...items]);
+    if (containerRef.current) {
       getDirection();
       getSpeed();
-      setStart(true);
     }
-  }
-
+  }, [items]);
+  
   const getDirection = () => {
     if (containerRef.current) {
       if (direction === "left") {
@@ -74,6 +63,12 @@ export const InfiniteMovingCards = ({
     }
   };
 
+  const handleItemClick = (content: string) => {
+    if (onPromptSelect) {
+      onPromptSelect(content);
+    }
+  };
+
   return (
     <div
       ref={containerRef}
@@ -85,22 +80,24 @@ export const InfiniteMovingCards = ({
       <ul
         ref={scrollerRef}
         className={cn(
-          "flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap",
-          start && "animate-scroll ",
+          "flex min-w-full shrink-0 gap-4 w-max flex-nowrap animate-scroll",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
-        {items.map((item, idx) => (
+        {duplicatedItems.map((item, idx) => (
           <li
             className="flex-shrink-0"
-            key={idx}
+            key={`${item.title}-${idx}`}
           >
-            <Badge
-              className="cursor-pointer"
-              onClick={() => console.log(item.content)}
+            <div
+              className={cn('group rounded-full border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800')}
+              onClick={() => handleItemClick(item.content)}
             >
-              {item.title}
-            </Badge>
+              <HoverBorderGradient className="inline-flex items-center justify-center px-4 py-1 transition ease-out">
+                <span>{item.title}</span>
+                <ArrowRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+              </HoverBorderGradient>
+            </div>
           </li>
         ))}
       </ul>

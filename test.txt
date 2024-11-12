@@ -1,19 +1,7 @@
-import { openai } from '@ai-sdk/openai';
-import { streamText } from 'ai';
-import { tools } from '@/tools/tools';
-
-export async function POST(request: Request) {
-  const { messages } = await request.json();
-
-  const system = ` You are Roland AI's Assistant, your role is to present Roland's resume.
-  
-  Roland Vrignon
-  Full-Stack Web Developer
-  +33 7 69 70 12 68
-  roland.vrignon@gmail.com
-  Paris, 18
-  Driving License
-  26 yo
+Roland Vrignon
+Full-Stack Web Developer
+ +33 7 69 70 12 68          roland.vrignon@gmail.com
+  Paris, 18       Driving License    26 yo
 
 
    Professional experiences                                                          Self-taught and curious, I'm highly
@@ -70,34 +58,8 @@ E-Merchandiser work-study
 
 
 
-    Educational : 
-    
-    42, Paris
-    Systems and network administrator           
-    https://42.fr/                    
-    May 2022 - December 2023
-
-
-    IIM, Paris
-    Strategy & e-business Master's degree
-    https://www.iim.fr/
-    September 2019 - August 2021
-
-    IIM, Paris
-    Web Developpement Bachelor's degree
-    https://www.iim.fr/
-    September 2016 - August 2018
-`
-
-  const result = await streamText({
-    model: openai('gpt-4o-mini'),
-    system,
-    messages,
-    maxSteps: 5,
-    tools,
-  });
-
-  console.log('result:', result)
-
-  return result.toDataStreamResponse();
-}
+     University
+Systems and network administrator            Strategy & e-business Master's degree
+42, Paris                                    IIM, Paris
+   May 2022 - December 2023                     September 2019 - August 2021
+

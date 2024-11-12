@@ -4,15 +4,13 @@ import PromptCarousel from './PromptCarousel';
 
 interface EmptyStateProps {
     onPromptSelect: (content: string) => void;
+    onSubmit: () => void;
 }
 
-const EmptyState: React.FC<EmptyStateProps> = ({ onPromptSelect }) => {
+const EmptyState: React.FC<EmptyStateProps> = ({ onPromptSelect, onSubmit }) => {
     return (
         <div className="absolute container top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
             <div className="flex flex-col items-center space-y-8">
-                <Avatar className="h-12 w-12">
-                    <AvatarFallback className="text-foreground">👋</AvatarFallback>
-                </Avatar>
                 <div className="space-y-4 text-center">
                     <h1 className="text-xl text-foreground font-semibold">
                         Hi it's Roland's AI Assistant<br />Talk with me to know me better!
@@ -21,7 +19,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({ onPromptSelect }) => {
                         Select a topic or ask me anything about Roland's development expertise
                     </p>
                 </div>
-                <PromptCarousel onPromptSelect={onPromptSelect} />
+                <PromptCarousel onPromptSelect={onPromptSelect} onSubmit={onSubmit} />
             </div>
         </div>
     );
