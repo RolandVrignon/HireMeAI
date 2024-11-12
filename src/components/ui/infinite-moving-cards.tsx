@@ -10,7 +10,7 @@ export const InfiniteMovingCards = ({
   direction = "left",
   speed = "fast",
   pauseOnHover = true,
-  onPromptSelect,
+  handleSubmitPrePrompt,
   className,
 }: {
   items: {
@@ -20,7 +20,7 @@ export const InfiniteMovingCards = ({
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
   pauseOnHover?: boolean;
-  onPromptSelect: (content: string) => void;
+  handleSubmitPrePrompt: (content : string) => void;
   className?: string;
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -64,8 +64,9 @@ export const InfiniteMovingCards = ({
   };
 
   const handleItemClick = (content: string) => {
-    if (onPromptSelect) {
-      onPromptSelect(content);
+    console.log('content:', content)
+    if (handleSubmitPrePrompt) {
+        handleSubmitPrePrompt(content);
     }
   };
 

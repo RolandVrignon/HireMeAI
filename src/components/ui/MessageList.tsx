@@ -2,15 +2,15 @@ import React, { useEffect, useRef } from 'react';
 import { Message } from 'ai/react';
 import MessageItem from './MessageItem';
 import PromptCarousel from './PromptCarousel';
+import { ClientMessage } from '@/app/actions';
 
 interface MessageListProps {
-    messages: Message[];
-    onPromptSelect: (content: string) => void;
-    onSubmit: () => void;
-    isLoading: boolean;
+    conversation: any,
+    isLoading: boolean,
+    handleSubmitPrePrompt: (content : string) => void
 }
 
-const MessageList: React.FC<MessageListProps> = ({ messages, onPromptSelect, onSubmit, isLoading }) => {
+const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, handleSubmitPrePrompt}) => {
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const [autoScroll, setAutoScroll] = React.useState(true);
@@ -24,7 +24,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages, onPromptSelect, onS
 
     useEffect(() => {
         scrollToBottom();
-    }, [messages]);
+    }, [conversation, isLoading]);
 
     const handleScroll = () => {
         if (containerRef.current) {
@@ -50,15 +50,14 @@ const MessageList: React.FC<MessageListProps> = ({ messages, onPromptSelect, onS
             onScroll={handleScroll}
             className="flex flex-col space-y-4 pt-[9vh] md:pt-[5vh] pb-[30vh] overflow-y-auto h-full"
         >
-            {messages.map((message) => (
-                <MessageItem key={message.id} message={message} />
+            {conversation.map((message: ClientMessage) => (
+                <MessageItem message={message} />
             ))}
-            {!isLoading && (
+            { !isLoading && (
                 <div className="container">
-                    <PromptCarousel onPromptSelect={onPromptSelect} onSubmit={onSubmit} />
+                    <PromptCarousel handleSubmitPrePrompt={handleSubmitPrePrompt} />
                 </div>
-            )
-            }
+            )}
             <div ref={messagesEndRef} />
         </div>
     );

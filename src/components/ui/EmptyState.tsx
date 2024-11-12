@@ -3,11 +3,10 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import PromptCarousel from './PromptCarousel';
 
 interface EmptyStateProps {
-    onPromptSelect: (content: string) => void;
-    onSubmit: () => void;
+    handleSubmitPrePrompt: (content : string) => void
 }
 
-const EmptyState: React.FC<EmptyStateProps> = ({ onPromptSelect, onSubmit }) => {
+const EmptyState: React.FC<EmptyStateProps> = ({ handleSubmitPrePrompt }) => {
     return (
         <div className="absolute container top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
             <div className="flex flex-col items-center space-y-8">
@@ -19,7 +18,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({ onPromptSelect, onSubmit }) => 
                         Select a topic or ask me anything about Roland's development expertise
                     </p>
                 </div>
-                <PromptCarousel onPromptSelect={onPromptSelect} onSubmit={onSubmit} />
+                <PromptCarousel handleSubmitPrePrompt={handleSubmitPrePrompt} />
             </div>
         </div>
     );

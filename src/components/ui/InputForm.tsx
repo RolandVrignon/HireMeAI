@@ -7,18 +7,18 @@ import { Send, Square } from "lucide-react"
 
 interface InputFormProps {
     input: string;
-    handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    setInput: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     handleSubmit: (e: React.FormEvent) => void;
     isLoading: boolean;
-    stop: () => void;
+    handleStop: () => void;
 }
 
 const InputForm: React.FC<InputFormProps> = ({
     input,
-    handleInputChange,
+    setInput,
     handleSubmit,
     isLoading,
-    stop,
+    handleStop,
 }) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -45,10 +45,15 @@ const InputForm: React.FC<InputFormProps> = ({
         }
     };
 
+    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setInput(e);
+    };
+
     return (
         <div className="group relative flex w-full items-end">
             <div className="flex w-full flex-col transition-colors contain-inline-size cursor-text rounded-3xl px-2.5 py-1 bg-blue-700/5 dark:bg-white/5 backdrop-blur-md">
                 {!isLoading && (
+
                     <form onSubmit={onSubmit} className="flex min-h-[44px] items-end px-2">
                         <div className="max-w-full flex-1">
                             <Textarea
@@ -62,28 +67,16 @@ const InputForm: React.FC<InputFormProps> = ({
                         </div>
                     </form>
                 )}
-
                 <div className="flex h-[44px] items-center justify-end">
-                    {isLoading ? (
-                        <Button
-                            size="icon"
-                            onClick={stop}
-                            className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white hover:opacity-70 dark:bg-white dark:text-black"
-                            aria-label="Stop generating"
-                        >
-                            <Square className="h-4 w-4" />
-                        </Button>
-                    ) : (
-                        <Button
-                            size="icon"
-                            onClick={onSubmit}
-                            className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white hover:opacity-70 dark:bg-white dark:text-black disabled:bg-[#b4b7eb] disabled:text-[#f4f4f4] dark:disabled:bg-zinc-600 dark:disabled:text-zinc-400"
-                            aria-label="Send message"
-                            disabled={!input.trim()}
-                        >
-                            <Send className="h-4 w-4" />
-                        </Button>
-                    )}
+                    <Button
+                        size="icon"
+                        onClick={onSubmit}
+                        className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-white hover:opacity-70 dark:bg-white dark:text-black disabled:bg-[#b4b7eb] disabled:text-[#f4f4f4] dark:disabled:bg-zinc-600 dark:disabled:text-zinc-400"
+                        aria-label="Send message"
+                        disabled={!input.trim() || isLoading}
+                    >
+                        <Send className="h-4 w-4" />
+                    </Button>
                 </div>
             </div>
         </div>

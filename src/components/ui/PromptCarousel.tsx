@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import { InfiniteMovingCards } from './infinite-moving-cards';
 
 interface Prompt {
@@ -48,15 +48,10 @@ const basePrompts: Prompt[] = [
 const prompts = shuffleArray(basePrompts);
 
 interface PromptCarouselProps {
-    onPromptSelect: (content: string) => void;
-    onSubmit: () => void;
+    handleSubmitPrePrompt: (content : string) => void
 }
 
-const PromptCarousel: React.FC<PromptCarouselProps> = ({ onPromptSelect, onSubmit }) => {
-    const handlePromptClick = (content: string) => {
-        onPromptSelect(content);
-    };
-
+const PromptCarousel: React.FC<PromptCarouselProps> = ({ handleSubmitPrePrompt }) => {
     return (
         <InfiniteMovingCards 
             items={prompts.map(prompt => ({
@@ -66,7 +61,7 @@ const PromptCarousel: React.FC<PromptCarouselProps> = ({ onPromptSelect, onSubmi
             direction="left"
             speed="slow"
             pauseOnHover={false}
-            onPromptSelect={handlePromptClick}
+            handleSubmitPrePrompt={handleSubmitPrePrompt}
             className="my-4"
         />
     );
