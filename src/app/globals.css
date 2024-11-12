@@ -6,10 +6,17 @@
   @apply text-base text-foreground leading-relaxed;
 }
 
-.markdown-body h1,
-.markdown-body h2,
+.markdown-body h1 {
+  @apply text-2xl my-4;
+  font-family: 'Righteous';
+}
+
+.markdown-body h2 {
+  @apply text-lg font-bold my-3;
+}
+
 .markdown-body h3 {
-  @apply text-lg font-bold my-4;
+  @apply text-lg font-bold my-2;
 }
 
 .markdown-body p {
@@ -56,6 +63,12 @@
   @apply bg-gray-50;
 }
 
+.markdown-body p:last-child,
+.markdown-body ol:last-child,
+.markdown-body ul:last-child,
+.markdown-body table:last-child {
+  @apply mb-0;
+}
 
 @layer base {
   :root {
