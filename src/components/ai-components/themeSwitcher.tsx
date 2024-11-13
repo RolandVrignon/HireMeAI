@@ -22,7 +22,7 @@ export const ThemeSwitcher = ({ themeProvided }: ThemeProps) => {
                 setThemeChanged(false);
             }
             setIsLoading(false);
-        }, 2000)
+        }, 1000)
     }, []);
 
     if (!isLoading && !themeChanged) {
