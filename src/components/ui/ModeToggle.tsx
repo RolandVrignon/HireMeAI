@@ -32,11 +32,6 @@ export function ModeToggle() {
           damping: 30,
         }}
       >
-        {isDark ? (
-          <Moon className="w-4 h-4 text-blue-600" />
-        ) : (
-          <Sun className="w-4 h-4 text-yellow-500" />
-        )}
       </motion.div>
     </motion.button>
   )

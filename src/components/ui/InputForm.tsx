@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Send, Square } from "lucide-react"
-
+import Link from "next/link"
 interface InputFormProps {
     input: string;
     setInput: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -50,7 +50,7 @@ const InputForm: React.FC<InputFormProps> = ({
     };
 
     return (
-        <div className="group relative flex w-full items-end">
+        <div className="group max-h-[20vh] relative flex w-full items-end">
             <div className="flex w-full flex-col transition-colors contain-inline-size cursor-text rounded-3xl px-2.5 py-1 bg-blue-700/5 dark:bg-white/5 backdrop-blur-md">
                 {!isLoading && (
 
@@ -62,7 +62,7 @@ const InputForm: React.FC<InputFormProps> = ({
                                 onChange={handleInputChange}
                                 onKeyDown={handleKeyDown}
                                 placeholder="Message Roland AI"
-                                className="block focus:ring-offset-transparent min-h-[44px] w-full resize-none rounded-none border-0 bg-transparent px-0 py-2 text-gray-700 dark:text-gray-200 placeholder:text-zinc-500 dark:placeholder:text-zinc-400"
+                                className="placeholder:font-bold placeholder:font-doto block font-light focus:ring-offset-transparent min-h-[44px] w-full resize-none rounded-none border-0 bg-transparent px-0 py-2 text-gray-700 dark:text-gray-200 placeholder:text-zinc-500 dark:placeholder:text-zinc-400"
                             />
                         </div>
                     </form>
@@ -78,6 +78,9 @@ const InputForm: React.FC<InputFormProps> = ({
                         <Send className="h-4 w-4" />
                     </Button>
                 </div>
+                <Link href="https://github.com/RolandVrignon" target="_blank" className="font-doto text-xs w-full text-gray-400 text-center">
+                    Made with love and coffee
+                </Link>
             </div>
         </div>
     );

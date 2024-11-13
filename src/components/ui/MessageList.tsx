@@ -48,13 +48,17 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
         <div
             ref={containerRef}
             onScroll={handleScroll}
-            className="flex flex-col space-y-4 pt-[9vh] md:pt-[5vh] pb-[30vh] overflow-y-auto h-full"
+            className="flex flex-col overflow-auto h-full hide-scrollbar pb-[30vh]"
         >
-            {conversation.map((message: ClientMessage) => (
-                <MessageItem message={message} />
+            {conversation.map((message: ClientMessage, index: number) => (
+                <MessageItem 
+                    key={index} 
+                    message={message} 
+                    isFirst={index === 0} // Ajout du paramètre isFirst
+                />
             ))}
             { !isLoading && (
-                <div className="container">
+                <div className="px-1">
                     <PromptCarousel handleSubmitPrePrompt={handleSubmitPrePrompt} />
                 </div>
             )}
@@ -63,4 +67,4 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
     );
 };
 
-export default MessageList; 
+export default MessageList;

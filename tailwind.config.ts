@@ -12,13 +12,12 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
       screens: {
         sm: "100%", // Full width pour les petits écrans
-        md: "728px", // Largeur fixe pour les écrans moyens
-        lg: "600px", // Largeur fixe pour les écrans larges
-        xl: "600px", // Largeur fixe pour les très grands écrans
-        "2xl": "600px", // Largeur fixe pour les écrans XXL
+        md: "520px", // Largeur fixe pour les écrans moyens
+        lg: "520px", // Largeur fixe pour les écrans larges
+        xl: "520px", // Largeur fixe pour les très grands écrans
+        "2xl": "520px", // Largeur fixe pour les écrans XXL
       },
     },
     extend: {
@@ -87,6 +86,11 @@ export default {
             transform: "translate(calc(-50% - 0.5rem))",
           },
         },
+      },
+      fontFamily: {
+        fira: ["'Fira Code'", "monospace"], // Associez "Fira Code"
+        doto: ["'Doto'", "sans-serif"], // Associez "Doto"
+        righteous: ["'Righteous'", "cursive"], // Associez "Righteous"
       },
     },
   },

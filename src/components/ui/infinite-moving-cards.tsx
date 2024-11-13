@@ -64,7 +64,6 @@ export const InfiniteMovingCards = ({
   };
 
   const handleItemClick = (content: string) => {
-    console.log('content:', content)
     if (handleSubmitPrePrompt) {
         handleSubmitPrePrompt(content);
     }
@@ -74,7 +73,7 @@ export const InfiniteMovingCards = ({
     <div
       ref={containerRef}
       className={cn(
-        "scroller container relative z-20 max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
+        "scroller relative z-20 max-w-7xl mt-2 overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
         className
       )}
     >
@@ -91,13 +90,12 @@ export const InfiniteMovingCards = ({
             key={`${item.title}-${idx}`}
           >
             <div
-              className={cn('group rounded-full border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800')}
+              className={cn('group rounded-full border bg-gray-700/5 text-black dark:text-white dark:bg-white/5 dark:hover:bg-white/10 dark:backdrop-blur-md text-base transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5')}
               onClick={() => handleItemClick(item.content)}
             >
-              <HoverBorderGradient className="inline-flex items-center justify-center px-4 py-1 transition ease-out">
-                <span>{item.title}</span>
-                <ArrowRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
-              </HoverBorderGradient>
+              <div className="flex items-center justify-center px-2 py-1 transition ease-out">
+                <span className="font-doto text-xs" >{item.title}</span>
+              </div>
             </div>
           </li>
         ))}

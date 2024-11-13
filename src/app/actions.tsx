@@ -8,6 +8,7 @@ import { generateId } from 'ai';
 import ReactMarkdown from 'react-markdown';
 import { ShowEducation } from './serverComponents/education';
 import { educationData } from '@/data/educationData';
+import { ThemeSwitcher } from '@/components/ai-components/themeSwitcher';
 
 const system = ` You are Roland AI's Assistant, your role is to present Roland's resume.
   
@@ -103,6 +104,7 @@ export interface ClientMessage {
   role: 'user' | 'assistant';
   display: ReactNode;
   loadingState: any;
+  date: Date;
 }
 
 export async function continueConversation(
@@ -150,8 +152,8 @@ export async function continueConversation(
 
           return (
             <div className="flex flex-col gap-2">
-                <p>{location}</p>
-                <p>67 degrees.</p>
+              <p>{location}</p>
+              <p>67 degrees.</p>
             </div>
           );
         },
@@ -159,7 +161,7 @@ export async function continueConversation(
       showEducation: {
         description: 'Display the education history of the resume.',
         parameters: z.object({
-            display: z.boolean(),
+          display: z.boolean(),
         }),
         generate: async (educations) => {
 
@@ -170,11 +172,33 @@ export async function continueConversation(
               content: `Displaying education history`,
             },
           ]);
-      
+
           loadingState.done({ loading: false });
 
           return (
             <ShowEducation educationData={educationData} />
+          );
+        }
+      },
+      changeTheme: {
+        description: 'Display the education history of the resume.',
+        parameters: z.object({
+          theme: z.enum(['dark', 'light']),
+        }),
+        generate: async ({ theme }) => {
+
+          history.done((messages: ServerMessage[]) => [
+            ...messages,
+            {
+              role: 'assistant',
+              content: `Changing Theme to ${theme} theme.`,
+            },
+          ]);
+
+          loadingState.done({ loading: false });
+
+          return (
+            <ThemeSwitcher themeProvided={theme} />
           );
         }
       }
@@ -186,5 +210,6 @@ export async function continueConversation(
     role: 'assistant',
     display: result.value,
     loadingState: loadingState.value,
+    date: new Date(),
   };
 }

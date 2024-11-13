@@ -3,12 +3,11 @@
 @tailwind utilities;
 
 .markdown-body {
-  @apply text-base leading-relaxed;
+  @apply text-base font-light text-sm leading-relaxed;
 }
 
 .markdown-body h1 {
   @apply text-2xl my-4;
-  font-family: 'Righteous';
 }
 
 .markdown-body h2 {
@@ -68,6 +67,23 @@
 .markdown-body ul:last-child,
 .markdown-body table:last-child {
   @apply mb-0;
+}
+
+.mask {
+  -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC); /* this fixes the overflow:hidden in Chrome/Opera */
+}
+
+.doto {
+  font-family: 'Doto';
+}
+
+.hide-scrollbar {
+  overflow: scroll;  /* Permet le défilement */
+  scrollbar-width: none;  /* Pour Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Masque la scrollbar sur les navigateurs basés sur Webkit (Chrome, Safari, etc.) */
 }
 
 @layer base {

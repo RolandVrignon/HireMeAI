@@ -20,27 +20,27 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 
 const basePrompts: Prompt[] = [
     {
-        title: "💻 Technologies",
+        title: "Technologies",
         content: "What are the main technologies and programming languages that Roland masters?"
     },
     {
-        title: "🔨 Projects",
+        title: "Projects",
         content: "Can you tell me about Roland's most significant projects and their technical challenges?"
     },
     {
-        title: "👨‍🎓 Experience",
+        title: "Experience",
         content: "What is Roland's professional experience in web development?"
     },
     {
-        title: "🏋️‍♂️ Motivation",
+        title: "Motivation",
         content: "What drives Roland as a developer and what are his career goals?"
     },
     {
-        title: "👨‍🎓 Skills",
+        title: "Skills",
         content: "What are Roland's key strengths as a developer?"
     },
     {
-        title: "🔨 Learning",
+        title: "Learning",
         content: "What is Roland's educational experience and what training has he undergone?"
     }
 ];
@@ -58,11 +58,10 @@ const PromptCarousel: React.FC<PromptCarouselProps> = ({ handleSubmitPrePrompt }
                 title: prompt.title,
                 content: prompt.content
             }))}
-            direction="left"
-            speed="slow"
+            direction="right"
+            speed="normal"
             pauseOnHover={false}
             handleSubmitPrePrompt={handleSubmitPrePrompt}
-            className="my-4"
         />
     );
 };

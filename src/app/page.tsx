@@ -6,7 +6,6 @@ import { useActions, useUIState, readStreamableValue } from 'ai/rsc';
 import { generateId } from 'ai';
 
 import { AuroraBackground } from "@/components/ui/aurora-background";
-import Navbar from '../components/ui/Navbar';
 import MessageList from '../components/ui/MessageList';
 import EmptyState from '../components/ui/EmptyState';
 import InputForm from '../components/ui/InputForm';
@@ -26,7 +25,7 @@ export default function Home() {
   const handleSubmitPrePrompt = async (content : string) => {
     setConversation((currentConversation: ClientMessage[]) => [
       ...currentConversation,
-      { id: generateId(), role: 'user', display: content },
+      { id: generateId(), role: 'user', display: content, date: new Date() },
     ]);
 
     setInput('');
@@ -58,7 +57,7 @@ export default function Home() {
   const handleSubmit = async () => {
     setConversation((currentConversation: ClientMessage[]) => [
       ...currentConversation,
-      { id: generateId(), role: 'user', display: input },
+      { id: generateId(), role: 'user', display: input, date: new Date() },
     ]);
 
     setInput('');
@@ -95,17 +94,18 @@ export default function Home() {
   };
 
   return (
-    <AuroraBackground>
-      <div className="flex flex-col h-screen w-full z-40">
-        <Navbar />
-        <main className="flex-1 overflow-hidden relative">
-          {conversation.length === 0 ? (
-            <EmptyState handleSubmitPrePrompt={handleSubmitPrePrompt} />
-          ) : (
-            <MessageList conversation={conversation} isLoading={isLoading} handleSubmitPrePrompt={handleSubmitPrePrompt} />
-          )}
+    <AuroraBackground blur={conversation?.length > 0 ? true : false} >
+      <div className="container flex flex-col h-screen p-2 md:px-8 w-full gap-5">
+        <main className="flex-1 w-full bg-blue-700/5 dark:bg-white/5 backdrop-blur-md rounded-3xl overflow-hidden relative p-2">
+          <div className='rounded-2xl overflow-hidden h-full mask'>
+            {conversation.length === 0 ? (
+              <EmptyState handleSubmitPrePrompt={handleSubmitPrePrompt} />
+            ) : (
+              <MessageList conversation={conversation} isLoading={isLoading} handleSubmitPrePrompt={handleSubmitPrePrompt} />
+            )}
+          </div>
         </main>
-        <div className="z-30 fixed bottom-3 left-0 right-0 container mx-auto">
+        <div className="w-full">
           <InputForm
             input={input}
             setInput={(e) => setInput(e.target.value)}
