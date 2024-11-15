@@ -10,7 +10,6 @@ interface InputFormProps {
     setInput: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     handleSubmit: (e: React.FormEvent) => void;
     isLoading: boolean;
-    handleStop: () => void;
 }
 
 const InputForm: React.FC<InputFormProps> = ({
@@ -18,7 +17,6 @@ const InputForm: React.FC<InputFormProps> = ({
     setInput,
     handleSubmit,
     isLoading,
-    handleStop,
 }) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 

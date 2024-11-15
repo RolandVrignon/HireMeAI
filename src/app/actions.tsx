@@ -6,7 +6,7 @@ import React, { ReactNode } from 'react';
 import { z } from 'zod';
 import { generateId } from 'ai';
 import ReactMarkdown from 'react-markdown';
-import { ShowEducation } from './serverComponents/education';
+import { ShowEducation } from '@/components/ai-components/education';
 import { educationData } from '@/data/educationData';
 import { ThemeSwitcher } from '@/components/ai-components/themeSwitcher';
 
@@ -93,7 +93,10 @@ September 2019 - August 2021
   https://www.iim.fr/
   September 2016 - August 2018
 `
-
+export interface UIInterface {
+  theme: 'dark' | 'light';
+  language: 'fr' | 'en' | 'es';
+}
 export interface ServerMessage {
   role: 'user' | 'assistant';
   content: string;
@@ -109,17 +112,22 @@ export interface ClientMessage {
 
 export async function continueConversation(
   input: string,
+  ui: UIInterface
 ): Promise<ClientMessage> {
   'use server';
 
+  console.log('ui:', ui);
+
   const history = getMutableAIState();
   const loadingState = createStreamableValue({ loading: true });
+
+  const UIPrompt = `Current Theme is ${ui.theme} mode.\nPlease answer in ${ui.language}, this is really important !\nHere is the your system prompt :\n ${system}.`
 
   const result = await streamUI({
     model: openai('gpt-4o-mini'),
     messages: [
       ...history.get(),
-      { role: 'system', content: system },
+      { role: 'system', content: UIPrompt },
       { role: 'user', content: input }
     ],
     text: ({ content, done }) => {
@@ -136,28 +144,6 @@ export async function continueConversation(
       );
     },
     tools: {
-      showWeatherLocation: {
-        description: 'Display the weather for a location',
-        parameters: z.object({
-          location: z.string(),
-        }),
-        generate: async ({ location }) => {
-          history.done((messages: ServerMessage[]) => [
-            ...messages,
-            {
-              role: 'assistant',
-              content: `Showing Meteo for ${location}`,
-            },
-          ]);
-
-          return (
-            <div className="flex flex-col gap-2">
-              <p>{location}</p>
-              <p>67 degrees.</p>
-            </div>
-          );
-        },
-      },
       showEducation: {
         description: 'Display the education history of the resume.',
         parameters: z.object({

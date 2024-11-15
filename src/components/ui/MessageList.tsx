@@ -23,8 +23,8 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
     };
 
     useEffect(() => {
-        scrollToBottom();
-    }, [conversation, isLoading]);
+        console.log('conversation:', conversation)
+    }, [conversation])
 
     const handleScroll = () => {
         if (containerRef.current) {
@@ -54,7 +54,7 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
                 <MessageItem 
                     key={index} 
                     message={message} 
-                    isFirst={index === 0} // Ajout du paramètre isFirst
+                    isFirst={index === 0}
                 />
             ))}
             { !isLoading && (
