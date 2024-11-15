@@ -1,0 +1,32 @@
+{
+  "title": "Hoi, ik ben de AI-assistent van {{userName}}\nPraat met me om me beter te leren kennen!",
+  "description": "Kies een onderwerp of vraag me alles over de ontwikkelingsdeskundigheid van {{userName}}",
+  "questions": [
+    {
+      "title": "Technologieën",
+      "content": "Welke technologieën en programmeertalen beheerst {{userName}}?"
+    },
+    {
+      "title": "Projecten",
+      "content": "Kun je me vertellen over de belangrijkste projecten van {{userName}} en de technische uitdagingen die ze tegenkwamen?"
+    },
+    {
+      "title": "Ervaring",
+      "content": "Wat is de professionele ervaring van {{userName}} in webontwikkeling?"
+    },
+    {
+      "title": "Motivatie",
+      "content": "Wat drijft {{userName}} als ontwikkelaar en wat zijn hun carrière doelen?"
+    },
+    {
+      "title": "Vaardigheden",
+      "content": "Wat zijn de belangrijkste sterke punten van {{userName}} als ontwikkelaar?"
+    },
+    {
+      "title": "Leren",
+      "content": "Wat is de educatieve ervaring van {{userName}} en welke opleiding heeft hij/zij gevolgd?"
+    }
+  ],
+  "placeholder": "Bericht aan {{assistantName}}",
+  "footer": "Gemaakt met liefde en koffie"
+}

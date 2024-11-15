@@ -24,7 +24,7 @@ const fetchResumeText = async (url : string): Promise<string> => {
 
 export interface UIInterface {
   theme: 'dark' | 'light';
-  language: 'fr' | 'en' | 'es';
+  language: 'fr' | 'en' | 'es' | 'de' | 'nl';
   url: string;
 }
 export interface ServerMessage {
@@ -134,7 +134,7 @@ export async function continueConversation(
       changeLangugae: {
         description: `Change application's language`,
         parameters: z.object({
-          language: z.enum(['en', 'fr']),
+          language: z.enum(['en', 'fr', 'de', 'nl', 'es']),
         }),
         generate: async ({ language }) => {
 

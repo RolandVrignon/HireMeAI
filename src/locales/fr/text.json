@@ -1,5 +1,4 @@
 {
-    "greeting": "Bonjour, le monde !",
     "title": "Salut, c'est l'assistant IA de {{userName}}\nDiscutez avec moi pour mieux me connaître !",
     "description": "Sélectionnez un sujet ou demandez-moi tout ce que vous voulez savoir sur l'expertise en développement de {{userName}}",
     "questions": [
