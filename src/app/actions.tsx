@@ -9,93 +9,23 @@ import ReactMarkdown from 'react-markdown';
 import { ShowEducation } from '@/components/ai-components/education';
 import { educationData } from '@/data/educationData';
 import { ThemeSwitcher } from '@/components/ai-components/themeSwitcher';
+import { LanguageSwitcher } from '@/components/ai-components/languageSwitcher';
 
-const system = ` You are Roland AI's Assistant, your role is to present Roland's resume.
-  
-Roland Vrignon
-Full-Stack Web Developer
-+33 7 69 70 12 68
-roland.vrignon@gmail.com
-Paris, 18
-Driving License
-26 yo
+const username = process.env.NEXT_PUBLIC_USER_NAME;
 
+const fetchResumeText = async (url : string): Promise<string> => {
+  const res = await fetch(`${url}/api/resume`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch resume text');
+  }
+  const data = await res.json();
+  return data.result || 'Texte du résumé introuvable.';
+};
 
- Professional experiences                                                          Self-taught and curious, I'm highly
-                                                                                   motivated to constantly develop my IT skills.
-                                                                                   I enjoy automating processes and
-                                                                                   embarking on new personal projects. I like
-Aitwork - Founder                                                                    to challenge myself in areas I'm not familiar
-ChatGPT Like multi-model B2B                                                         with, in order to surpass myself.
-March 2023 - Today                                      demo@aitwork.io
-
-https://app.aitwork.io                                  demo
-
-  Aitwork is a B2B platform focused on the use of Artificial Intelligence in
-  business. The platform enables the administrator to create multiple
-  accounts for company employees. Finally, users will be able to connect
-                                                                                       LinkedIn
-  and use AI with an experience similar to ChatGPT.
-                                                                                   www.linkedin.com/in/roland-vrignon
-  Aitwork allows the company to choose the templates available for Text to             Github
-  Text - Text to speech - Speech to text - Text to Image - Image to Text.          https://github.com/rolandvrignon
-
-  As founder, I developed the entire platform.
-
-  I learned to manipulate many APIs in the AI field. I also worked on
-  chunking docx and pdf documents to store them as vectors for knn                 Skills
-  search.
-                                                                                   HTML CSS SASS JAVASCRIPT TYPESCRIPT
-                                                                                   NODEJS       REACTJS   EXPRESS   MONGODB
-Blindating - Founder                                                                 GIT C AWS GITHUB PYTHON LINUX C++
-University dating application                                                        OMV       DOCKER       BASH   ZSH    OPENAI
-
- February 2021- October 2022                                                       CLAUDE2 BARD TYPESCRIPT MIDJOURNEY
-                                                                                   MISTRAL       SINGLESTORE VECTORSEARCH
- https://blindating.rolexx.fr
-                                                                                   KNN ADOBE PHOTOSHOP FIGMA
-   Blindating is a university dating application based on a questionnaire. One
-   completed form = One match!
-                                                                                   Languages
-   300 registrations on the 1st day of launch at Nanterre University
-   + 900 matches in 3 weeks                                                        French - native
-                                                                                   English - advanced
-                                                                                   German - intermediate
-
-
-Pierre&Vacances | Groupe PVCP                                                        Leisure
-
-E-Merchandiser work-study
-                                                                                   Soccer
-September 2019 - August 2021
-                                                                                   Street Art
-   Website personalization                                                         Computer Science
-   AB Tests (AB Tasty, Optimize)
-   Performance analysis (Hotjar, Google Analytics, ContentSquare)
-
-
-
-  Educational : 
-  
-  42, Paris
-  Systems and network administrator           
-  https://42.fr/                    
-  May 2022 - December 2023
-
-
-  IIM, Paris
-  Strategy & e-business Master's degree
-  https://www.iim.fr/
-  September 2019 - August 2021
-
-  IIM, Paris
-  Web Developpement Bachelor's degree
-  https://www.iim.fr/
-  September 2016 - August 2018
-`
 export interface UIInterface {
   theme: 'dark' | 'light';
   language: 'fr' | 'en' | 'es';
+  url: string;
 }
 export interface ServerMessage {
   role: 'user' | 'assistant';
@@ -116,18 +46,21 @@ export async function continueConversation(
 ): Promise<ClientMessage> {
   'use server';
 
-  console.log('ui:', ui);
-
   const history = getMutableAIState();
   const loadingState = createStreamableValue({ loading: true });
+  const resume = await fetchResumeText(ui.url);
 
-  const UIPrompt = `Current Theme is ${ui.theme} mode.\nPlease answer in ${ui.language}, this is really important !\nHere is the your system prompt :\n ${system}.`
+  const UIPrompt = `Current Theme is ${ui.theme} mode.\nPlease answer in ${ui.language}, this is really important !\nHere is the resume of ${username} :\n ${resume}.`
+
+  let messages = history.get();
+  messages.push({ role: 'user', content: input });
+  history.update(messages);
 
   const result = await streamUI({
     model: openai('gpt-4o-mini'),
-    messages: [
-      ...history.get(),
+    messages: [      
       { role: 'system', content: UIPrompt },
+      ...history.get(),
       { role: 'user', content: input }
     ],
     text: ({ content, done }) => {
@@ -173,18 +106,60 @@ export async function continueConversation(
         }),
         generate: async ({ theme }) => {
 
-          history.done((messages: ServerMessage[]) => [
-            ...messages,
-            {
-              role: 'assistant',
-              content: `Changing Theme to ${theme} theme.`,
-            },
-          ]);
+          if (theme === ui.theme) {
+            history.done((messages: ServerMessage[]) => [
+              ...messages,
+              {
+                role: 'assistant',
+                content: `Theme already set to ${theme} theme.`,
+              },
+            ]);
+          } else {
+            history.done((messages: ServerMessage[]) => [
+              ...messages,
+              {
+                role: 'assistant',
+                content: `Changing Theme to ${theme} theme.`,
+              },
+            ]);
+          }
 
           loadingState.done({ loading: false });
 
           return (
-            <ThemeSwitcher themeProvided={theme} />
+            <ThemeSwitcher themeProvided={theme}/>
+          );
+        }
+      },
+      changeLangugae: {
+        description: `Change application's language`,
+        parameters: z.object({
+          language: z.enum(['en', 'fr']),
+        }),
+        generate: async ({ language }) => {
+
+          if (language === ui.language) {
+            history.done((messages: ServerMessage[]) => [
+              ...messages,
+              {
+                role: 'assistant',
+                content: `Changing Application language to ${language}.`,
+              },
+            ]);
+          } else {
+            history.done((messages: ServerMessage[]) => [
+              ...messages,
+              {
+                role: 'assistant',
+                content: `Application language already set to ${language}.`,
+              },
+            ]);
+          }
+
+          loadingState.done({ loading: false });
+
+          return (
+            <LanguageSwitcher newLanguage={language}/>
           );
         }
       }

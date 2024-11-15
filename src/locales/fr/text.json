@@ -1,0 +1,34 @@
+{
+    "greeting": "Bonjour, le monde !",
+    "title": "Salut, c'est l'assistant IA de {{userName}}\nDiscutez avec moi pour mieux me connaître !",
+    "description": "Sélectionnez un sujet ou demandez-moi tout ce que vous voulez savoir sur l'expertise en développement de {{userName}}",
+    "questions": [
+      {
+        "title": "Technologies",
+        "content": "Quelles sont les principales technologies et langages de programmation que {{userName}} maîtrise ?"
+      },
+      {
+        "title": "Projets",
+        "content": "Pouvez-vous me parler des projets les plus significatifs de {{userName}} et des défis techniques qu'ils ont rencontrés ?"
+      },
+      {
+        "title": "Expérience",
+        "content": "Quelle est l'expérience professionnelle de {{userName}} en développement web ?"
+      },
+      {
+        "title": "Motivation",
+        "content": "Qu'est-ce qui motive {{userName}} en tant que développeur et quels sont ses objectifs de carrière ?"
+      },
+      {
+        "title": "Compétences",
+        "content": "Quelles sont les principales forces de {{userName}} en tant que développeur ?"
+      },
+      {
+        "title": "Apprentissage",
+        "content": "Quelle est l'expérience éducative de {{userName}} et quelles formations a-t-il suivies ?"
+      }
+    ],
+    "placeholder": "Message {{assistantName}}",
+    "footer": "Fait avec amour et café"
+  }
+  

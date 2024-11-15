@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { ThemeProvider } from '@/providers/theme-provider'
-import { AI } from './ai';
 import "./globals.css";
 
 const geistSans = localFont({
@@ -25,6 +24,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
       <html lang="en" suppressHydrationWarning>
         <head>
@@ -32,16 +32,11 @@ export default function RootLayout({
           <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet"></link>
           <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Righteous&display=swap" rel="stylesheet"></link>
         </head>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <AI>{children}</AI>
-          </ThemeProvider>
-        </body>
-      </html>
+        <body>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

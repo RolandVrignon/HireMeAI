@@ -2,15 +2,16 @@ import React, { useEffect, useRef } from 'react';
 import { Message } from 'ai/react';
 import MessageItem from './MessageItem';
 import PromptCarousel from './PromptCarousel';
-import { ClientMessage } from '@/app/actions';
+import { ClientMessage } from '../../app/actions';
 
 interface MessageListProps {
     conversation: any,
     isLoading: boolean,
-    handleSubmitPrePrompt: (content : string) => void
+    handleSubmitPrePrompt: (content : string) => void,
+    translations: any,
 }
 
-const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, handleSubmitPrePrompt}) => {
+const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, handleSubmitPrePrompt, translations}) => {
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const [autoScroll, setAutoScroll] = React.useState(true);
@@ -59,7 +60,7 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
             ))}
             { !isLoading && (
                 <div className="px-1">
-                    <PromptCarousel handleSubmitPrePrompt={handleSubmitPrePrompt} />
+                    <PromptCarousel handleSubmitPrePrompt={handleSubmitPrePrompt} translations={translations} />
                 </div>
             )}
             <div ref={messagesEndRef} />

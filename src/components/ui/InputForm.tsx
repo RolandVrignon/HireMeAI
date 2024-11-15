@@ -10,6 +10,7 @@ interface InputFormProps {
     setInput: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     handleSubmit: (e: React.FormEvent) => void;
     isLoading: boolean;
+    translations: any;
 }
 
 const InputForm: React.FC<InputFormProps> = ({
@@ -17,6 +18,7 @@ const InputForm: React.FC<InputFormProps> = ({
     setInput,
     handleSubmit,
     isLoading,
+    translations,
 }) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -59,7 +61,7 @@ const InputForm: React.FC<InputFormProps> = ({
                                 value={input}
                                 onChange={handleInputChange}
                                 onKeyDown={handleKeyDown}
-                                placeholder="Message Roland AI"
+                                placeholder={translations.placeholder}
                                 className="placeholder:font-bold placeholder:font-doto block font-light focus:ring-offset-transparent min-h-[44px] w-full resize-none rounded-none border-0 bg-transparent px-0 py-2 text-gray-700 dark:text-gray-200 placeholder:text-zinc-500 dark:placeholder:text-zinc-400"
                             />
                         </div>
@@ -77,7 +79,7 @@ const InputForm: React.FC<InputFormProps> = ({
                     </Button>
                 </div>
                 <Link href="https://github.com/RolandVrignon" target="_blank" className="font-doto text-xs w-full text-gray-400 text-center">
-                    Made with love and coffee
+                    {translations.footer}
                 </Link>
             </div>
         </div>

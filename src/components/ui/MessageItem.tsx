@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ClientMessage } from '@/app/actions';
+import { ClientMessage } from '../../app/actions';
 
 interface MessageItemProps {
     message: ClientMessage,
