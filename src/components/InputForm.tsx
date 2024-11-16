@@ -3,7 +3,7 @@
 import { useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { Send, Square } from "lucide-react"
+import { Send } from "lucide-react"
 import Link from "next/link"
 interface InputFormProps {
     input: string;

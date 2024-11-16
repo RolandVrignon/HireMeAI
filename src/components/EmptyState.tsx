@@ -1,6 +1,5 @@
 import React from 'react';
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import PromptCarousel from './PromptCarousel';
+import PromptCarousel from './ui/PromptCarousel';
 
 interface EmptyStateProps {
     handleSubmitPrePrompt: (content: string) => void,

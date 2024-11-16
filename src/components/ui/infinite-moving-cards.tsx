@@ -2,8 +2,6 @@
 
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
-import { ArrowRightIcon } from 'lucide-react';
-import { HoverBorderGradient } from "./hover-border-gradient";
 
 export const InfiniteMovingCards = ({
   items,

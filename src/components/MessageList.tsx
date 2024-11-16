@@ -1,17 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import { Message } from 'ai/react';
-import MessageItem from './MessageItem';
-import PromptCarousel from './PromptCarousel';
-import { ClientMessage } from '../../app/actions';
+import MessageItem from './ui/MessageItem';
+import PromptCarousel from './ui/PromptCarousel';
+import { ClientMessage } from '@/types/types';
 
-interface MessageListProps {
-    conversation: any,
-    isLoading: boolean,
-    handleSubmitPrePrompt: (content : string) => void,
-    translations: any,
+export interface MessageListProps {
+    conversation: any;
+    isLoading: boolean;
+    handleSubmitPrePrompt: (content: string) => void;
+    translations: any;
 }
 
-const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, handleSubmitPrePrompt, translations}) => {
+const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, handleSubmitPrePrompt, translations }) => {
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const [autoScroll, setAutoScroll] = React.useState(true);
@@ -52,13 +52,13 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
             className="flex flex-col overflow-auto h-full hide-scrollbar pb-[30vh]"
         >
             {conversation.map((message: ClientMessage, index: number) => (
-                <MessageItem 
-                    key={index} 
-                    message={message} 
+                <MessageItem
+                    key={index}
+                    message={message}
                     isFirst={index === 0}
                 />
             ))}
-            { !isLoading && (
+            {!isLoading && (
                 <div className="px-1">
                     <PromptCarousel handleSubmitPrePrompt={handleSubmitPrePrompt} translations={translations} />
                 </div>

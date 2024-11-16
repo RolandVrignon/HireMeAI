@@ -1,14 +1,25 @@
 {
-    "title": "Salut, c'est l'assistant IA de {{userName}}\nDiscutez avec moi pour mieux me connaître !",
-    "description": "Sélectionnez un sujet ou demandez-moi tout ce que vous voulez savoir sur l'expertise en développement de {{userName}}",
+    "languages": {
+      "en": "Anglais",
+      "fr": "Français",
+      "es": "Espagnol",
+      "nl": "Néerlandais",
+      "de": "Allemand"
+    },
+    "themes": {
+        "dark": "sombre",
+        "light": "clair"
+    },
+    "title": "Bonjour, c'est l'assistant IA de {{userName}}\nParle avec moi pour mieux me connaître !",
+    "description": "Choisis un sujet ou pose-moi des questions sur l'expertise en développement de {{userName}}",
     "questions": [
       {
         "title": "Technologies",
-        "content": "Quelles sont les principales technologies et langages de programmation que {{userName}} maîtrise ?"
+        "content": "Quelles sont les principales technologies et langages de programmation maîtrisés par {{userName}} ?"
       },
       {
         "title": "Projets",
-        "content": "Pouvez-vous me parler des projets les plus significatifs de {{userName}} et des défis techniques qu'ils ont rencontrés ?"
+        "content": "Peux-tu me parler des projets les plus importants de {{userName}} et des défis techniques rencontrés ?"
       },
       {
         "title": "Expérience",
@@ -20,14 +31,26 @@
       },
       {
         "title": "Compétences",
-        "content": "Quelles sont les principales forces de {{userName}} en tant que développeur ?"
+        "content": "Quelles sont les forces principales de {{userName}} en tant que développeur ?"
       },
       {
         "title": "Apprentissage",
-        "content": "Quelle est l'expérience éducative de {{userName}} et quelles formations a-t-il suivies ?"
+        "content": "Quelle est l'expérience éducative de {{userName}} et quelles formations a-t-il/elle suivies ?"
       }
     ],
-    "placeholder": "Message {{assistantName}}",
-    "footer": "Fait avec amour et café"
+    "placeholder": "Message à {{assistantName}}",
+    "footer": "Fait avec amour et café",
+    "functions": {
+      "language": {
+        "success": "Thème changé en mode {{theme}}",
+        "error": "Le thème est déjà réglé sur le mode {{theme}}",
+        "loading": "Changement de thème"
+      },
+      "theme": {
+        "success": "Thème changé en mode {{theme}}",
+        "error": "Le thème est déjà réglé sur le mode {{theme}}",
+        "loading": "Changement de thème"
+      }
+    }
   }
   

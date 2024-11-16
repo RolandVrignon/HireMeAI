@@ -1,17 +1,16 @@
-// src/app/page.tsx
 import { headers } from 'next/headers';
-import { LanguageProvider, Language } from '@/providers/language-provider';
+import { LanguageProvider } from '@/providers/language-provider';
 import HomePageContent from '@/components/HomePageContent';
 import { AI } from './ai';
+import { Languages, Language } from "@/types/types";
+
+const availableLanguages: Language[] = Object.keys(Languages) as Language[];
 
 export default async function HomePage() {
     const headersList = await headers();
     const acceptLanguage = headersList.get('accept-language') || 'en';
 
-    // Liste des langues possibles
-    const availableLanguages: Language[] = ['en', 'fr', 'es', 'nl'];
-
-    // Trouve la langue qui correspond
+    // Trouver la langue dans `availableLanguages`
     const language = availableLanguages.find(lang => acceptLanguage.split(',')[0].startsWith(lang)) || 'en';
 
     return (
@@ -22,4 +21,3 @@ export default async function HomePage() {
         </LanguageProvider>
     );
 }
-

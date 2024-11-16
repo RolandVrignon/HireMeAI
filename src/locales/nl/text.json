@@ -1,4 +1,15 @@
 {
+  "languages": {
+    "en": "Engels",
+    "fr": "Frans",
+    "es": "Spaans",
+    "nl": "Nederlands",
+    "de": "Duits"
+  },
+  "themes": {
+    "dark": "donker",
+    "light": "licht"
+  },
   "title": "Hoi, ik ben de AI-assistent van {{userName}}\nPraat met me om me beter te leren kennen!",
   "description": "Kies een onderwerp of vraag me alles over de ontwikkelingsdeskundigheid van {{userName}}",
   "questions": [
@@ -8,7 +19,7 @@
     },
     {
       "title": "Projecten",
-      "content": "Kun je me vertellen over de belangrijkste projecten van {{userName}} en de technische uitdagingen die ze tegenkwamen?"
+      "content": "Kun je me iets vertellen over de belangrijkste projecten van {{userName}} en de technische uitdagingen?"
     },
     {
       "title": "Ervaring",
@@ -16,7 +27,7 @@
     },
     {
       "title": "Motivatie",
-      "content": "Wat drijft {{userName}} als ontwikkelaar en wat zijn hun carrière doelen?"
+      "content": "Wat drijft {{userName}} als ontwikkelaar en wat zijn hun carrièredoelen?"
     },
     {
       "title": "Vaardigheden",
@@ -24,9 +35,21 @@
     },
     {
       "title": "Leren",
-      "content": "Wat is de educatieve ervaring van {{userName}} en welke opleiding heeft hij/zij gevolgd?"
+      "content": "Wat is de educatieve ervaring van {{userName}} en welke trainingen heeft hij/zij gevolgd?"
     }
   ],
   "placeholder": "Bericht aan {{assistantName}}",
-  "footer": "Gemaakt met liefde en koffie"
+  "footer": "Gemaakt met liefde en koffie",
+  "functions": {
+    "language": {
+      "success": "Taal gewijzigd naar {{language}}",
+      "error": "De taal is al ingesteld op {{language}}",
+      "loading": "Taal wordt gewijzigd"
+    },
+    "theme": {
+      "success": "Thema gewijzigd naar {{theme}} modus",
+      "error": "Het thema is al ingesteld op {{theme}} modus",
+      "loading": "Thema wordt gewijzigd"
+    }
+  }
 }

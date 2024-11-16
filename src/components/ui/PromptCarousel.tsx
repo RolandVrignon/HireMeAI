@@ -2,14 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { InfiniteMovingCards } from './infinite-moving-cards';
+import { Prompt } from "@/types/types"
 
-// Définir un type pour chaque question
-interface Prompt {
-    title: string;
-    content: string;
-}
-
-// Fonction de mélange Fisher-Yates
 const shuffleArray = <T,>(array: T[]): T[] => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {

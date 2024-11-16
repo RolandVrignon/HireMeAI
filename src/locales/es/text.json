@@ -1,4 +1,15 @@
 {
+  "languages": {
+    "en": "Inglés",
+    "fr": "Francés",
+    "es": "Español",
+    "nl": "Neerlandés",
+    "de": "Alemán"
+  },
+  "themes": {
+    "dark": "oscuro",
+    "light": "claro"
+  },
   "title": "¡Hola, soy el asistente de IA de {{userName}}\n¡Habla conmigo para conocerme mejor!",
   "description": "Selecciona un tema o pregúntame cualquier cosa sobre la experiencia en desarrollo de {{userName}}",
   "questions": [
@@ -28,5 +39,17 @@
     }
   ],
   "placeholder": "Mensaje para {{assistantName}}",
-  "footer": "Hecho con amor y café"
+  "footer": "Hecho con amor y café",
+  "functions": {
+    "language": {
+      "success": "Idioma cambiado a {{language}}",
+      "error": "El idioma ya está configurado como {{language}}",
+      "loading": "Cambiando el idioma"
+    },
+    "theme": {
+      "success": "Tema cambiado a modo {{theme}}",
+      "error": "El tema ya está configurado en modo {{theme}}",
+      "loading": "Cambiando el tema"
+    }
+  }
 }

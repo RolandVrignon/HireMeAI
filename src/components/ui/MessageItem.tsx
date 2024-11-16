@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
-import { ClientMessage } from '../../app/actions';
+import React from 'react';
+import { ClientMessage } from '@/types/types';
 
-interface MessageItemProps {
+
+export interface MessageItemProps {
     message: ClientMessage,
     isFirst: boolean,
-}   
+}
+
 
 const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst }) => {
 
@@ -20,7 +22,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst }) => {
                 <div>
                     {message.display}
                 </div>
-                { formattedTime && (
+                {formattedTime && (
                     <div className="flex w-full justify-end font-doto text-xs mt-2">
                         {role} - {formattedTime}
                     </div>

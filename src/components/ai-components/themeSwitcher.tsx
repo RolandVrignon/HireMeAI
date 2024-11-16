@@ -1,18 +1,37 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Sun, Moon, Ban } from "lucide-react";
 import { FunctionAlert } from "@/components/ui/functionAlert";
+import { Language, Theme } from "@/types/types"
 
-type ThemeProps = {
-    themeProvided: string
+// Importation des fichiers JSON de textes par langue
+import enText from '@/locales/en/text.json';
+import frText from '@/locales/fr/text.json';
+import esText from '@/locales/es/text.json';
+import nlText from '@/locales/nl/text.json';
+import deText from '@/locales/de/text.json';
+
+const themeTextMap = {
+    en: enText,
+    fr: frText,
+    es: esText,
+    nl: nlText,
+    de: deText
 };
 
-export const ThemeSwitcher = ({ themeProvided }: ThemeProps) => {
+type ThemeProps = {
+    themeProvided: Theme,
+    language: Language
+};
+
+export const ThemeSwitcher = ({ themeProvided, language }: ThemeProps) => {
     const { theme, setTheme } = useTheme();
     const [isLoading, setIsLoading] = useState(true);
     const [themeChanged, setThemeChanged] = useState(false);
+
+    const currentThemeText = themeTextMap[language];
 
     useEffect(() => {
         setTimeout(() => {
@@ -30,25 +49,28 @@ export const ThemeSwitcher = ({ themeProvided }: ThemeProps) => {
         return (
             <FunctionAlert
                 status="pending"
-                message="Changing theme"
+                message={currentThemeText?.functions.theme.loading || "Changing theme"}
             />
         );
     }
+
     if (!isLoading && themeChanged) {
         return (
             <FunctionAlert
                 status="success"
-                message={`Theme changed to ${themeProvided} mode`}
+                message={currentThemeText?.functions.theme.success.replace("{{theme}}", currentThemeText?.themes[themeProvided]) || `Theme changed to ${themeProvided} mode`}
                 icon={themeProvided === "light" ? Sun : Moon}
             />
         );
-    } else if (!isLoading && !themeChanged) {
+    }
+    
+    if (!isLoading && !themeChanged) {
         return (
             <FunctionAlert
                 status="error"
-                message={`Theme already set to ${themeProvided} mode`}
+                message={currentThemeText?.functions.theme.error.replace("{{theme}}", currentThemeText?.themes[themeProvided]) || `Theme already set to ${themeProvided} mode`}
                 icon={Ban}
             />
-        )
+        );
     }
 };

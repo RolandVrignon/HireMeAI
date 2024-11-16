@@ -10,6 +10,7 @@ import { ShowEducation } from '@/components/ai-components/education';
 import { educationData } from '@/data/educationData';
 import { ThemeSwitcher } from '@/components/ai-components/themeSwitcher';
 import { LanguageSwitcher } from '@/components/ai-components/languageSwitcher';
+import { ClientMessage, ServerMessage, UIInterface } from '@/types/types';
 
 const username = process.env.NEXT_PUBLIC_USER_NAME;
 
@@ -21,24 +22,6 @@ const fetchResumeText = async (url : string): Promise<string> => {
   const data = await res.json();
   return data.result || 'Texte du résumé introuvable.';
 };
-
-export interface UIInterface {
-  theme: 'dark' | 'light';
-  language: 'fr' | 'en' | 'es' | 'de' | 'nl';
-  url: string;
-}
-export interface ServerMessage {
-  role: 'user' | 'assistant';
-  content: string;
-}
-
-export interface ClientMessage {
-  id: string;
-  role: 'user' | 'assistant';
-  display: ReactNode;
-  loadingState: any;
-  date: Date;
-}
 
 export async function continueConversation(
   input: string,
@@ -127,7 +110,7 @@ export async function continueConversation(
           loadingState.done({ loading: false });
 
           return (
-            <ThemeSwitcher themeProvided={theme}/>
+            <ThemeSwitcher themeProvided={theme} language={ui.language}/>
           );
         }
       },

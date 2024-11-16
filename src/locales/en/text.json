@@ -1,33 +1,55 @@
 {
-    "title": "Hi it's {{userName}}'s AI Assistant\nTalk with me to know me better!",
-    "description": "Select a topic or ask me anything about {{userName}}'s development expertise",
-    "questions": [
-      {
-          "title": "Technologies",
-          "content": "What are the main technologies and programming languages that {{userName}} masters?"
-      },
-      {
-          "title": "Projects",
-          "content": "Can you tell me about {{userName}}'s most significant projects and their technical challenges?"
-      },
-      {
-          "title": "Experience",
-          "content": "What is {{userName}}'s professional experience in web development?"
-      },
-      {
-          "title": "Motivation",
-          "content": "What drives {{userName}} as a developer and what are their career goals?"
-      },
-      {
-          "title": "Skills",
-          "content": "What are {{userName}}'s key strengths as a developer?"
-      },
-      {
-          "title": "Learning",
-          "content": "What is {{userName}}'s educational experience and what training has they undergone?"
-      }
-    ],
-    "placeholder": "Message {{assistantName}}",
-    "footer": "Made with love and coffee"
+  "languages" : {
+    "en" : "English",
+    "fr" : "French",
+    "es" : "Spanish",
+    "nl" : "Dutch",
+    "de" : "German"
+  },
+  "themes": {
+    "dark": "dark",
+    "light": "light"
+  },
+  "title": "Hi it's {{userName}}'s AI Assistant\nTalk with me to know me better!",
+  "description": "Select a topic or ask me anything about {{userName}}'s development expertise",
+  "questions": [
+    {
+      "title": "Technologies",
+      "content": "What are the main technologies and programming languages that {{userName}} masters?"
+    },
+    {
+      "title": "Projects",
+      "content": "Can you tell me about {{userName}}'s most significant projects and their technical challenges?"
+    },
+    {
+      "title": "Experience",
+      "content": "What is {{userName}}'s professional experience in web development?"
+    },
+    {
+      "title": "Motivation",
+      "content": "What drives {{userName}} as a developer and what are their career goals?"
+    },
+    {
+      "title": "Skills",
+      "content": "What are {{userName}}'s key strengths as a developer?"
+    },
+    {
+      "title": "Learning",
+      "content": "What is {{userName}}'s educational experience and what training has they undergone?"
+    }
+  ],
+  "placeholder": "Message {{assistantName}}",
+  "footer": "Made with love and coffee",
+  "functions": {
+    "language": {
+            "success": "Language changed to {{language}}",
+            "error": "Language already set to {{language}}",
+            "loading": "Changing Language"
+    },
+    "theme": {
+        "success": "Theme changed to {{theme}} mode",
+        "error": "Theme already set to {{theme}} mode",
+        "loading": "Changing theme"
+    }
   }
-  
+}

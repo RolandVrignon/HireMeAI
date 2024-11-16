@@ -1,9 +1,7 @@
 "use client"
 
 import React, { createContext, useState, useEffect, useMemo } from 'react';
-
-export type Language = 'en' | 'fr' | 'es' | 'nl' | 'de';
-
+import { Language } from "@/types/types"
 interface LanguageContextProps {
   language: Language;
   setLanguage: (language: Language) => void;
@@ -12,7 +10,7 @@ interface LanguageContextProps {
 }
 
 interface Translations {
-    [key: string]: string | Translations | Array<Translations>; // Types pour les traductions (string, object ou array)
+    [key: string]: string | Translations | Array<Translations>;
 }
 
 function replaceVariables(translations: Translations, userName: string, assistantName: string): Translations {

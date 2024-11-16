@@ -1,4 +1,15 @@
 {
+  "languages": {
+    "en": "Englisch",
+    "fr": "Französisch",
+    "es": "Spanisch",
+    "nl": "Niederländisch",
+    "de": "Deutsch"
+  },
+  "themes": {
+    "dark": "dunkel",
+    "light": "hell"
+  },
   "title": "Hallo, ich bin der KI-Assistent von {{userName}}\nSprich mit mir, um mich besser kennenzulernen!",
   "description": "Wähle ein Thema oder frage mich alles über die Entwicklungsexpertise von {{userName}}",
   "questions": [
@@ -28,5 +39,17 @@
     }
   ],
   "placeholder": "Nachricht an {{assistantName}}",
-  "footer": "Gemacht mit Liebe und Kaffee"
+  "footer": "Gemacht mit Liebe und Kaffee",
+  "functions": {
+    "language": {
+      "success": "Sprache geändert zu {{language}}",
+      "error": "Sprache ist bereits auf {{language}}",
+      "loading": "Sprache wird geändert"
+    },
+    "theme": {
+      "success": "Thema geändert zu {{theme}} Modus",
+      "error": "Das Thema ist bereits auf {{theme}} Modus eingestellt",
+      "loading": "Thema wird geändert"
+    }
+  }
 }
