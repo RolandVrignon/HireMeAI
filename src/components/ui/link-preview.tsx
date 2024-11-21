@@ -1,4 +1,4 @@
-"use client";
+// Import necessary modules
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
 import Image from "next/image";
 import { encode } from "qss";
@@ -10,8 +10,9 @@ import {
   useSpring,
 } from "framer-motion";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"; // Ensure this utility function exists
 
+// Define the LinkPreviewProps type
 type LinkPreviewProps = {
   children: React.ReactNode;
   url: string;
@@ -19,12 +20,11 @@ type LinkPreviewProps = {
   width?: number;
   height?: number;
   quality?: number;
-  layout?: string;
-} & (
-  | { isStatic: true; imageSrc: string }
-  | { isStatic?: false; imageSrc?: never }
-);
+  isStatic?: boolean;
+  imageSrc?: string;
+};
 
+// Define the LinkPreview component
 export const LinkPreview = ({
   children,
   url,
@@ -32,7 +32,6 @@ export const LinkPreview = ({
   width = 200,
   height = 125,
   quality = 50,
-  layout = "fixed",
   isStatic = false,
   imageSrc = "",
 }: LinkPreviewProps) => {
@@ -44,7 +43,7 @@ export const LinkPreview = ({
       meta: false,
       embed: "screenshot.url",
       colorScheme: "dark",
-      "viewport.isMobile": true,
+      "viewport.isMobile": false,
       "viewport.deviceScaleFactor": 1,
       "viewport.width": width * 3,
       "viewport.height": height * 3,
@@ -55,7 +54,6 @@ export const LinkPreview = ({
   }
 
   const [isOpen, setOpen] = React.useState(false);
-
   const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -64,49 +62,52 @@ export const LinkPreview = ({
 
   const springConfig = { stiffness: 100, damping: 15 };
   const x = useMotionValue(0);
-
   const translateX = useSpring(x, springConfig);
 
   const handleMouseMove = (event: any) => {
     const targetRect = event.target.getBoundingClientRect();
     const eventOffsetX = event.clientX - targetRect.left;
-    const offsetFromCenter = (eventOffsetX - targetRect.width / 2) / 2; // Reduce the effect to make it subtle
+    const offsetFromCenter = (eventOffsetX - targetRect.width / 2) / 2; // Subtle effect
     x.set(offsetFromCenter);
   };
 
   return (
     <>
-      {isMounted ? (
+      {isMounted && (
         <div className="hidden">
           <Image
             src={src}
             width={width}
             height={height}
             quality={quality}
-            layout={layout}
             priority={true}
             alt="hidden image"
           />
         </div>
-      ) : null}
+      )}
 
       <HoverCardPrimitive.Root
         openDelay={50}
         closeDelay={100}
-        onOpenChange={(open : any) => {
+        onOpenChange={(open: boolean) => {
           setOpen(open);
         }}
+        // className="hello z-50"
       >
-        <HoverCardPrimitive.Trigger
-          onMouseMove={handleMouseMove}
-          className={cn("text-black dark:text-white", className)}
-          href={url}
-        >
-          {children}
+        <HoverCardPrimitive.Trigger asChild className="hello">
+          <Link
+            onMouseMove={handleMouseMove}
+            className={cn("text-blue-500", className)}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {children}
+          </Link>
         </HoverCardPrimitive.Trigger>
 
         <HoverCardPrimitive.Content
-          className="[transform-origin:var(--radix-hover-card-content-transform-origin)]"
+          className="z-50 [transform-origin:var(--radix-hover-card-content-transform-origin)]"
           side="top"
           align="center"
           sideOffset={10}
@@ -130,18 +131,19 @@ export const LinkPreview = ({
                 style={{
                   x: translateX,
                 }}
-              >
+      >
                 <Link
                   href={url}
-                  className="block p-1 bg-white border-2 border-transparent shadow rounded-xl hover:border-neutral-200 dark:hover:border-neutral-800"
+                  className="block p-1 z-50 bg-white border-2 border-transparent shadow rounded-xl hover:border-neutral-200 dark:hover:border-neutral-800 no-underline"
                   style={{ fontSize: 0 }}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Image
                     src={isStatic ? imageSrc : src}
                     width={width}
                     height={height}
                     quality={quality}
-                    layout={layout}
                     priority={true}
                     className="rounded-lg"
                     alt="preview image"
@@ -155,3 +157,4 @@ export const LinkPreview = ({
     </>
   );
 };
+

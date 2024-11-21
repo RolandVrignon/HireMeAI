@@ -8,6 +8,7 @@ import { useTheme } from 'next-themes';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import remarkGfm from 'remark-gfm';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { LinkPreview } from '@/components/ui/link-preview';
 
 const CustomCode = ({ node, inline, className, children, ...props }: any) => {
     const { theme } = useTheme();
@@ -115,10 +116,26 @@ const CustomTable = ({ children, ...props }: any) => {
     );
 };
 
+const CustomLink = ({
+    href,
+    title,
+    children,
+  }: {
+    href?: string;
+    title?: string;
+    children?: React.ReactNode;
+  }) => {
+    return (
+      <LinkPreview url={href || ''} className='hello'>
+        {children}
+      </LinkPreview>
+    );
+}
 export const MarkdownInterpretor = ({ content }: { content: string }) => {
     const components = {
         code: CustomCode,
         table: CustomTable,
+        a: CustomLink,
     };
 
     return (
