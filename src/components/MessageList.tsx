@@ -3,7 +3,8 @@ import MessageItem from './ui/MessageItem';
 import PromptCarousel from './ui/PromptCarousel';
 import { ClientMessage } from '@/types/types';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown } from 'lucide-react';
+
 export interface MessageListProps {
     conversation: ClientMessage[];
     isLoading: boolean;
@@ -15,39 +16,57 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
     const containerRef = useRef<HTMLDivElement>(null);
     const lastMessageRef = useRef<HTMLDivElement>(null);
     const endRef = useRef<HTMLDivElement>(null);
-    const [showArrow, setShowArrow] = useState<boolean>(false);
 
-    // Observer pour détecter si endRef est visible
+    const [showArrow, setShowArrow] = useState<boolean>(false);
+    const previousScrollTop = useRef<number>(0);
+
+    // Gestion du défilement pour déterminer la direction et la visibilité de endRef
     useEffect(() => {
         const container = containerRef.current;
-        const endElement = endRef.current;
 
-        if (!container || !endElement) return;
+        if (!container) return;
 
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                setShowArrow(!entry.isIntersecting);
-            },
-            { root: container, threshold: 1.0 }
-        );
+        const onScroll = () => {
+            const currentScrollTop = container.scrollTop;
+            const isScrollingDown = currentScrollTop > previousScrollTop.current;
+            previousScrollTop.current = currentScrollTop;
 
-        observer.observe(endElement);
+            // Vérifier si endRef est visible dans le conteneur
+            const endElement = endRef.current;
+            if (endElement) {
+                const containerRect = container.getBoundingClientRect();
+                const endElementRect = endElement.getBoundingClientRect();
 
+                const isEndRefVisible =
+                    endElementRect.top >= containerRect.top &&
+                    endElementRect.bottom <= containerRect.bottom;
+
+                if (!isEndRefVisible && !isScrollingDown) {
+                    setShowArrow(true);
+                } else {
+                    setShowArrow(false);
+                }
+            }
+        };
+
+        container.addEventListener('scroll', onScroll);
+
+        // Nettoyage de l'écouteur lors du démontage du composant
         return () => {
-            observer.disconnect();
+            container.removeEventListener('scroll', onScroll);
         };
     }, []);
 
     // Auto-scroll lors de la mise à jour de la conversation
     useEffect(() => {
-
         if (conversation.length > 0 && conversation[conversation.length - 1].role === 'user') {
-            console.log('conversation[conversation.length - 1]:', conversation[conversation.length - 1]);
             const container = containerRef.current;
             const lastMessage = lastMessageRef.current;
 
             if (container && lastMessage) {
-                const lastMessageOffset = conversation.length > 1 ? lastMessage.offsetTop - container.offsetTop + 8 : lastMessage.offsetTop - container.offsetTop - 8;
+                const lastMessageOffset = conversation.length > 1
+                    ? lastMessage.offsetTop - container.offsetTop + 8
+                    : lastMessage.offsetTop - container.offsetTop - 8;
                 container.scrollTop = lastMessageOffset;
             }
         }
@@ -81,7 +100,8 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
                     <div
                         key={index}
                         ref={index === conversation.length - 1 ? lastMessageRef : null}
-                    >                        <MessageItem
+                    >
+                        <MessageItem
                             message={message}
                             isFirst={index === 0}
                         />
@@ -99,7 +119,7 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
                 <button
                     onClick={scrollToBottom}
                     className="fixed bottom-4 left-1/2 z-50 transform -translate-x-1/2 h-10 w-10 p-1 flex items-center justify-center rounded-full bg-blue-600 dark:bg-zinc-800 text-white shadow-lg dark:hover:bg-zinc-900 hover:bg-blue-700 focus:outline-none"
-                    >
+                >
                     <ChevronDown />
                 </button>
             )}
