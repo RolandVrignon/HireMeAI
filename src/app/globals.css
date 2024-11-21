@@ -19,7 +19,7 @@
 }
 
 .markdown-body p {
-  @apply mb-4;
+  @apply mb-0;
 }
 
 .markdown-body a {
@@ -28,6 +28,10 @@
 
 .markdown-body ul {
   @apply list-disc pl-5 my-2;
+}
+
+.markdown-body li {
+  @apply mb-8;
 }
 
 .markdown-body ol {
@@ -54,27 +58,10 @@
   padding: 0.5rem !important;
 } */
 
-/* Styles pour les tables */
-.markdown-body table {
-  @apply w-full border-collapse my-4;
-}
-
-.markdown-body thead {
-  @apply bg-gray-100;
-}
-
-.markdown-body th,
-.markdown-body td {
-  @apply border border-gray-300 px-4 py-2 text-left;
-}
-
-.markdown-body tbody tr:nth-child(even) {
-  @apply bg-gray-50;
-}
-
 .markdown-body p:last-child,
 .markdown-body ol:last-child,
 .markdown-body ul:last-child,
+.markdown-body li:last-child,
 .markdown-body table:last-child {
   @apply mb-0;
 }

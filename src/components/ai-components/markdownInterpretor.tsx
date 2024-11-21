@@ -4,52 +4,126 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { useTheme } from 'next-themes'; // Si vous utilisez Next.js et le package next-themes
+import { useTheme } from 'next-themes';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import remarkGfm from 'remark-gfm';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+
+const CustomCode = ({ node, inline, className, children, ...props }: any) => {
+    const { theme } = useTheme();
+
+    const handleCopy = (code: string) => {
+        navigator.clipboard.writeText(code).then(() => {
+            alert('Code copied to clipboard!');
+        });
+    };
+
+    const language = className?.replace('language-', '') || 'plaintext';
+    const codeContent = String(children).replace(/\n$/, '');
+
+    if (language === 'plaintext') {
+        return <span className="font-bold">{codeContent}</span>;
+    }
+
+    const syntaxStyle = theme === 'dark' ? oneDark : oneLight;
+
+    return (
+        <div>
+            <div className="font-doto font-bold bg-zinc-400/20 p-1 flex justify-between items-center rounded-t-sm mt-2 border-b-1 border-blue-600">
+                <span className="text-xs">{language}</span>
+                <button
+                    onClick={() => handleCopy(codeContent)}
+                    className="p-1 bg-white hover:bg-blue-600 hover:text-white dark:bg-zinc-800 dark:hover:bg-zinc-900 rounded-sm font-doto font-bold text-xs"
+                >
+                    Copy
+                </button>
+            </div>
+            <SyntaxHighlighter language={language} style={syntaxStyle} {...props}>
+                {codeContent}
+            </SyntaxHighlighter>
+        </div>
+    );
+};
+
+const CustomTable = ({ children, ...props }: any) => {
+    const extractText = (element: any): any => {
+        if (typeof element === 'string') {
+            return element;
+        } else if (React.isValidElement(element)) {
+            return extractText(element.props.children);
+        } else if (Array.isArray(element)) {
+            return element.map(extractText).join('');
+        } else {
+            return '';
+        }
+    };
+
+    const tableChildren = Array.isArray(children) ? children : [children];
+
+    let headers: string[] = [];
+    let rows: string[][] = [];
+
+    // Extract headers
+    const thead = tableChildren.find((child: any) => child.type === 'thead');
+    if (thead && thead.props && thead.props.children) {
+        const theadRow = thead.props.children;
+        const theadCells = Array.isArray(theadRow.props.children)
+            ? theadRow.props.children
+            : [theadRow.props.children];
+
+        headers = theadCells.map((cell: any) => extractText(cell));
+    }
+
+    // Extract rows
+    const tbody = tableChildren.find((child: any) => child.type === 'tbody');
+    if (tbody && tbody.props && tbody.props.children) {
+        const tbodyRows = Array.isArray(tbody.props.children)
+            ? tbody.props.children
+            : [tbody.props.children];
+
+        rows = tbodyRows.map((row: any) => {
+            const rowCells = Array.isArray(row.props.children)
+                ? row.props.children
+                : [row.props.children];
+
+            return rowCells.map((cell: any) => extractText(cell));
+        });
+    }
+
+    return (
+        <ScrollArea className="font-xs my-2 rounded-md overflow-auto bg-slate-50/90 dark:bg-white/5">
+            <Table {...props}>
+                <TableHeader>
+                    <TableRow>
+                        {headers.map((headerCell: any, index: number) => (
+                            <TableHead className="font-doto font-bold" key={index}>{headerCell}</TableHead>
+                        ))}
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {rows.map((row: any, rowIndex: number) => (
+                        <TableRow key={rowIndex}>
+                            {row.map((cell: any, cellIndex: number) => (
+                                <TableCell key={cellIndex}>{cell}</TableCell>
+                            ))}
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+            <ScrollBar orientation="horizontal" />
+        </ScrollArea>
+    );
+};
 
 export const MarkdownInterpretor = ({ content }: { content: string }) => {
-  const { theme } = useTheme(); // Obtenez le thème actuel (light ou dark)
+    const components = {
+        code: CustomCode,
+        table: CustomTable,
+    };
 
-  // Fonction de copie dans le presse-papiers
-  const handleCopy = (code: string) => {
-    navigator.clipboard.writeText(code).then(() => {
-      alert('Code copié dans le presse-papiers!');
-    });
-  };
-
-  return (
-    <ReactMarkdown
-      children={content}
-      components={{
-        code({ node, inline, className, children, ...props }: { node: any, inline: boolean, className: string, children: React.ReactNode }) {
-          if (inline) {
-            return <code className={className} {...props}>{children}</code>;
-          }
-
-          // Récupérer le nom du langage
-          const language = className?.replace('language-', '') || 'plaintext';
-          const codeContent = String(children).replace(/\n$/, '');
-
-          // Choisir le style en fonction du thème
-          const syntaxStyle = theme === 'dark' ? oneDark : oneLight;
-
-          return (
-            <div>
-              <div className="font-doto font-bold bg-zinc-400/20 p-1 flex justify-between items-center rounded-t-sm mt-2 border-b-1 border-blue-600">
-                <span className='text-xs'>{language}</span>
-                <button
-                  onClick={() => handleCopy(codeContent)}
-                  className='p-1 bg-white hover:bg-blue-600 hover:text-white dark:bg-zinc-800 dark:hover:bg-zinc-900 rounded-sm font-doto font-bold text-xs'
-                >
-                  Copier
-                </button>
-              </div>
-              <SyntaxHighlighter language={language} style={syntaxStyle} {...props}>
-                {codeContent}
-              </SyntaxHighlighter>
-            </div>
-          );
-        },
-      }}
-    />
-  );
+    return (
+        <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+            {content}
+        </ReactMarkdown>
+    );
 };

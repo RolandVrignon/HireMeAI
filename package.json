@@ -31,6 +31,7 @@
     "react-dom": "^18",
     "react-markdown": "^9.0.1",
     "react-syntax-highlighter": "^15.6.1",
+    "remark-gfm": "^4.0.0",
     "tailwind-merge": "^2.5.4",
     "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-animate": "^1.0.7",
