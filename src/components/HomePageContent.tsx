@@ -1,4 +1,3 @@
-// src/components/HomePageContent.tsx
 'use client';
 
 import { useContext, useState, useEffect } from 'react';
@@ -25,8 +24,17 @@ export default function HomePageContent() {
     const [ui, setUI] = useState<UIInterface>({
         theme: theme === 'dark' || theme === 'light' ? theme : 'dark',
         language: language,
-        url: window.location.origin
+        url: ''
     });
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setUI((prevUI) => ({
+                ...prevUI,
+                url: window.location.origin
+            }));
+        }
+    }, []);
 
     useEffect(() => {
         setUI((prevUI) => ({

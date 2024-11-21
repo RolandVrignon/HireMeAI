@@ -80,6 +80,11 @@
 .hide-scrollbar {
   overflow: scroll;  /* Permet le défilement */
   scrollbar-width: none;  /* Pour Firefox */
+  position: relative;
+}
+
+.smooth-scroll {
+  scroll-behavior: smooth;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
