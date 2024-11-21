@@ -48,16 +48,16 @@ const CustomCode = ({ node, inline, className, children, ...props }: any) => {
 const CustomTable = ({ children, ...props }: any) => {
     const extractText = (element: any): any => {
         if (typeof element === 'string') {
-            return element;
-        } else if (React.isValidElement(element)) {
-            return extractText(element.props.children);
+          return element;
+        } else if (React.isValidElement<{ children?: any }>(element)) {
+          return extractText(element.props.children);
         } else if (Array.isArray(element)) {
-            return element.map(extractText).join('');
+          return element.map(extractText).join('');
         } else {
-            return '';
+          return '';
         }
-    };
-
+      };
+      
     const tableChildren = Array.isArray(children) ? children : [children];
 
     let headers: string[] = [];
