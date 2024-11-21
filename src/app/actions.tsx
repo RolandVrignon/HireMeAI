@@ -11,6 +11,7 @@ import { educationData } from '@/data/educationData';
 import { ThemeSwitcher } from '@/components/ai-components/themeSwitcher';
 import { LanguageSwitcher } from '@/components/ai-components/languageSwitcher';
 import { ClientMessage, ServerMessage, UIInterface } from '@/types/types';
+import { MarkdownInterpretor } from '@/components/ai-components/markdownInterpretor'
 
 const username = process.env.NEXT_PUBLIC_USER_NAME;
 
@@ -54,10 +55,8 @@ export async function continueConversation(
         ]);
         loadingState.done({ loading: false });
       }
-
-      return (
-        <ReactMarkdown>{content}</ReactMarkdown>
-      );
+  
+      return <MarkdownInterpretor content={content} />;
     },
     tools: {
       showEducation: {

@@ -42,12 +42,12 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
     useEffect(() => {
 
         if (conversation.length > 0 && conversation[conversation.length - 1].role === 'user') {
+            console.log('conversation[conversation.length - 1]:', conversation[conversation.length - 1]);
             const container = containerRef.current;
             const lastMessage = lastMessageRef.current;
 
             if (container && lastMessage) {
                 const lastMessageOffset = conversation.length > 1 ? lastMessage.offsetTop - container.offsetTop + 8 : lastMessage.offsetTop - container.offsetTop - 8;
-                console.log('lastMessageOffset:', lastMessageOffset)
                 container.scrollTop = lastMessageOffset;
             }
         }
@@ -75,7 +75,7 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
         <div className="relative h-full">
             <ScrollArea
                 ref={containerRef}
-                className={`smooth-scroll flex flex-col overflow-auto h-full hide-scrollbar pb-[120%]`}
+                className={`smooth-scroll flex flex-col overflow-auto h-full hide-scrollbar pb-[100vh]`}
             >
                 {conversation.map((message: ClientMessage, index: number) => (
                     <div

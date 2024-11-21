@@ -34,15 +34,25 @@
   @apply list-decimal pl-5 my-2;
 }
 
-/* Styles pour le code inline */
-.markdown-body code {
-  @apply bg-gray-200 text-gray-800 px-1 py-0.5 rounded text-sm font-mono;
+/* .markdown-body code > span {
+  @apply text-xs;
+  line-height: 0 !important;
 }
 
-/* Styles pour les blocs de code */
-.markdown-body pre {
-  @apply bg-gray-900 text-white p-4 rounded-lg overflow-x-auto font-mono text-sm;
+.markdown-body code {
+  @apply text-xs;
+  line-height: 0 !important;
+}*/
+
+
+.markdown-body pre, code {
+  @apply rounded-lg overflow-x-auto font-mono text-xs;
+  margin-top: 0 !important;
 }
+/*
+.markdown-body pre {
+  padding: 0.5rem !important;
+} */
 
 /* Styles pour les tables */
 .markdown-body table {
