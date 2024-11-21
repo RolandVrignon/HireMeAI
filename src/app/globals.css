@@ -31,7 +31,7 @@
 }
 
 .markdown-body li {
-  @apply mb-8;
+  @apply mb-4;
 }
 
 .markdown-body ol {
