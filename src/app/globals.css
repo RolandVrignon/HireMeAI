@@ -23,7 +23,7 @@
 }
 
 .markdown-body a {
-  @apply text-blue-500;
+  @apply text-blue-600 dark:text-blue-500 font-doto font-bold text-xs;
 }
 
 .markdown-body ul {

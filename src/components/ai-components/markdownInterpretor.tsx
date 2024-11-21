@@ -92,7 +92,7 @@ const CustomTable = ({ children, ...props }: any) => {
     }
 
     return (
-        <ScrollArea className="font-xs my-2 rounded-md overflow-auto bg-slate-50/90 dark:bg-white/5">
+        <ScrollArea className="font-xs my-2 rounded-lg overflow-auto bg-slate-50/90 dark:bg-white/5">
             <Table {...props}>
                 <TableHeader>
                     <TableRow>
