@@ -16,61 +16,61 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
     const containerRef = useRef<HTMLDivElement>(null);
     const lastMessageRef = useRef<HTMLDivElement>(null);
     const endRef = useRef<HTMLDivElement>(null);
-
     const [showArrow, setShowArrow] = useState<boolean>(false);
-    const previousScrollTop = useRef<number>(0);
+    const [autoScrollEnabled, setAutoScrollEnabled] = useState<boolean>(true);
+    const lastScrollTop = useRef<number>(0);
 
-    // Gestion du défilement pour déterminer la direction et la visibilité de endRef
+    // Observer pour détecter si endRef est visible
+    useEffect(() => {
+        const container = containerRef.current;
+        const endElement = endRef.current;
+
+        if (!container || !endElement) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setShowArrow(!entry.isIntersecting);
+            },
+            { root: container, threshold: 1.0 }
+        );
+
+        observer.observe(endElement);
+
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
+
+    // Auto-scroll lorsque isLoading passe de true à false
+    useEffect(() => {
+        if (!isLoading && autoScrollEnabled) {
+            scrollToBottom();
+        }
+    }, [isLoading, autoScrollEnabled]);
+
+    // Listener pour surveiller le défilement manuel de l'utilisateur
     useEffect(() => {
         const container = containerRef.current;
 
         if (!container) return;
 
-        const onScroll = () => {
-            const currentScrollTop = container.scrollTop;
-            const isScrollingDown = currentScrollTop > previousScrollTop.current;
-            previousScrollTop.current = currentScrollTop;
+        const handleScroll = () => {
+            const scrollTop = container.scrollTop;
 
-            // Vérifier si endRef est visible dans le conteneur
-            const endElement = endRef.current;
-            if (endElement) {
-                const containerRect = container.getBoundingClientRect();
-                const endElementRect = endElement.getBoundingClientRect();
-
-                const isEndRefVisible =
-                    endElementRect.top >= containerRect.top &&
-                    endElementRect.bottom <= containerRect.bottom;
-
-                if (!isEndRefVisible && !isScrollingDown) {
-                    setShowArrow(true);
-                } else {
-                    setShowArrow(false);
-                }
+            // Si l'utilisateur fait défiler vers le haut, désactive l'auto-scroll
+            if (scrollTop < lastScrollTop.current) {
+                setAutoScrollEnabled(false);
             }
+
+            lastScrollTop.current = scrollTop;
         };
 
-        container.addEventListener('scroll', onScroll);
+        container.addEventListener('scroll', handleScroll);
 
-        // Nettoyage de l'écouteur lors du démontage du composant
         return () => {
-            container.removeEventListener('scroll', onScroll);
+            container.removeEventListener('scroll', handleScroll);
         };
     }, []);
-
-    // Auto-scroll lors de la mise à jour de la conversation
-    useEffect(() => {
-        if (conversation.length > 0 && conversation[conversation.length - 1].role === 'user') {
-            const container = containerRef.current;
-            const lastMessage = lastMessageRef.current;
-
-            if (container && lastMessage) {
-                const lastMessageOffset = conversation.length > 1
-                    ? lastMessage.offsetTop - container.offsetTop + 8
-                    : lastMessage.offsetTop - container.offsetTop - 8;
-                container.scrollTop = lastMessageOffset;
-            }
-        }
-    }, [conversation]);
 
     // Fonction pour faire défiler jusqu'à endRef et le centrer
     const scrollToBottom = () => {
@@ -81,7 +81,7 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
             // Calculer la position pour centrer endRef
             const containerHeight = container.clientHeight;
             const endElementOffsetTop = endElement.offsetTop;
-            const desiredScrollTop = endElementOffsetTop - containerHeight / 2;
+            const desiredScrollTop = endElementOffsetTop - containerHeight / 3;
 
             container.scrollTo({
                 top: desiredScrollTop,
@@ -101,10 +101,7 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
                         key={index}
                         ref={index === conversation.length - 1 ? lastMessageRef : null}
                     >
-                        <MessageItem
-                            message={message}
-                            isFirst={index === 0}
-                        />
+                        <MessageItem message={message} isFirst={index === 0} />
                     </div>
                 ))}
                 {!isLoading && (
@@ -117,7 +114,10 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
 
             {showArrow && (
                 <button
-                    onClick={scrollToBottom}
+                    onClick={() => {
+                        setAutoScrollEnabled(true);
+                        scrollToBottom();
+                    }}
                     className="fixed bottom-4 left-1/2 z-50 transform -translate-x-1/2 h-10 w-10 p-1 flex items-center justify-center rounded-full bg-blue-600 dark:bg-zinc-800 text-white shadow-lg dark:hover:bg-zinc-900 hover:bg-blue-700 focus:outline-none"
                 >
                     <ChevronDown />

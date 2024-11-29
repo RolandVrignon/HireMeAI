@@ -10,6 +10,10 @@
     "dark": "dark",
     "light": "light"
   },
+  "copy": {
+    "label" : "copy",
+    "success" : "Code copied to clipboard!"
+  },
   "title": "Hi it's {{userName}}'s AI Assistant\nTalk with me to know me better!",
   "description": "Select a topic or ask me anything about {{userName}}'s development expertise",
   "questions": [

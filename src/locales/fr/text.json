@@ -1,56 +1,59 @@
 {
-    "languages": {
-      "en": "Anglais",
-      "fr": "Français",
-      "es": "Espagnol",
-      "nl": "Néerlandais",
-      "de": "Allemand"
+  "languages": {
+    "en": "Anglais",
+    "fr": "Français",
+    "es": "Espagnol",
+    "nl": "Néerlandais",
+    "de": "Allemand"
+  },
+  "themes": {
+    "dark": "sombre",
+    "light": "clair"
+  },
+  "copy": {
+    "label": "copier",
+    "success": "Code copié dans le presse-papiers!"
+  },
+  "title": "Bonjour, c'est l'assistant IA de {{userName}}\nParle avec moi pour mieux me connaître !",
+  "description": "Choisis un sujet ou pose-moi des questions sur l'expertise en développement de {{userName}}",
+  "questions": [
+    {
+      "title": "Technologies",
+      "content": "Quelles sont les principales technologies et langages de programmation maîtrisés par {{userName}} ?"
     },
-    "themes": {
-        "dark": "sombre",
-        "light": "clair"
+    {
+      "title": "Projets",
+      "content": "Peux-tu me parler des projets les plus importants de {{userName}} et des défis techniques rencontrés ?"
     },
-    "title": "Bonjour, c'est l'assistant IA de {{userName}}\nParle avec moi pour mieux me connaître !",
-    "description": "Choisis un sujet ou pose-moi des questions sur l'expertise en développement de {{userName}}",
-    "questions": [
-      {
-        "title": "Technologies",
-        "content": "Quelles sont les principales technologies et langages de programmation maîtrisés par {{userName}} ?"
-      },
-      {
-        "title": "Projets",
-        "content": "Peux-tu me parler des projets les plus importants de {{userName}} et des défis techniques rencontrés ?"
-      },
-      {
-        "title": "Expérience",
-        "content": "Quelle est l'expérience professionnelle de {{userName}} en développement web ?"
-      },
-      {
-        "title": "Motivation",
-        "content": "Qu'est-ce qui motive {{userName}} en tant que développeur et quels sont ses objectifs de carrière ?"
-      },
-      {
-        "title": "Compétences",
-        "content": "Quelles sont les forces principales de {{userName}} en tant que développeur ?"
-      },
-      {
-        "title": "Apprentissage",
-        "content": "Quelle est l'expérience éducative de {{userName}} et quelles formations a-t-il/elle suivies ?"
-      }
-    ],
-    "placeholder": "Message à {{assistantName}}",
-    "footer": "Fait avec amour et café",
-    "functions": {
-      "language": {
-        "success": "Thème changé en mode {{theme}}",
-        "error": "Le thème est déjà réglé sur le mode {{theme}}",
-        "loading": "Changement de thème"
-      },
-      "theme": {
-        "success": "Thème changé en mode {{theme}}",
-        "error": "Le thème est déjà réglé sur le mode {{theme}}",
-        "loading": "Changement de thème"
-      }
+    {
+      "title": "Expérience",
+      "content": "Quelle est l'expérience professionnelle de {{userName}} en développement web ?"
+    },
+    {
+      "title": "Motivation",
+      "content": "Qu'est-ce qui motive {{userName}} en tant que développeur et quels sont ses objectifs de carrière ?"
+    },
+    {
+      "title": "Compétences",
+      "content": "Quelles sont les forces principales de {{userName}} en tant que développeur ?"
+    },
+    {
+      "title": "Apprentissage",
+      "content": "Quelle est l'expérience éducative de {{userName}} et quelles formations a-t-il/elle suivies ?"
+    }
+  ],
+  "placeholder": "Message à {{assistantName}}",
+  "footer": "Fait avec amour et café",
+  "functions": {
+    "language": {
+      "success": "Thème changé en mode {{theme}}",
+      "error": "Le thème est déjà réglé sur le mode {{theme}}",
+      "loading": "Changement de thème"
+    },
+    "theme": {
+      "success": "Thème changé en mode {{theme}}",
+      "error": "Le thème est déjà réglé sur le mode {{theme}}",
+      "loading": "Changement de thème"
     }
   }
-  
+}

@@ -56,7 +56,7 @@ export async function continueConversation(
         loadingState.done({ loading: false });
       }
   
-      return <MarkdownInterpretor content={content} />;
+      return <MarkdownInterpretor content={content}/>;
     },
     tools: {
       showEducation: {

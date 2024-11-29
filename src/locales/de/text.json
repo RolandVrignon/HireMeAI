@@ -10,6 +10,10 @@
     "dark": "dunkel",
     "light": "hell"
   },
+  "copy": {
+    "label": "kopieren",
+    "success": "Code in die Zwischenablage kopiert!"
+  },
   "title": "Hallo, ich bin der KI-Assistent von {{userName}}\nSprich mit mir, um mich besser kennenzulernen!",
   "description": "Wähle ein Thema oder frage mich alles über die Entwicklungsexpertise von {{userName}}",
   "questions": [

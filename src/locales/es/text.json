@@ -10,6 +10,10 @@
     "dark": "oscuro",
     "light": "claro"
   },
+  "copy": {
+    "label": "copiar",
+    "success": "¡Código copiado al portapapeles!"
+  },
   "title": "¡Hola, soy el asistente de IA de {{userName}}\n¡Habla conmigo para conocerme mejor!",
   "description": "Selecciona un tema o pregúntame cualquier cosa sobre la experiencia en desarrollo de {{userName}}",
   "questions": [

@@ -10,6 +10,10 @@
     "dark": "donker",
     "light": "licht"
   },
+  "copy": {
+    "label": "kopiëren",
+    "success": "Code naar klembord gekopieerd!"
+  },
   "title": "Hoi, ik ben de AI-assistent van {{userName}}\nPraat met me om me beter te leren kennen!",
   "description": "Kies een onderwerp of vraag me alles over de ontwikkelingsdeskundigheid van {{userName}}",
   "questions": [

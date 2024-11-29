@@ -1,6 +1,7 @@
 "use client";
 
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { LanguageContext } from '@/providers/language-provider';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -12,17 +13,23 @@ import { LinkPreview } from '@/components/ui/link-preview';
 
 const CustomCode = ({ node, inline, className, children, ...props }: any) => {
     const { theme } = useTheme();
+    const { language, setLanguage, translations, loadTranslations } = useContext(LanguageContext);
+
+    const [copyStatus, setCopyStatus] = useState(false);
 
     const handleCopy = (code: string) => {
         navigator.clipboard.writeText(code).then(() => {
-            alert('Code copied to clipboard!');
+            setCopyStatus(true); // Affiche le message de succès
+            setTimeout(() => {
+                setCopyStatus(false); // Réinitialise après 3 secondes
+            }, 3000);
         });
     };
 
-    const language = className?.replace('language-', '') || 'plaintext';
+    const codeLanguage = className?.replace('language-', '') || 'plaintext';
     const codeContent = String(children).replace(/\n$/, '');
 
-    if (language === 'plaintext') {
+    if (codeLanguage === 'plaintext') {
         return <span className="font-bold">{codeContent}</span>;
     }
 
@@ -30,16 +37,18 @@ const CustomCode = ({ node, inline, className, children, ...props }: any) => {
 
     return (
         <div>
-            <div className="font-doto font-bold bg-zinc-400/20 p-1 flex justify-between items-center rounded-t-sm mt-2 border-b-1 border-blue-600">
-                <span className="text-xs">{language}</span>
+            <div className="font-doto font-bold bg-zinc-400/20 p-1 flex justify-between items-center rounded-t-lg mt-2 border-b-1 border-blue-600">
+                <span className="text-xs">{codeLanguage}</span>
                 <button
                     onClick={() => handleCopy(codeContent)}
-                    className="p-1 bg-white hover:bg-blue-600 hover:text-white dark:bg-zinc-800 dark:hover:bg-zinc-900 rounded-sm font-doto font-bold text-xs"
+                    className={`p-1 bg-white hover:bg-blue-600 hover:text-white dark:bg-zinc-800 dark:hover:bg-zinc-900 rounded-sm font-doto font-bold text-xs
+                    }`}
+                    disabled={copyStatus} // Désactive le bouton temporairement
                 >
-                    Copy
+                    {copyStatus ? translations.copy.success : translations.copy.label}
                 </button>
             </div>
-            <SyntaxHighlighter language={language} style={syntaxStyle} {...props}>
+            <SyntaxHighlighter language={codeLanguage} style={syntaxStyle} className="rounded-b-lg" {...props}>
                 {codeContent}
             </SyntaxHighlighter>
         </div>
@@ -49,16 +58,16 @@ const CustomCode = ({ node, inline, className, children, ...props }: any) => {
 const CustomTable = ({ children, ...props }: any) => {
     const extractText = (element: any): any => {
         if (typeof element === 'string') {
-          return element;
+            return element;
         } else if (React.isValidElement<{ children?: any }>(element)) {
-          return extractText(element.props.children);
+            return extractText(element.props.children);
         } else if (Array.isArray(element)) {
-          return element.map(extractText).join('');
+            return element.map(extractText).join('');
         } else {
-          return '';
+            return '';
         }
-      };
-      
+    };
+
     const tableChildren = Array.isArray(children) ? children : [children];
 
     let headers: string[] = [];
@@ -120,18 +129,20 @@ const CustomLink = ({
     href,
     title,
     children,
-  }: {
+}: {
     href?: string;
     title?: string;
     children?: React.ReactNode;
-  }) => {
+}) => {
     return (
-      <LinkPreview url={href || ''} className='hello'>
-        {children}
-      </LinkPreview>
+        <LinkPreview url={href || ''} className='hello'>
+            {children}
+        </LinkPreview>
     );
 }
-export const MarkdownInterpretor = ({ content }: { content: string }) => {
+
+export const MarkdownInterpretor = ({ content }: { content: string}) => {
+    
     const components = {
         code: CustomCode,
         table: CustomTable,
@@ -139,8 +150,9 @@ export const MarkdownInterpretor = ({ content }: { content: string }) => {
     };
 
     return (
-        <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
-            {content}
-        </ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+                {content}
+            </ReactMarkdown>
     );
+
 };
