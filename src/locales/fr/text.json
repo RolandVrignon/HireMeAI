@@ -14,8 +14,8 @@
     "label": "copier",
     "success": "Code copié dans le presse-papiers!"
   },
-  "title": "Bonjour, c'est l'assistant IA de {{userName}}\nParle avec moi pour mieux me connaître !",
-  "description": "Choisis un sujet ou pose-moi des questions sur l'expertise en développement de {{userName}}",
+  "title": "👋 Salut, discutez avec moi avant de m'embaucher",
+  "description": "Sélectionnez un sujet ou posez-moi n'importe quelle question sur l'expertise en développement de {{userName}}.",
   "questions": [
     {
       "title": "Technologies",

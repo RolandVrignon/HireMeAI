@@ -14,8 +14,8 @@
     "label": "kopieren",
     "success": "Code in die Zwischenablage kopiert!"
   },
-  "title": "Hallo, ich bin der KI-Assistent von {{userName}}\nSprich mit mir, um mich besser kennenzulernen!",
-  "description": "Wähle ein Thema oder frage mich alles über die Entwicklungsexpertise von {{userName}}",
+  "title": "👋 Hallo, bitte chatte mit mir, bevor du mich anstellst",
+  "description": "Wähle ein Thema oder frage mich alles über {{userName}}'s Entwicklungsexpertise.",
   "questions": [
     {
       "title": "Technologien",

@@ -14,8 +14,8 @@
     "label" : "copy",
     "success" : "Code copied to clipboard!"
   },
-  "title": "Hi it's {{userName}}'s AI Assistant\nTalk with me to know me better!",
-  "description": "Select a topic or ask me anything about {{userName}}'s development expertise",
+  "title": "👋 Hi, please chat with me before hiring me",
+  "description": "Select a topic or ask me anything about {{userName}}'s development expertise.",
   "questions": [
     {
       "title": "Technologies",

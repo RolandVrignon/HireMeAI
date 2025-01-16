@@ -2,8 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Antique";
+  src: url("../assets/fonts/AntiqueLegacy/AntiqueLegacy-Bold.otf")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Antique";
+  src: url("../assets/fonts/AntiqueLegacy/AntiqueLegacy-Light.otf")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Antique";
+  src: url("../assets/fonts/AntiqueLegacy/AntiqueLegacy-Medium.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Antique";
+  src: url("../assets/fonts/AntiqueLegacy/AntiqueLegacy-Regular.otf")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 .markdown-body {
-  @apply text-base font-light text-sm leading-relaxed;
+  @apply text-base font-light text-sm leading-relaxed font-antique;
 }
 
 .markdown-body h1 {

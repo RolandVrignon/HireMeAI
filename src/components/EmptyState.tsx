@@ -9,7 +9,7 @@ interface EmptyStateProps {
 const EmptyState: React.FC<EmptyStateProps> = ({ handleSubmitPrePrompt, translations }) => {
     return (
         <div className="h-full w-full flex flex-col items-center justify-center px-4 gap-2">
-            <h1 className="text-xl text-center text-foreground font-semibold">
+            <h1 className="text-xl text-center text-foreground font-antique">
                 {translations.title}
             </h1>
             <p className="text-sm text-center text-muted-foreground">
@@ -22,4 +22,4 @@ const EmptyState: React.FC<EmptyStateProps> = ({ handleSubmitPrePrompt, translat
     );
 };
 
-export default EmptyState; 
+export default EmptyState;

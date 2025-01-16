@@ -101,7 +101,7 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
                         key={index}
                         ref={index === conversation.length - 1 ? lastMessageRef : null}
                     >
-                        <MessageItem message={message} isFirst={index === 0} />
+                        <MessageItem message={message} isFirst={index === 0}/>
                     </div>
                 ))}
                 {!isLoading && (

@@ -14,8 +14,8 @@
     "label": "kopiëren",
     "success": "Code naar klembord gekopieerd!"
   },
-  "title": "Hoi, ik ben de AI-assistent van {{userName}}\nPraat met me om me beter te leren kennen!",
-  "description": "Kies een onderwerp of vraag me alles over de ontwikkelingsdeskundigheid van {{userName}}",
+  "title": "👋 Hallo, chat eerst met mij voordat je me inhuurt",
+  "description": "Kies een onderwerp of vraag me alles over {{userName}}'s ontwikkelingsdeskundigheid.",
   "questions": [
     {
       "title": "Technologieën",

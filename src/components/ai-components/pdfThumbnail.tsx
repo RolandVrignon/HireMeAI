@@ -4,7 +4,7 @@ import "pdfjs-dist/web/pdf_viewer.css";
 import { Languages, Language } from "@/types/types"
 
 // Configure le worker PDF.js à partir du dossier public
-GlobalWorkerOptions.workerSrc = "/pdf.worker.js";
+GlobalWorkerOptions.workerSrc = "/pdf.worker.mjs";
 
 
 export const PdfThumbnail = ({ language }: { language: Language }) => {
