@@ -21,7 +21,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst }) => {
             <div className={`flex flex-col max-w-[100%] rounded-2xl p-2 ${message.role === "user" ? "bg-blue-600 text-white dark:bg-white/15 dark:text-foreground" : "bg-gray-700/5 text-gray-700 dark:bg-white/5 dark:text-gray-200"} backdrop-blur-md markdown-body`}>
                 <div>
                     {message.display}
-                    <PdfThumbnail language="en"/>
+                    {/* <PdfThumbnail language="en"/> */}
                 </div>
                 {formattedTime && (
                     <div className="flex w-full justify-end font-doto text-xs mt-2">
@@ -33,4 +33,4 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst }) => {
     );
 };
 
-export default MessageItem; 
+export default MessageItem;

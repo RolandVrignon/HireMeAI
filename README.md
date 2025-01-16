@@ -20,7 +20,7 @@
 
 **Chat With Me Before Hiring Me** allows recruiters or users to ask a chatbot questions based on a resume uploaded in a specific folder. You can upload your resume in various languages, enabling the chatbot to provide contextual responses based on the selected language and the content of the resume.
 
-Thanks to the use of Vercel AI SDK and React Server Components (RSC), the chatbot can do much more than provide textual answers. It can interact with specific components, such as the **ThemeSwitcher**, **LanguageSwitcher**, and resume visualization. This approach allows for a rich and interactive user experience.
+Thanks to the use of Vercel AI SDK and React Server Components (RSC), the chatbot can do much more than provide textual answers. It can interact with specific components, such as the **ThemeSwitcher**, **LanguageSwitcher**, and **resume visualization**. This approach allows for a rich and interactive user experience.
 
 ## Prerequisites
 
@@ -114,9 +114,7 @@ export const Languages = {
 
 ## Personalizing the Resume
 
-To personalize your chatbot responses, simply upload your resume in the appropriate folder under `./public/{language}/`. For example:
-- For English: `./public/en/resume.json`
-- For French: `./public/fr/resume.json`
+To personalize your chatbot responses, simply upload your resume under `./public/resume.pdf`.
 
 The chatbot will automatically fetch and display the content of the resume based on the language selected.
 
