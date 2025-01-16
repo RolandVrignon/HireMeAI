@@ -48,6 +48,21 @@ cd chat_with_me_before_hiring_me
 pnpm install
 ```
 
+4. Rename the `.env.example` file to `.env`.
+
+5. Add your OpenAI API key, bot name, and user name in the `.env` file:
+```bash
+OPENAI_API_KEY= ## OpenAI API Key
+NEXT_PUBLIC_ASSISTANT_NAME="JohnGPT"
+NEXT_PUBLIC_USER_NAME="John"
+```
+- Replace `## OpenAI API Key` with your actual OpenAI API key.
+- Set `NEXT_PUBLIC_ASSISTANT_NAME` to the desired name of your bot.
+- Set `NEXT_PUBLIC_USER_NAME` to your name.
+
+
+These configurations will allow the chatbot to interact with OpenAI and respond with personalized answers based on the assistant and user names you provided.
+
 ## Running the Project
 
 Once the dependencies are installed, you can start the development server:
