@@ -1,6 +1,6 @@
 # Chat With Me Before Hiring Me 🤖
 
-**Chat With Me Before Hiring Me** is an interactive chatbot powered by AI, which allows users to upload their resumes in different languages for a more personalized experience. The chatbot can respond not only with text but also with interactive components, such as changing the theme or language of the website, or even displaying the resume. This application is built using the Vercel AI SDK (RSC), enabling the streaming of components for a richer experience than a traditional text-based chatbot.
+**Chat With Me Before Hiring Me** is an interactive chatbot powered by Mistral AI, which allows users to upload their resumes in different languages for a more personalized experience. The chatbot can respond not only with text but also with interactive components, such as changing the theme or language of the website, or even displaying the resume. This application is built using the Vercel AI SDK (RSC), enabling the streaming of components for a richer experience than a traditional text-based chatbot.
 
 
 | ![Screenshot 1](./src/assets/img/img1.png) | ![Screenshot 2](./src/assets/img/img2.png) | ![Screenshot 3](./src/assets/img/img3.png) |
