@@ -10,6 +10,7 @@
 
 - [Project Description 📝](#project-description)
 - [Features ✨](#features)
+- [Upcoming Features 🚀](#upcoming-features)
 - [AI Model 🧠](#ai-model)
 - [Prerequisites 📋](#prerequisites)
 - [Installation 🚀](#installation)
@@ -35,6 +36,24 @@ Thanks to the use of Vercel AI SDK and React Server Components (RSC), the chatbo
     - **Resume visualization**: Display a visual representation of your resume.
     - **Theme switching**: Switch between dark and light themes.
     - **Language switching**: Change the website's language dynamically.
+
+## Upcoming Features 🚀
+
+| Feature | Description | Status |
+|---------|------------|--------|
+| Education Server Component | Interactive component to display and discuss educational background | 🟡 In Progress |
+| Professional Server Component | Dynamic component to showcase professional experience | 🔵 Planned |
+| Project Server Component | Interactive showcase of portfolio projects | 🔵 Planned |
+| Resume Displayer | Visual component to display and interact with the full resume | 🔵 Planned |
+| Contact Server Component | Interactive component for contact information and networking | 🔵 Planned |
+| Enhanced Context Support | Add more context than just a resume (cover letter, portfolio links, etc.) | 🔵 Planned |
+
+> Legend:
+> - 🟡 In Progress: Currently being developed
+> - 🔵 Planned: On the roadmap
+> - 🟢 Completed: Ready to use
+
+These upcoming features will enhance the interactive capabilities of the chatbot, allowing for more dynamic and engaging conversations about different aspects of the resume and additional professional context.
 
 ## AI Model 🧠
 
@@ -133,7 +152,58 @@ The chatbot will provide a contextual response based on the resume content and c
 
 ## Contributing 🤝
 
-We welcome contributions to the project! If you would like to contribute, feel free to fork the repository, make your changes, and submit a pull request. Be sure to include tests and documentation for your contributions.
+We welcome and appreciate contributions from the community! Here's how you can contribute:
+
+### Types of Contributions
+
+- 🐛 **Bug Reports**: Create an issue describing the bug and how to reproduce it
+- ✨ **Feature Requests**: Suggest new features or improvements
+- 📝 **Documentation**: Help improve or translate the documentation
+- 💻 **Code Contributions**: Submit pull requests with bug fixes or new features
+
+### How to Contribute
+
+1. **Fork the Repository**
+   ```bash
+   git clone https://github.com/your-username/chat_with_me_before_hiring_me.git
+   ```
+
+2. **Create a Branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+3. **Make Your Changes**
+   - Follow the existing code style
+   - Add comments where necessary
+   - Update documentation if needed
+
+4. **Test Your Changes**
+   - Ensure all existing tests pass
+   - Add new tests if needed
+   - Test the application locally
+
+5. **Submit a Pull Request**
+   - Provide a clear description of the changes
+   - Reference any related issues
+   - Update the README if needed
+
+### Development Guidelines
+
+- Use TypeScript for all new code
+- Follow the existing project structure
+- Use meaningful commit messages
+- Keep pull requests focused on a single feature or fix
+- Add appropriate documentation for new features
+
+### Need Help?
+
+Feel free to create an issue for:
+- Questions about the codebase
+- Clarification on how to implement a feature
+- Discussion about potential improvements
+
+We aim to review all contributions within a week. Thank you for helping improve Chat With Me Before Hiring Me! 🙏
 
 ## License 📜
 
