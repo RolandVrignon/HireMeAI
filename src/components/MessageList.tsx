@@ -96,14 +96,23 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
                 ref={containerRef}
                 className={`smooth-scroll flex flex-col overflow-auto h-full hide-scrollbar pb-[100vh]`}
             >
-                {conversation.map((message: ClientMessage, index: number) => (
-                    <div
-                        key={index}
-                        ref={index === conversation.length - 1 ? lastMessageRef : null}
-                    >
-                        <MessageItem message={message} isFirst={index === 0}/>
-                    </div>
-                ))}
+                {conversation.map((message: ClientMessage, index: number) => {
+                    const isLastAssistantMessage = index === conversation.length - 1 && message.role === 'assistant';
+                    
+                    return (
+                        <div
+                            key={index}
+                            ref={index === conversation.length - 1 ? lastMessageRef : null}
+                        >
+                            <MessageItem 
+                                message={message} 
+                                isFirst={index === 0} 
+                                isLoading={isLoading}
+                                isLastAssistantMessage={isLastAssistantMessage}
+                            />
+                        </div>
+                    );
+                })}
                 {!isLoading && (
                     <div className="px-1">
                         <PromptCarousel handleSubmitPrePrompt={handleSubmitPrePrompt} translations={translations} />

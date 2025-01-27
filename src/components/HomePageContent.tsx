@@ -61,53 +61,70 @@ export default function HomePageContent() {
     };
 
     const handleSubmitPrePrompt = async (content: string) => {
+        setIsLoading(true);
+        
         setConversation((currentConversation: ClientMessage[]) => [
             ...currentConversation,
             createMessage(content),
+            {
+                id: generateId(),
+                role: 'assistant',
+                display: '',
+                date: new Date(),
+            }
         ]);
-
-        setInput('');
-        setIsLoading(true);
 
         try {
             const { loadingState, ...message } = await continueConversation(content, ui);
+            
             setConversation((currentConversation: ClientMessage[]) => [
-                ...currentConversation,
+                ...currentConversation.slice(0, -1),
                 message,
             ]);
 
+            setIsLoading(false);
+
             for await (const state of readStreamableValue(loadingState)) {
-                setIsLoading((state as { loading: boolean }).loading);
+                // Ne plus utiliser setIsLoading ici
             }
         } catch (error) {
             console.error('Erreur lors de la conversation:', error);
-        } finally {
             setIsLoading(false);
         }
     };
 
     const handleSubmit = async () => {
+        const userMessage = createMessage(input);
+        setInput('');
+        
+        setIsLoading(true);
+        
         setConversation((currentConversation: ClientMessage[]) => [
             ...currentConversation,
-            createMessage(input),
+            userMessage,
+            {
+                id: generateId(),
+                role: 'assistant',
+                display: '',
+                date: new Date(),
+            }
         ]);
-
-        setInput('');
-        setIsLoading(true);
 
         try {
             const { loadingState, ...message } = await continueConversation(input, ui);
+            
             setConversation((currentConversation: ClientMessage[]) => [
-                ...currentConversation,
+                ...currentConversation.slice(0, -1),
                 message,
             ]);
 
+            setIsLoading(false);
+
             for await (const state of readStreamableValue(loadingState)) {
-                setIsLoading((state as { loading: boolean }).loading);
+                // Ne plus utiliser setIsLoading ici
             }
         } catch (error) {
             console.error('Erreur lors de la conversation:', error);
-        } finally {
             setIsLoading(false);
         }
     };
