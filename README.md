@@ -19,6 +19,7 @@
 - [Usage Examples](#usage-examples)
 - [Contributing](#contributing)
 - [License](#license)
+- [AI Model](#ai-model)
 
 ## Project Description
 
@@ -139,6 +140,10 @@ We welcome contributions to the project! If you would like to contribute, feel f
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## AI Model
+
+This project uses the Mistral AI model, specifically `mistral-small-latest`, for generating responses. The model provides efficient and accurate natural language processing capabilities while maintaining good performance.
 
 
 

@@ -1,7 +1,7 @@
 'use server';
 
 import { getMutableAIState, streamUI, createStreamableValue } from 'ai/rsc';
-import { openai } from '@ai-sdk/openai';
+import { mistral } from '@ai-sdk/mistral';
 import React, { ReactNode } from 'react';
 import { z } from 'zod';
 import { generateId } from 'ai';
@@ -41,7 +41,7 @@ export async function continueConversation(
   history.update(messages);
 
   const result = await streamUI({
-    model: openai('gpt-4o-mini'),
+    model: mistral('mistral-small-latest'),
     messages: [      
       { role: 'system', content: UIPrompt },
       ...history.get(),
