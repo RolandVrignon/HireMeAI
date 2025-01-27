@@ -67,7 +67,10 @@
 }
 
 .markdown-body li {
-  @apply mb-2;
+  @apply mb-4;
+  strong {
+    font-weight: 700;
+  }
 }
 
 .markdown-body ol {

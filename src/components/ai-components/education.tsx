@@ -15,7 +15,7 @@ type EducationProps = {
 
 const Education = ({ image, title, subtitle, startDate, endDate, description, url }: EducationProps) => {
   return (
-    <div className="flex flex-col gap-2 education-item bg-red-500 rounded-xl p-2">
+    <div className="flex flex-col gap-2 education-item bg-white/80 dark:bg-gray-700/30 rounded-xl p-2">
       <LinkPreview url={url}>
         <h2>{title}</h2>
         <h3>{subtitle}</h3>
