@@ -1,6 +1,6 @@
 import { mistral } from "@ai-sdk/mistral";
 import { smoothStream, streamText } from "ai";
-import { extractTextFromPdf } from "../resume/route";
+import { extractTextFromPdf } from '@/utils/pdf';   
 import { tools } from "@/ai/tools";
 export const maxDuration = 30;
 

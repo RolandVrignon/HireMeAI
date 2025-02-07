@@ -1,21 +1,7 @@
-import { NextResponse } from "next/server";
 import path from "path";
 import PDFParser from "pdf2json";
 
 export const runtime = "nodejs";
-
-export async function GET(request: Request) {
-  try {
-    const resumeText = await extractTextFromPdf("resume.pdf");
-    return NextResponse.json({ result: resumeText }, { status: 200 });
-  } catch (error) {
-    console.error("Error extracting text from PDF:", error);
-    return NextResponse.json(
-      { error: "Error extracting resume text" },
-      { status: 500 }
-    );
-  }
-}
 
 export function extractTextFromPdf(fileName: string): Promise<string> {
   return new Promise((resolve, reject) => {
