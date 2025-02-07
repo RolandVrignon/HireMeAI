@@ -126,7 +126,7 @@ export const PdfThumbnail = () => {
   return (
     <div
       onClick={handleOpenPdf}
-      className={!isPdfAvailable ? "hidden" : `mask cursor-pointer mt-4 border-4 border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden`}
+      className={!isPdfAvailable ? "hidden" : `mask cursor-pointer border-4 border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden`}
     >
       <div className="h-[150px] w-full overflow-hidden">
         {thumbnailSrc ? (

@@ -90,20 +90,29 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isLoading, handleSu
         }
     };
 
+    const displayMessages = [...messages];
+    if (isLoading && messages.length > 0 && messages[messages.length - 1].role === 'user') {
+        displayMessages.push({
+            id: 'loading-message',
+            role: 'assistant',
+            content: '',
+            createdAt: new Date()
+        });
+    }
+
     return (
         <div className="relative h-full">
             <ScrollArea
                 ref={containerRef}
                 className={`smooth-scroll flex flex-col overflow-auto h-full hide-scrollbar pb-[100vh]`}
             >
-                {messages.map((message: Message, index: number) => {
-
-                    const isLastAssistantMessage = index === messages.length - 1 && message.role === 'assistant';
+                {displayMessages.map((message: Message, index: number) => {
+                    const isLastAssistantMessage = index === displayMessages.length - 1 && message.role === 'assistant';
                     
                     return (
                         <div
-                            key={index}
-                            ref={index === messages.length - 1 ? lastMessageRef : null}
+                            key={message.id || index}
+                            ref={index === displayMessages.length - 1 ? lastMessageRef : null}
                         >
                             <MessageItem 
                                 message={message} 

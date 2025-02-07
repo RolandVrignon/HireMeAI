@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 
     const resumeText = await extractTextFromPdf("resume.pdf");
 
-    const systemMessage = `You are a helpful assistant. Here is my resume:\n\n${resumeText}\n\nYou can use tools when specifically asked, otherwise provide normal text responses.`;
+    const systemMessage = `You are a helpful assistant. Here is my resume:\n\n${resumeText}\n\nYou should absolutely use tools if a tool fullfills users request, otherwise provide normal text responses.`;
 
     const result = streamText({
       model: mistral("mistral-small-latest"),
@@ -26,6 +26,8 @@ export async function POST(req: Request) {
       maxSteps: 1,
       tools,
       experimental_transform: smoothStream(),
+      toolCallStreaming: true,
+      experimental_toolCallStreaming: true,
     });
 
     return result.toDataStreamResponse();

@@ -3,6 +3,8 @@ import { Message } from 'ai';
 import Skeleton from './Skeleton';
 import { MarkdownInterpretor } from '../ai-components/markdownInterpretor';
 import { PdfThumbnail } from '../ai-components/pdfThumbnail';
+import { Badge } from '@/components/ui/badge';
+import { Experiences } from '../ai-components/Experiences';
 export interface MessageItemProps {
     message: Message;
     isFirst: boolean;
@@ -18,22 +20,26 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst, isLoading, 
 
     const role = message.role === "user" ? "Me" : process.env.NEXT_PUBLIC_ASSISTANT_NAME;
 
-    useEffect(() => {
-        console.log('message.parts:', JSON.stringify(message.parts, null, 2))
-    }, [message])
-
     const renderPart = (part: any) => {
         if (part.type === 'tool-invocation') {
-            if (part.toolInvocation.toolName === 'getResume') {
-                return <PdfThumbnail />;
-            }
-            else if (part.toolInvocation.toolName === 'getContact') {
-                return (
-                    <div className='w-full my-2'>
-                        <div className='bg-red-500 w-full h-20 rounded my-2' />
-                    </div>
-                );
-            }
+            return (
+                <>
+                    <Badge variant="secondary" className='mt-4 mb-4 antique font-light bg-green-300/40 text-green-950 dark:bg-green-800/40 dark:text-green-300'>
+                        {'>'}  {part.toolInvocation.toolName}()
+                    </Badge>
+                    {part.toolInvocation.toolName === 'getResume' && (
+                        <PdfThumbnail />
+                    )}
+                    {part.toolInvocation.toolName === 'getExperience' && (
+                        <Experiences experiences={part.toolInvocation?.args?.experiences} />
+                    )}
+                    {part.toolInvocation.toolName === 'getContact' && (
+                        <div className='w-full my-2'>
+                            <div className='bg-red-500 w-full h-20 rounded my-2' />
+                        </div>
+                    )}
+                </>
+            );
         }
         else if (part.type === 'text') {
             return <MarkdownInterpretor content={part.text} />;

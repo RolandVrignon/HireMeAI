@@ -18,6 +18,7 @@ export default function HomePageContent() {
     const { messages, input, setInput, handleInputChange, handleSubmit, stop } = useChat({
         api: '/api/chat',
         onResponse: () => {
+            console.log('onResponse')
             setIsLoading(false);
         }
     });
