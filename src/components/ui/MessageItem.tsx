@@ -1,21 +1,36 @@
 import React from 'react';
-import { ClientMessage } from '@/types/types';
+import { Message } from 'ai';
 import Skeleton from './Skeleton';
+import { MarkdownInterpretor } from '../ai-components/markdownInterpretor';
 
 export interface MessageItemProps {
-    message: ClientMessage;
+    message: Message;
     isFirst: boolean;
     isLoading: boolean;
     isLastAssistantMessage: boolean;
 }
 
 const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst, isLoading, isLastAssistantMessage }) => {
-    const formattedTime = message?.date?.toLocaleTimeString([], {
+    const formattedTime = message?.createdAt?.toLocaleTimeString([], {
         hour: '2-digit',
         minute: '2-digit',
     });
 
     const role = message.role === "user" ? "Me" : process.env.NEXT_PUBLIC_ASSISTANT_NAME;
+
+    const renderPart = (part: any) => {
+        if (part.type === 'tool-invocation') {
+            return (
+                <div className="text-gray-500 bg-gray-100 dark:bg-gray-800 rounded p-2 my-2 font-mono text-sm">
+                    {part.toolInvocation.result}
+                </div>
+            );
+        }
+        if (part.type === 'text') {
+            return <MarkdownInterpretor content={part.text} />;
+        }
+        return null;
+    };
     
     return (
         <div className={`flex ${isFirst ? "pb-2" : "py-2"} ${message.role === "user" ? "justify-end" : "justify-start"} items-end`}>
@@ -24,7 +39,11 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst, isLoading, 
                     {isLoading && isLastAssistantMessage && message.role === 'assistant' ? (
                         <Skeleton />
                     ) : (
-                        message.display
+                        message.parts?.map((part, index) => (
+                            <React.Fragment key={index}>
+                                {renderPart(part)}
+                            </React.Fragment>
+                        ))
                     )}
                 </div>
                 {formattedTime && (

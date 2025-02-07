@@ -1,25 +1,36 @@
 'use client';
 
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import { LanguageContext } from '@/providers/language-provider';
 import { useTheme } from 'next-themes';
-import { useActions, useUIState, readStreamableValue } from 'ai/rsc';
-import { generateId } from 'ai';
-
-import { ClientMessage, Language, UIInterface } from '@/types/types';
-
+import { useChat } from 'ai/react';
+import { UIInterface } from '@/types/types';
 import { AuroraBackground } from '@/components/ui/aurora-background';
 import MessageList from '@/components/MessageList';
 import EmptyState from '@/components/EmptyState';
-import InputForm from '@/components/InputForm';
+import InputForm, { InputFormRef } from '@/components/InputForm';
 
 export default function HomePageContent() {
-    const [input, setInput] = useState<string>('');
-    const [conversation, setConversation] = useUIState();
-    const { continueConversation } = useActions();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const { theme } = useTheme();
+
     const { language, setLanguage, translations, loadTranslations } = useContext(LanguageContext);
+    const { messages, input, setInput, handleInputChange, handleSubmit, stop } = useChat({
+        api: '/api/chat',
+        maxSteps: 5,
+        onResponse: () => {
+            setIsLoading(false);
+        }
+    });
+
+    const inputFormRef = useRef<InputFormRef>(null);
+
+    const [pendingSubmit, setPendingSubmit] = useState(false);
+
+    useEffect(() => {
+        console.log('messages:', messages)
+        console.log('translations:', translations)
+    }, [])
 
     const [ui, setUI] = useState<UIInterface>({
         theme: theme === 'dark' || theme === 'light' ? theme : 'dark',
@@ -29,121 +40,54 @@ export default function HomePageContent() {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            setUI((prevUI) => ({
-                ...prevUI,
-                url: window.location.origin
-            }));
+            setUI(prev => ({ ...prev, url: window.location.origin }));
         }
     }, []);
 
     useEffect(() => {
-        setUI((prevUI) => ({
-            ...prevUI,
+        setUI(prev => ({
+            ...prev,
             theme: theme === 'dark' || theme === 'light' ? theme : 'dark',
         }));
     }, [theme]);
 
     useEffect(() => {
-        setUI((prevUI) => ({
-            ...prevUI,
-            language: language,
-        }));
-        loadTranslations(language)
+        setUI(prev => ({ ...prev, language }));
+        loadTranslations(language);
     }, [language]);
 
-    const createMessage = (text: string) => {
-        return {
-            id: generateId(),
-            role: 'user',
-            display: text,
-            date: new Date(),
-        };
-    };
+    useEffect(() => {
+        if (pendingSubmit && input) {
+            inputFormRef.current?.submitForm();
+            setPendingSubmit(false);
+        }
+    }, [input, pendingSubmit]);
 
     const handleSubmitPrePrompt = async (content: string) => {
+        setInput(content);
         setIsLoading(true);
-        
-        setConversation((currentConversation: ClientMessage[]) => [
-            ...currentConversation,
-            createMessage(content),
-            {
-                id: generateId(),
-                role: 'assistant',
-                display: '',
-                date: new Date(),
-            }
-        ]);
-
-        try {
-            const { loadingState, ...message } = await continueConversation(content, ui);
-            
-            setConversation((currentConversation: ClientMessage[]) => [
-                ...currentConversation.slice(0, -1),
-                message,
-            ]);
-
-            setIsLoading(false);
-
-            for await (const state of readStreamableValue(loadingState)) {
-                // Ne plus utiliser setIsLoading ici
-            }
-        } catch (error) {
-            console.error('Erreur lors de la conversation:', error);
-            setIsLoading(false);
-        }
+        setPendingSubmit(true);
     };
 
-    const handleSubmit = async () => {
-        const userMessage = createMessage(input);
-        setInput('');
-        
+    const handleSubmitMain = async (e: React.FormEvent) => {
+        e.preventDefault();
         setIsLoading(true);
-        
-        setConversation((currentConversation: ClientMessage[]) => [
-            ...currentConversation,
-            userMessage,
-            {
-                id: generateId(),
-                role: 'assistant',
-                display: '',
-                date: new Date(),
-            }
-        ]);
-
-        try {
-            const { loadingState, ...message } = await continueConversation(input, ui);
-            
-            setConversation((currentConversation: ClientMessage[]) => [
-                ...currentConversation.slice(0, -1),
-                message,
-            ]);
-
-            setIsLoading(false);
-
-            for await (const state of readStreamableValue(loadingState)) {
-                // Ne plus utiliser setIsLoading ici
-            }
-        } catch (error) {
-            console.error('Erreur lors de la conversation:', error);
-            setIsLoading(false);
-        }
-    };
-
-    const handleLanguageChange = (newLanguage: Language) => {
-        setLanguage(newLanguage);
-        loadTranslations(newLanguage);
+        handleSubmit(e);
     };
 
     return (
-        <AuroraBackground blur={conversation?.length > 0}>
+        <AuroraBackground blur={true}>
             <div className="container flex flex-col h-[100dvh] p-2 md:px-8 w-full gap-2">
                 <main className="flex-1 w-full bg-blue-700/5 dark:bg-white/5 backdrop-blur-md rounded-3xl overflow-hidden relative p-2">
                     <div className="rounded-2xl overflow-hidden h-full mask">
-                        {conversation.length === 0 ? (
-                            <EmptyState handleSubmitPrePrompt={handleSubmitPrePrompt} translations={translations} />
+                        {messages.length === 0 ? (
+                            <EmptyState
+                                handleSubmitPrePrompt={handleSubmitPrePrompt}
+                                translations={translations}
+                            />
                         ) : (
                             <MessageList
-                                conversation={conversation}
+                                messages={messages}
                                 isLoading={isLoading}
                                 handleSubmitPrePrompt={handleSubmitPrePrompt}
                                 translations={translations}
@@ -153,9 +97,10 @@ export default function HomePageContent() {
                 </main>
                 <div className="w-full">
                     <InputForm
+                        ref={inputFormRef}
                         input={input}
-                        setInput={(e) => setInput(e.target.value)}
-                        handleSubmit={handleSubmit}
+                        setInput={handleInputChange}
+                        handleSubmit={handleSubmitMain}
                         isLoading={isLoading}
                         translations={translations}
                     />

@@ -4,15 +4,15 @@ import PromptCarousel from './ui/PromptCarousel';
 import { ClientMessage } from '@/types/types';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
 import { ChevronDown } from 'lucide-react';
-
+import { Message } from 'ai';
 export interface MessageListProps {
-    conversation: ClientMessage[];
+    messages: Message[];
     isLoading: boolean;
     handleSubmitPrePrompt: (content: string) => void;
     translations: any;
 }
 
-const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, handleSubmitPrePrompt, translations }) => {
+const MessageList: React.FC<MessageListProps> = ({ messages, isLoading, handleSubmitPrePrompt, translations }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const lastMessageRef = useRef<HTMLDivElement>(null);
     const endRef = useRef<HTMLDivElement>(null);
@@ -96,13 +96,14 @@ const MessageList: React.FC<MessageListProps> = ({ conversation, isLoading, hand
                 ref={containerRef}
                 className={`smooth-scroll flex flex-col overflow-auto h-full hide-scrollbar pb-[100vh]`}
             >
-                {conversation.map((message: ClientMessage, index: number) => {
-                    const isLastAssistantMessage = index === conversation.length - 1 && message.role === 'assistant';
+                {messages.map((message: Message, index: number) => {
+
+                    const isLastAssistantMessage = index === messages.length - 1 && message.role === 'assistant';
                     
                     return (
                         <div
                             key={index}
-                            ref={index === conversation.length - 1 ? lastMessageRef : null}
+                            ref={index === messages.length - 1 ? lastMessageRef : null}
                         >
                             <MessageItem 
                                 message={message} 

@@ -17,7 +17,7 @@ export async function GET(request: Request) {
   }
 }
 
-function extractTextFromPdf(fileName: string): Promise<string> {
+export function extractTextFromPdf(fileName: string): Promise<string> {
   return new Promise((resolve, reject) => {
 
     const filePath = path.join(process.cwd(), "public", fileName);
