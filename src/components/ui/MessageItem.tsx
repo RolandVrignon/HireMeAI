@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Message } from 'ai';
-import Skeleton from './Skeleton';
+import { SkeletonCard } from './SkeletonCard';
 import { MarkdownInterpretor } from '../ai-components/markdownInterpretor';
 import { PdfThumbnail } from '../ai-components/pdfThumbnail';
 import { Badge } from '@/components/ui/badge';
@@ -52,7 +52,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst, isLoading, 
             <div className={`flex flex-col w-[100%] rounded-2xl p-2 ${message.role === "user" ? "bg-blue-600 text-white dark:bg-white/15 dark:text-foreground" : "bg-gray-700/5 text-gray-700 dark:bg-white/5 dark:text-gray-200"} backdrop-blur-md markdown-body`}>
                 <div className='font-antique'>
                     {isLoading && isLastAssistantMessage && message.role === 'assistant' ? (
-                        <Skeleton />
+                        <SkeletonCard />
                     ) : (
                         message.parts?.map((part, index) => (
                             <React.Fragment key={index}>
