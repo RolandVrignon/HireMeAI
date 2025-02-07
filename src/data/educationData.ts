@@ -6,7 +6,7 @@ export const educationData = [
         startDate: '2018-09-01',
         endDate: '2021-06-30',
         description: 'Formation en développement de logiciels et systèmes informatiques.',
-        url: 'https://example.com/course1',
+        url: 'https://42.fr',
     },
     {
         image: 'https://example.com/image2.jpg',
