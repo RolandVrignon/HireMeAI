@@ -19,27 +19,27 @@
   "questions": [
     {
       "title": "Technologies",
-      "content": "Quelles sont les principales technologies et langages de programmation maîtrisés par {{userName}} ?"
+      "content": "Quelles sont les principales technologies et langages de programmation maîtrisés par {{userName}} ? Puis affiche le CV."
     },
     {
       "title": "Projets",
-      "content": "Peux-tu me parler des projets les plus importants de {{userName}} et des défis techniques rencontrés ?"
+      "content": "Peux-tu me parler des projets les plus importants de {{userName}} et des défis techniques rencontrés ? Puis affiche le CV."
     },
     {
       "title": "Expérience",
-      "content": "Quelle est l'expérience professionnelle de {{userName}} en développement web ?"
+      "content": "Quelle est l'expérience professionnelle de {{userName}} en développement web ? Puis affiche le CV."
     },
     {
       "title": "Motivation",
-      "content": "Qu'est-ce qui motive {{userName}} en tant que développeur et quels sont ses objectifs de carrière ?"
+      "content": "Qu'est-ce qui motive {{userName}} en tant que développeur et quels sont ses objectifs de carrière ? Puis affiche le CV."
     },
     {
       "title": "Compétences",
-      "content": "Quelles sont les forces principales de {{userName}} en tant que développeur ?"
+      "content": "Quelles sont les forces principales de {{userName}} en tant que développeur ? Puis affiche le CV."
     },
     {
       "title": "Apprentissage",
-      "content": "Quelle est l'expérience éducative de {{userName}} et quelles formations a-t-il/elle suivies ?"
+      "content": "Quelle est l'expérience éducative de {{userName}} et quelles formations a-t-il/elle suivies ? Puis affiche le CV."
     }
   ],
   "placeholder": "Message à {{assistantName}}",

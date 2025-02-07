@@ -1,14 +1,15 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 import "pdfjs-dist/web/pdf_viewer.css";
-import { Languages, Language } from "@/types/types"
 
 // Configure le worker PDF.js à partir du dossier public
 GlobalWorkerOptions.workerSrc = "/pdf.worker.mjs";
 
 
-export const PdfThumbnail = ({ language }: { language: Language }) => {
-  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+export const PdfThumbnail = () => {
+  const [pdfUrl, setPdfUrl] = useState<string | null>('/resume.pdf');
   const [isPdfAvailable, setIsPdfAvailable] = useState<boolean>(true);
   const [thumbnailSrc, setThumbnailSrc] = useState<string | null>(null);
   const [fileSize, setFileSize] = useState<number | null>(null);
@@ -33,38 +34,32 @@ export const PdfThumbnail = ({ language }: { language: Language }) => {
     return `${size.toFixed(2)} ${sizes[i]}`;
   };
 
-
   useEffect(() => {
-    const fetchPdfUrl = async () => {
-      try {
-        const response = await fetch("/api/pdf-files");
-        const data = await response.json();
-        setPdfUrl(data[language] || data.en || null);
-      } catch (error) {
-        console.error("Error fetching PDF URL:", error);
-        setIsPdfAvailable(false);
-      }
-    };
+    let isMounted = true; // Add mounted flag
 
-    fetchPdfUrl();
-  }, [language]);
-
-  useEffect(() => {
     const checkAndGenerateThumbnail = async () => {
+
+      if (!pdfUrl) return;
+      if (!canvasRef.current) return; // Early return if canvas not available
+      
       try {
-
-        if (!pdfUrl) return;
-
+        const canvas = canvasRef.current;
         const pdf = await getDocument(pdfUrl).promise;
         await getFileSize(pdfUrl);
         setPageCount(pdf.numPages);
         const page = await pdf.getPage(1);
-        const viewport = page.getViewport({ scale: 1 });
+        console.log('page:', page)
+        const viewport = page.getViewport({ scale: 0.5 });
+        console.log('viewport:', viewport)
 
-        const canvas = canvasRef.current!;
-        const context = canvas.getContext("2d")!;
-        canvas.width = viewport.width;
+        // Check if component is still mounted before updating canvas
+        if (!isMounted || !canvas) return;
+
+        const context = canvas.getContext('2d');
+        if (!context) return; // Early return if context not available
+
         canvas.height = viewport.height;
+        canvas.width = viewport.width;
 
         // Si une tâche de rendu est déjà en cours, annulez-la
         if (renderTaskRef.current) {
@@ -74,7 +69,7 @@ export const PdfThumbnail = ({ language }: { language: Language }) => {
         // Lancer le rendu sur le canvas
         const renderTask = page.render({
           canvasContext: context,
-          viewport,
+          viewport: viewport,
         });
 
         // Enregistrer la tâche de rendu en cours
@@ -86,26 +81,36 @@ export const PdfThumbnail = ({ language }: { language: Language }) => {
 
           // Si le rendu est terminé avec succès, générez l'image miniature
           setThumbnailSrc(canvas.toDataURL("image/png"));
+
+          if (isMounted) {
+            setIsPdfAvailable(true);
+          }
         } catch (error: any) {
-          if (error.name === "RenderingCancelledException") {
-            console.warn("Rendering cancelled:", error.message);
-          } else {
-            throw error; // Renvoyez d'autres erreurs pour le débogage
+          if (isMounted) {
+            if (error.name === "RenderingCancelledException") {
+              console.warn("Rendering cancelled:", error.message);
+            } else {
+              console.error("Error rendering PDF:", error);
+            }
+            setIsPdfAvailable(false);
           }
         } finally {
           // Réinitialisez la tâche de rendu une fois terminée
           renderTaskRef.current = null;
         }
       } catch (error) {
-        console.error("Error rendering PDF:", error);
-        setIsPdfAvailable(false);
+        if (isMounted) {
+          console.error("Error rendering PDF:", error);
+          setIsPdfAvailable(false);
+        }
       }
     };
 
     checkAndGenerateThumbnail();
 
-    // Nettoyage lors du démontage ou de la mise à jour
+    // Cleanup function
     return () => {
+      isMounted = false;
       if (renderTaskRef.current) {
         renderTaskRef.current.cancel(); // Annulez toute tâche de rendu en cours
       }
@@ -121,13 +126,13 @@ export const PdfThumbnail = ({ language }: { language: Language }) => {
   return (
     <div
       onClick={handleOpenPdf}
-      className={!isPdfAvailable ? "hidden" : `mask cursor-pointer mt-4 border-4 border-gray-300 rounded-lg shadow-md max-w-sm hover:shadow-lg transition-shadow overflow-hidden`}
+      className={!isPdfAvailable ? "hidden" : `mask cursor-pointer mt-4 border-4 border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden`}
     >
-      <div className="h-[150px] overflow-hidden">
+      <div className="h-[150px] w-full overflow-hidden">
         {thumbnailSrc ? (
           <img
             src={thumbnailSrc}
-            alt={`Thumbnail of the ${Languages[language]} resume`}
+            alt={`Thumbnail of the resume`}
             className="w-full object-cover"
           />
         ) : (

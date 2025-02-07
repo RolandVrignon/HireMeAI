@@ -17,7 +17,6 @@ export default function HomePageContent() {
     const { language, setLanguage, translations, loadTranslations } = useContext(LanguageContext);
     const { messages, input, setInput, handleInputChange, handleSubmit, stop } = useChat({
         api: '/api/chat',
-        maxSteps: 5,
         onResponse: () => {
             setIsLoading(false);
         }

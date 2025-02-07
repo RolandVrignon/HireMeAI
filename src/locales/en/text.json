@@ -18,28 +18,32 @@
   "description": "Select a topic or ask me anything about {{userName}}'s development expertise.",
   "questions": [
     {
+      "title": "Informations",
+      "content": "I want {{userName}}'s personal infos and then render the resume"
+    },
+    {
       "title": "Technologies",
-      "content": "What are the main technologies and programming languages that {{userName}} masters?"
+      "content": "What are the main technologies and programming languages that {{userName}} masters ? Then render the resume."
     },
     {
       "title": "Projects",
-      "content": "Can you tell me about {{userName}}'s most significant projects and their technical challenges?"
+      "content": "Can you tell me about {{userName}}'s most significant projects and their technical challenges? Then render the resume."
     },
     {
       "title": "Experience",
-      "content": "What is {{userName}}'s professional experience in web development?"
+      "content": "What is {{userName}}'s professional experience in web development? Then render the resume."
     },
     {
       "title": "Motivation",
-      "content": "What drives {{userName}} as a developer and what are their career goals?"
+      "content": "What drives {{userName}} as a developer and what are their career goals? Then render the resume."
     },
     {
       "title": "Skills",
-      "content": "What are {{userName}}'s key strengths as a developer?"
+      "content": "What are {{userName}}'s key strengths as a developer? Then render the resume."
     },
     {
       "title": "Learning",
-      "content": "What is {{userName}}'s educational experience and what training has they undergone?"
+      "content": "What is {{userName}}'s educational experience and what training has they undergone? Then render the resume."
     }
   ],
   "placeholder": "Message {{assistantName}}",

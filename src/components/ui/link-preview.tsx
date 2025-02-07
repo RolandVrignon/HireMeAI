@@ -67,14 +67,14 @@ export const LinkPreview = ({
   const handleMouseMove = (event: any) => {
     const targetRect = event.target.getBoundingClientRect();
     const eventOffsetX = event.clientX - targetRect.left;
-    const offsetFromCenter = (eventOffsetX - targetRect.width / 2) / 2; // Subtle effect
+    const offsetFromCenter = (eventOffsetX - targetRect.width / 2) / 2;
     x.set(offsetFromCenter);
   };
 
   return (
     <>
       {isMounted && (
-        <div className="hidden">
+        <span className="hidden">
           <Image
             src={src}
             width={width}
@@ -83,7 +83,7 @@ export const LinkPreview = ({
             priority={true}
             alt="hidden image"
           />
-        </div>
+        </span>
       )}
 
       <HoverCardPrimitive.Root

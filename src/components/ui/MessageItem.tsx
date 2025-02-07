@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Message } from 'ai';
 import Skeleton from './Skeleton';
 import { MarkdownInterpretor } from '../ai-components/markdownInterpretor';
-
+import { PdfThumbnail } from '../ai-components/pdfThumbnail';
 export interface MessageItemProps {
     message: Message;
     isFirst: boolean;
@@ -18,20 +18,29 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst, isLoading, 
 
     const role = message.role === "user" ? "Me" : process.env.NEXT_PUBLIC_ASSISTANT_NAME;
 
+    useEffect(() => {
+        console.log('message.parts:', JSON.stringify(message.parts, null, 2))
+    }, [message])
+
     const renderPart = (part: any) => {
         if (part.type === 'tool-invocation') {
-            return (
-                <div className="text-gray-500 bg-gray-100 dark:bg-gray-800 rounded p-2 my-2 font-mono text-sm">
-                    {part.toolInvocation.result}
-                </div>
-            );
+            if (part.toolInvocation.toolName === 'getResume') {
+                return <PdfThumbnail />;
+            }
+            else if (part.toolInvocation.toolName === 'getContact') {
+                return (
+                    <div className='w-full my-2'>
+                        <div className='bg-red-500 w-full h-20 rounded my-2' />
+                    </div>
+                );
+            }
         }
-        if (part.type === 'text') {
+        else if (part.type === 'text') {
             return <MarkdownInterpretor content={part.text} />;
         }
         return null;
     };
-    
+
     return (
         <div className={`flex ${isFirst ? "pb-2" : "py-2"} ${message.role === "user" ? "justify-end" : "justify-start"} items-end`}>
             <div className={`flex flex-col w-[100%] rounded-2xl p-2 ${message.role === "user" ? "bg-blue-600 text-white dark:bg-white/15 dark:text-foreground" : "bg-gray-700/5 text-gray-700 dark:bg-white/5 dark:text-gray-200"} backdrop-blur-md markdown-body`}>
