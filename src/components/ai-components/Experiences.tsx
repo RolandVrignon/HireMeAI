@@ -19,7 +19,6 @@ export const Experiences: React.FC<ExperiencesProps> = ({ experiences }) => {
 
     useEffect(() => {
         if (experiences && experiences.length > 0) {
-            console.log('experiences:', experiences)
 
             setIsLoading(false);
         }

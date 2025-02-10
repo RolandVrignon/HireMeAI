@@ -48,9 +48,7 @@ export const PdfThumbnail = () => {
         await getFileSize(pdfUrl);
         setPageCount(pdf.numPages);
         const page = await pdf.getPage(1);
-        console.log('page:', page)
         const viewport = page.getViewport({ scale: 0.5 });
-        console.log('viewport:', viewport)
 
         // Check if component is still mounted before updating canvas
         if (!isMounted || !canvas) return;
@@ -133,7 +131,7 @@ export const PdfThumbnail = () => {
           <img
             src={thumbnailSrc}
             alt={`Thumbnail of the resume`}
-            className="w-full object-cover"
+            className="w-full object-cover transition-transform duration-300 hover:scale-[1.02]"
           />
         ) : (
           <canvas ref={canvasRef} className="hidden" />

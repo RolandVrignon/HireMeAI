@@ -5,44 +5,32 @@ import { MarkdownInterpretor } from '../ai-components/markdownInterpretor';
 import { PdfThumbnail } from '../ai-components/pdfThumbnail';
 import { Badge } from '@/components/ui/badge';
 import { Experiences } from '../ai-components/Experiences';
+import { Weather } from '../ai-components/weather';
 export interface MessageItemProps {
     message: Message;
     isFirst: boolean;
     isLoading: boolean;
     isLastAssistantMessage: boolean;
-    onToolInvocation: (toolInvocation: any) => void;
 }
 
-const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst, isLoading, isLastAssistantMessage, onToolInvocation }) => {
+const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst, isLoading, isLastAssistantMessage }) => {
     const formattedTime = message?.createdAt?.toLocaleTimeString([], {
         hour: '2-digit',
         minute: '2-digit',
     });
-
-    useEffect(() => {
-        console.log('message:', message)
-    }, [message])
-
+    
     const role = message.role === "user" ? "Me" : process.env.NEXT_PUBLIC_ASSISTANT_NAME;
-
-
 
     const renderPart = (part: any) => {
         if (part.type === 'tool-invocation') {
 
-            console.log('message:', message)
-            // onToolInvocation(part.toolInvocation?.args?.introduction);
-
             return (
                 <>
-                    {/* <Badge variant="secondary" className='mt-4 mb-2 antique font-light bg-green-300/40 text-green-950 dark:bg-green-800/40 dark:text-green-300'>
+                    <Badge variant="secondary" className='mt-4 mb-2 antique font-light bg-green-300/40 text-green-950 dark:bg-green-800/40 dark:text-green-300'>
                         {'>'}  {part.toolInvocation.toolName}()
-                    </Badge> */}
+                    </Badge>
                     {part.toolInvocation.toolName === 'getResume' && (
                         <>
-                            <div className='mb-4'>
-                                <MarkdownInterpretor content={part.toolInvocation?.args?.introduction} />
-                            </div>
                             <div className='mb-4'>
                                 <PdfThumbnail />
                             </div>
@@ -58,6 +46,12 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst, isLoading, 
                             </div>
                         </>
                     )}
+                    {part.toolInvocation.toolName === 'getWeather' && (
+                        <div className='mb-4'>
+                            <Weather weatherAtLocation={part.toolInvocation?.result}/>
+                        </div>
+                    )}
+
                     {part.toolInvocation.toolName === 'getContact' && (
                         <div className='w-full my-2'>
                             <div className='bg-red-500 w-full h-20 rounded my-2' />

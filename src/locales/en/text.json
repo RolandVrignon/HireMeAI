@@ -22,6 +22,10 @@
       "content": "I want {{userName}}'s personal infos."
     },
     {
+      "title": "Meteo",
+      "content": "What is the weather in my city ?"
+    },
+    {
       "title": "Resume",
       "content": "I want to see {{userName}}'s resume."
     },

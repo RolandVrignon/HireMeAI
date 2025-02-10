@@ -10,10 +10,10 @@ export interface MessageListProps {
     isLoading: boolean;
     handleSubmitPrePrompt: (content: string) => void;
     translations: any;
-    handleToolInvocation: (args: any) => void;
+    isFinished: boolean;
 }
 
-const MessageList: React.FC<MessageListProps> = ({ messages, isLoading, handleSubmitPrePrompt, translations, handleToolInvocation }) => {
+const MessageList: React.FC<MessageListProps> = ({ messages, isLoading, handleSubmitPrePrompt, translations, isFinished }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const lastMessageRef = useRef<HTMLDivElement>(null);
     const endRef = useRef<HTMLDivElement>(null);
@@ -120,12 +120,11 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isLoading, handleSu
                                 isFirst={index === 0} 
                                 isLoading={isLoading}
                                 isLastAssistantMessage={isLastAssistantMessage}
-                                onToolInvocation={handleToolInvocation}
                             />
                         </div>
                     );
                 })}
-                {!isLoading && (
+                {isFinished && (
                     <div className="px-1">
                         <PromptCarousel handleSubmitPrePrompt={handleSubmitPrePrompt} translations={translations} />
                     </div>

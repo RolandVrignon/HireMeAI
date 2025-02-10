@@ -12,25 +12,24 @@ import InputForm, { InputFormRef } from '@/components/InputForm';
 
 export default function HomePageContent() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [isFinished, setIsFinished] = useState<boolean>(true);
     const { theme } = useTheme();
 
     const { language, setLanguage, translations, loadTranslations } = useContext(LanguageContext);
     const { messages, setMessages, input, setInput, handleInputChange, handleSubmit, stop } = useChat({
         api: '/api/chat',
+        sendExtraMessageFields: true,
         onResponse: () => {
-            console.log('onResponse')
             setIsLoading(false);
+        },
+        onFinish: () => {
+            setIsFinished(true);
         }
     });
 
     const inputFormRef = useRef<InputFormRef>(null);
 
     const [pendingSubmit, setPendingSubmit] = useState(false);
-
-    useEffect(() => {
-        console.log('messages:', messages)
-        console.log('translations:', translations)
-    }, [])
 
     const [ui, setUI] = useState<UIInterface>({
         theme: theme === 'dark' || theme === 'light' ? theme : 'dark',
@@ -66,25 +65,16 @@ export default function HomePageContent() {
     const handleSubmitPrePrompt = async (content: string) => {
         setInput(content);
         setIsLoading(true);
+        setIsFinished(false);
         setPendingSubmit(true);
     };
 
     const handleSubmitMain = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
+        setIsFinished(false);
         handleSubmit(e);
     };
-
-    const handleToolInvocation = useCallback((args: any) => {
-        console.log('args:', args)
-        const updatedMessages = [...messages];
-        console.log('updatedMessages:', updatedMessages)
-        updatedMessages[messages.length - 1] = {
-            ...messages[messages.length - 1],
-            content: JSON.stringify(args, null, 2)
-        };  
-        setMessages(updatedMessages);
-    }, [messages, setMessages]);
 
     return (
         <AuroraBackground blur={true}>
@@ -102,7 +92,7 @@ export default function HomePageContent() {
                                 isLoading={isLoading}
                                 handleSubmitPrePrompt={handleSubmitPrePrompt}
                                 translations={translations}
-                                handleToolInvocation={handleToolInvocation}
+                                isFinished={isFinished}
                             />
                         )}
                     </div>
@@ -114,6 +104,7 @@ export default function HomePageContent() {
                         setInput={handleInputChange}
                         handleSubmit={handleSubmitMain}
                         isLoading={isLoading}
+                        isFinished={isFinished}
                         translations={translations}
                     />
                 </div>

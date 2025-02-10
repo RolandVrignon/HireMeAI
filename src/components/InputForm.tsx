@@ -11,6 +11,7 @@ interface InputFormProps {
     setInput: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     handleSubmit: (e: React.FormEvent) => void;
     isLoading: boolean;
+    isFinished: boolean;
     translations: any;
 }
 
@@ -23,6 +24,7 @@ const InputForm = forwardRef<InputFormRef, InputFormProps>(({
     setInput,
     handleSubmit,
     isLoading,
+    isFinished,
     translations,
 }, ref) => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -42,11 +44,8 @@ const InputForm = forwardRef<InputFormRef, InputFormProps>(({
     }));
 
     const submitMessage = (e: React.FormEvent) => {
-        console.log('submitMessage')
         e.preventDefault();
-        console.log('input:', input)
         if (input.trim()) {
-            console.log('input.trim() : ', input.trim())
             handleSubmit(e);
         }
     };
@@ -70,7 +69,7 @@ const InputForm = forwardRef<InputFormRef, InputFormProps>(({
                             onKeyDown={handleKeyDown}
                             placeholder={translations.placeholder}
                             className="placeholder:font-bold placeholder:font-doto block font-light focus:ring-offset-transparent min-h-[44px] w-full resize-none rounded-none border-0 bg-transparent px-0 py-2 text-gray-700 dark:text-gray-200 placeholder:text-zinc-500 dark:placeholder:text-zinc-400"
-                            disabled={isLoading}
+                            disabled={(isLoading || !isFinished)}
                         />
                     </div>
                     <div className="flex h-[44px] items-center justify-end">
@@ -79,7 +78,7 @@ const InputForm = forwardRef<InputFormRef, InputFormProps>(({
                             size="icon"
                             className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white hover:opacity-70 dark:bg-white dark:text-black disabled:bg-[#b4b7eb] disabled:text-[#f4f4f4] dark:disabled:bg-zinc-600 dark:disabled:text-zinc-400"
                             aria-label="Send message"
-                            disabled={!input.trim() || isLoading}
+                            disabled={!input.trim() || (isLoading || !isFinished)}
                         >
                             <Send className="h-4 w-4" />
                         </Button>
