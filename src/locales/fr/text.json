@@ -18,28 +18,40 @@
   "description": "Sélectionnez un sujet ou posez-moi n'importe quelle question sur l'expertise en développement de {{userName}}.",
   "questions": [
     {
+      "title": "Informations",
+      "content": "Je veux les informations personnelles de {{userName}}."
+    },
+    {
+      "title": "Météo",
+      "content": "Quel est le temps dans ma ville ?"
+    },
+    {
+      "title": "Résumé",
+      "content": "Je veux voir le CV de {{userName}}."
+    },
+    {
       "title": "Technologies",
-      "content": "Quelles sont les principales technologies et langages de programmation maîtrisés par {{userName}} ? Puis affiche le CV."
+      "content": "Quelles sont les principales technologies et langages de programmation que {{userName}} maîtrise ?"
     },
     {
       "title": "Projets",
-      "content": "Peux-tu me parler des projets les plus importants de {{userName}} et des défis techniques rencontrés ? Puis affiche le CV."
+      "content": "Pouvez-vous me parler des projets les plus significatifs de {{userName}} et de leurs défis techniques ?"
     },
     {
       "title": "Expérience",
-      "content": "Quelle est l'expérience professionnelle de {{userName}} en développement web ? Puis affiche le CV."
+      "content": "Quelle est l'expérience professionnelle de {{userName}} ?"
     },
     {
       "title": "Motivation",
-      "content": "Qu'est-ce qui motive {{userName}} en tant que développeur et quels sont ses objectifs de carrière ? Puis affiche le CV."
+      "content": "Qu'est-ce qui motive {{userName}} en tant que développeur et quels sont ses objectifs de carrière ?"
     },
     {
       "title": "Compétences",
-      "content": "Quelles sont les forces principales de {{userName}} en tant que développeur ? Puis affiche le CV."
+      "content": "Quelles sont les principales forces de {{userName}} en tant que développeur ?"
     },
     {
       "title": "Apprentissage",
-      "content": "Quelle est l'expérience éducative de {{userName}} et quelles formations a-t-il/elle suivies ? Puis affiche le CV."
+      "content": "Quelle est l'expérience éducative de {{userName}} et quelles formations a-t-il suivies ?"
     }
   ],
   "placeholder": "Message à {{assistantName}}",

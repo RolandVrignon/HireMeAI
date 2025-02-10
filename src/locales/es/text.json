@@ -18,16 +18,28 @@
   "description": "Selecciona un tema o pregúntame cualquier cosa sobre la experiencia en desarrollo de {{userName}}.",
   "questions": [
     {
+      "title": "Información",
+      "content": "Quiero la información personal de {{userName}}."
+    },
+    {
+      "title": "Clima",
+      "content": "¿Cuál es el clima en mi ciudad?"
+    },
+    {
+      "title": "Resumen",
+      "content": "Quiero ver el currículum de {{userName}}."
+    },
+    {
       "title": "Tecnologías",
       "content": "¿Cuáles son las principales tecnologías y lenguajes de programación que domina {{userName}}?"
     },
     {
       "title": "Proyectos",
-      "content": "¿Puedes contarme sobre los proyectos más importantes de {{userName}} y los desafíos técnicos que enfrentaron?"
+      "content": "¿Puedes hablarme de los proyectos más significativos de {{userName}} y sus desafíos técnicos?"
     },
     {
       "title": "Experiencia",
-      "content": "¿Cuál es la experiencia profesional de {{userName}} en desarrollo web?"
+      "content": "¿Cuál es la experiencia profesional de {{userName}}?"
     },
     {
       "title": "Motivación",
@@ -35,7 +47,7 @@
     },
     {
       "title": "Habilidades",
-      "content": "¿Cuáles son los puntos fuertes de {{userName}} como desarrollador?"
+      "content": "¿Cuáles son las principales fortalezas de {{userName}} como desarrollador?"
     },
     {
       "title": "Aprendizaje",

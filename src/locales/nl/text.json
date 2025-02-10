@@ -18,20 +18,32 @@
   "description": "Kies een onderwerp of vraag me alles over {{userName}}'s ontwikkelingsdeskundigheid.",
   "questions": [
     {
+      "title": "Informatie",
+      "content": "Ik wil de persoonlijke informatie van {{userName}}."
+    },
+    {
+      "title": "Weer",
+      "content": "Hoe is het weer in mijn stad?"
+    },
+    {
+      "title": "Resume",
+      "content": "Ik wil het CV van {{userName}} zien."
+    },
+    {
       "title": "Technologieën",
-      "content": "Welke technologieën en programmeertalen beheerst {{userName}}?"
+      "content": "Wat zijn de belangrijkste technologieën en programmeertalen die {{userName}} beheerst?"
     },
     {
       "title": "Projecten",
-      "content": "Kun je me iets vertellen over de belangrijkste projecten van {{userName}} en de technische uitdagingen?"
+      "content": "Kunt u me vertellen over de belangrijkste projecten van {{userName}} en hun technische uitdagingen?"
     },
     {
       "title": "Ervaring",
-      "content": "Wat is de professionele ervaring van {{userName}} in webontwikkeling?"
+      "content": "Wat is de professionele ervaring van {{userName}}?"
     },
     {
       "title": "Motivatie",
-      "content": "Wat drijft {{userName}} als ontwikkelaar en wat zijn hun carrièredoelen?"
+      "content": "Wat drijft {{userName}} als ontwikkelaar en wat zijn zijn/haar carrièredoelen?"
     },
     {
       "title": "Vaardigheden",
@@ -39,7 +51,7 @@
     },
     {
       "title": "Leren",
-      "content": "Wat is de educatieve ervaring van {{userName}} en welke trainingen heeft hij/zij gevolgd?"
+      "content": "Wat is de opleidingsachtergrond van {{userName}} en welke trainingen heeft hij/zij gevolgd?"
     }
   ],
   "placeholder": "Bericht aan {{assistantName}}",

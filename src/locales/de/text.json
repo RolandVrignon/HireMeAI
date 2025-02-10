@@ -18,28 +18,40 @@
   "description": "Wähle ein Thema oder frage mich alles über {{userName}}'s Entwicklungsexpertise.",
   "questions": [
     {
+      "title": "Informationen",
+      "content": "Ich möchte die persönlichen Informationen von {{userName}}."
+    },
+    {
+      "title": "Wetter",
+      "content": "Wie ist das Wetter in meiner Stadt?"
+    },
+    {
+      "title": "Lebenslauf",
+      "content": "Ich möchte den Lebenslauf von {{userName}} sehen."
+    },
+    {
       "title": "Technologien",
-      "content": "Welche Haupttechnologien und Programmiersprachen beherrscht {{userName}}?"
+      "content": "Welche sind die wichtigsten Technologien und Programmiersprachen, die {{userName}} beherrscht?"
     },
     {
       "title": "Projekte",
-      "content": "Kannst du mir etwas über die bedeutendsten Projekte von {{userName}} und die technischen Herausforderungen erzählen?"
+      "content": "Können Sie mir über die bedeutendsten Projekte von {{userName}} und deren technische Herausforderungen erzählen?"
     },
     {
       "title": "Erfahrung",
-      "content": "Welche berufliche Erfahrung hat {{userName}} in der Webentwicklung?"
+      "content": "Wie sieht die berufliche Erfahrung von {{userName}} aus?"
     },
     {
       "title": "Motivation",
-      "content": "Was motiviert {{userName}} als Entwickler und was sind ihre beruflichen Ziele?"
+      "content": "Was treibt {{userName}} als Entwickler an und welche sind seine/ihre Karriereziele?"
     },
     {
       "title": "Fähigkeiten",
-      "content": "Was sind die wichtigsten Stärken von {{userName}} als Entwickler?"
+      "content": "Welche sind die wichtigsten Stärken von {{userName}} als Entwickler?"
     },
     {
       "title": "Lernen",
-      "content": "Welche Ausbildung hat {{userName}} erhalten und welche Schulungen hat er/sie durchlaufen?"
+      "content": "Wie sieht die Bildungserfahrung von {{userName}} aus und welche Schulungen hat er/sie absolviert?"
     }
   ],
   "placeholder": "Nachricht an {{assistantName}}",
