@@ -19,31 +19,35 @@
   "questions": [
     {
       "title": "Informations",
-      "content": "I want {{userName}}'s personal infos and then render the resume"
+      "content": "I want {{userName}}'s personal infos."
+    },
+    {
+      "title": "Resume",
+      "content": "I want to see {{userName}}'s resume."
     },
     {
       "title": "Technologies",
-      "content": "What are the main technologies and programming languages that {{userName}} masters ? Then render the resume."
+      "content": "What are the main technologies and programming languages that {{userName}} masters ?"
     },
     {
       "title": "Projects",
-      "content": "Can you tell me about {{userName}}'s most significant projects and their technical challenges? Then render the resume."
+      "content": "Can you tell me about {{userName}}'s most significant projects and their technical challenges?"
     },
     {
       "title": "Experience",
-      "content": "What is {{userName}}'s professional experience in web development? Then render the resume."
+      "content": "What is {{userName}}'s professional experience ?"
     },
     {
       "title": "Motivation",
-      "content": "What drives {{userName}} as a developer and what are their career goals? Then render the resume."
+      "content": "What drives {{userName}} as a developer and what are their career goals?"
     },
     {
       "title": "Skills",
-      "content": "What are {{userName}}'s key strengths as a developer? Then render the resume."
+      "content": "What are {{userName}}'s key strengths as a developer?"
     },
     {
       "title": "Learning",
-      "content": "What is {{userName}}'s educational experience and what training has they undergone? Then render the resume."
+      "content": "What is {{userName}}'s educational experience and what training has they undergone?"
     }
   ],
   "placeholder": "Message {{assistantName}}",

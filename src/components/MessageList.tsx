@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import MessageItem from './ui/MessageItem';
 import PromptCarousel from './ui/PromptCarousel';
 import { ClientMessage } from '@/types/types';
@@ -10,9 +10,10 @@ export interface MessageListProps {
     isLoading: boolean;
     handleSubmitPrePrompt: (content: string) => void;
     translations: any;
+    handleToolInvocation: (args: any) => void;
 }
 
-const MessageList: React.FC<MessageListProps> = ({ messages, isLoading, handleSubmitPrePrompt, translations }) => {
+const MessageList: React.FC<MessageListProps> = ({ messages, isLoading, handleSubmitPrePrompt, translations, handleToolInvocation }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const lastMessageRef = useRef<HTMLDivElement>(null);
     const endRef = useRef<HTMLDivElement>(null);
@@ -119,6 +120,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isLoading, handleSu
                                 isFirst={index === 0} 
                                 isLoading={isLoading}
                                 isLastAssistantMessage={isLastAssistantMessage}
+                                onToolInvocation={handleToolInvocation}
                             />
                         </div>
                     );

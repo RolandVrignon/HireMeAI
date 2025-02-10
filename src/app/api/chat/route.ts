@@ -15,24 +15,34 @@ export async function POST(req: Request) {
 
     console.log('messagesFiltered:', messagesFiltered)
 
-    const resumeText = await extractTextFromPdf("resume.pdf");
+    let resumeText;
+    try {
+      resumeText = await extractTextFromPdf("resume.pdf");
+    } catch (error) {
+      console.error("Error extracting PDF:", error);
+      return new Response("Error processing resume", { status: 500 });
+    }
 
-    const systemMessage = `You are a helpful assistant. Here is my resume:\n\n${resumeText}\n\nYou should absolutely use tools if a tool fullfills users request, otherwise provide normal text responses.`;
+    const systemMessage = `You are a helpful assistant. Here is my resume:\n\n${resumeText}\n\nYou should absolutely use tools if a tool fullfills users request, otherwise provide normal well formatted text responses that answer the user's question and are concise.`;
 
     const result = streamText({
-      model: mistral("mistral-small-latest"),
+      model: mistral("mistral-large-latest"),
       system: systemMessage,
-      prompt: messagesFiltered[messagesFiltered.length - 1].content,
-      maxSteps: 1,
+      messages: messagesFiltered,
+      maxSteps: 2,
       tools,
-      experimental_transform: smoothStream(),
+      experimental_transform: smoothStream({delayInMs: 25, chunking: "word"}),
       toolCallStreaming: true,
-      experimental_toolCallStreaming: true,
     });
 
     return result.toDataStreamResponse();
+
   } catch (error) {
     console.error("Error in chat endpoint:", error);
     return new Response("Internal Server Error", { status: 500 });
   }
+}
+
+export async function GET(req: Request) {
+  return new Response("Hello, world!");
 }

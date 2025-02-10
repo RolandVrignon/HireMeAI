@@ -81,6 +81,9 @@ export default {
             backgroundPosition: "350% 50%, 350% 50%",
           },
         },
+        shimmer: {
+          "100%": { transform: "translateX(100%)" }
+        },
         scroll: {
           to: {
             transform: "translate(calc(-50% - 0.5rem))",

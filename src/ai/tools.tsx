@@ -2,19 +2,18 @@ import { tool as createTool } from 'ai';
 import { z } from "zod";
 
 const username = process.env.NEXT_PUBLIC_USER_NAME;
-console.log('Tool username:', username)
 
 const ResumeTool = createTool({
-    description: `Render ${username}'s resume.`,
-    parameters: z.object({}),
-    execute: async () => {
-        return "true";
-    },
+    description: `This tool allows the chatbot to render ${username}'s resume. Use this tool sparingly and strategically to enhance responses when relevant. It's beneficial to occasionally showcase the resume to provide concrete examples and credibility, but avoid overuse. The tool should complement natural conversation rather than dominate it.`,
+    parameters: z.object({
+        introduction: z.string().max(100).describe(`A brief introduction to ${username}'s resume. It should be at least two sentences describing the resume in the language of last user's message.`)
+    }),
 });
 
 const ExperienceTool = createTool({
-    description: `Render ${username}'s professional experience.`,
+    description: `This tool allows the chatbot to render ${username}'s professional experience. Use this tool sparingly and strategically to enhance responses when relevant. It's beneficial to showcase the experience to provide concrete examples of skills and achievements, but avoid overuse. The tool should complement natural conversation rather than dominate it.`,
     parameters: z.object({
+        introduction: z.string().max(100).describe(`A brief introduction to ${username}'s professional experience. It should be at least two sentences describing the resume in the language of last user's message.`),
         experiences: z.array(z.object({
             company: z.string().describe("Company or organization name"),
             position: z.string().describe("Job title or position"),
@@ -23,23 +22,6 @@ const ExperienceTool = createTool({
             website: z.string().optional().describe("Website of the company")
         }))
     }),
-    execute: async ({ experiences }) => {
-        console.log('Tool - experiences:', experiences);
-        
-        // Create a TransformStream to stream the response
-        const stream = new TransformStream();
-        const writer = stream.writable.getWriter();
-
-        // Write the experiences data in chunks
-        for (const experience of experiences) {
-            await writer.write(JSON.stringify({ experience }) + '\n');
-            // Add small delay between chunks to simulate streaming
-            await new Promise(resolve => setTimeout(resolve, 100));
-        }
-        
-        await writer.close();
-        return stream.readable;
-    },
 });
 
 const ContactTool = createTool({

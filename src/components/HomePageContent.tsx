@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext, useState, useEffect, useRef } from 'react';
+import { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import { LanguageContext } from '@/providers/language-provider';
 import { useTheme } from 'next-themes';
 import { useChat } from 'ai/react';
@@ -15,7 +15,7 @@ export default function HomePageContent() {
     const { theme } = useTheme();
 
     const { language, setLanguage, translations, loadTranslations } = useContext(LanguageContext);
-    const { messages, input, setInput, handleInputChange, handleSubmit, stop } = useChat({
+    const { messages, setMessages, input, setInput, handleInputChange, handleSubmit, stop } = useChat({
         api: '/api/chat',
         onResponse: () => {
             console.log('onResponse')
@@ -75,6 +75,17 @@ export default function HomePageContent() {
         handleSubmit(e);
     };
 
+    const handleToolInvocation = useCallback((args: any) => {
+        console.log('args:', args)
+        const updatedMessages = [...messages];
+        console.log('updatedMessages:', updatedMessages)
+        updatedMessages[messages.length - 1] = {
+            ...messages[messages.length - 1],
+            content: JSON.stringify(args, null, 2)
+        };  
+        setMessages(updatedMessages);
+    }, [messages, setMessages]);
+
     return (
         <AuroraBackground blur={true}>
             <div className="container flex flex-col h-[100dvh] p-2 md:px-8 w-full gap-2">
@@ -91,6 +102,7 @@ export default function HomePageContent() {
                                 isLoading={isLoading}
                                 handleSubmitPrePrompt={handleSubmitPrePrompt}
                                 translations={translations}
+                                handleToolInvocation={handleToolInvocation}
                             />
                         )}
                     </div>

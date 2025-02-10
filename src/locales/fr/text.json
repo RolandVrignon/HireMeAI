@@ -14,7 +14,7 @@
     "label": "copier",
     "success": "Code copié dans le presse-papiers!"
   },
-  "title": "👋 Salut, discutez avec moi avant de m'embaucher",
+  "title": "Hello",
   "description": "Sélectionnez un sujet ou posez-moi n'importe quelle question sur l'expertise en développement de {{userName}}.",
   "questions": [
     {

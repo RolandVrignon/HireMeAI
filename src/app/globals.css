@@ -69,7 +69,8 @@
 .markdown-body li {
   @apply mb-4;
   strong {
-    font-weight: 700;
+    font-weight: 500;
+    text-decoration: underline;
   }
 }
 
