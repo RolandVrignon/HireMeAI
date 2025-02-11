@@ -14,7 +14,6 @@
 - [AI Model 🧠](#ai-model)
 - [Prerequisites 📋](#prerequisites)
 - [Installation 🚀](#installation)
-- [Configuration ⚙️](#configuration)
 - [Running the Project 🏃‍♂️](#running-the-project)
 - [Personalizing the Resume 📄](#personalizing-the-resume)
 - [Adding a Language 🌐](#adding-a-language)
@@ -96,16 +95,6 @@ MISTRAL_API_KEY= ## Mistral Api Key
 NEXT_PUBLIC_ASSISTANT_NAME="JohnGPT"
 NEXT_PUBLIC_USER_NAME="John"
 ```
-
-## Configuration ⚙️
-
-To configure the chatbot and customize the responses based on your resume, you'll need to modify the `actions.tsx` file located in `./src/app/actions.tsx`. This file controls the flow of messages and interactions within the chatbot, including the ability to fetch your resume content and display it in the conversation.
-
-The main components used for the configuration are:
-
-- **ThemeSwitcher**: Changes the website's theme.
-- **LanguageSwitcher**: Changes the language of the website.
-- **Resume Fetching**: The bot fetches and displays the resume content, depending on the language set.
 
 ## Running the Project 🏃‍♂️
 
