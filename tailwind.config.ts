@@ -91,10 +91,10 @@ export default {
         },
       },
       fontFamily: {
-        fira: ["'Fira Code'", "monospace"], // Associez "Fira Code"
-        doto: ["'Doto'", "sans-serif"], // Associez "Doto"
-        righteous: ["'Righteous'", "cursive"], // Associez "Righteous"
-        antique: ['"Antique"', "sans-serif"],
+        fira: ["'Fira Code'", "monospace"],
+        doto: ["'Doto'", "sans-serif"],
+        righteous: ["'Righteous'", "cursive"],
+        roboto: ['"Roboto"', "sans-serif"]
       },
     },
   },

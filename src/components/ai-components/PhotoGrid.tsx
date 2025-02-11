@@ -34,11 +34,7 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
       setDisplayedPhotos(photos.slice(0, photosPerPage));
     }
   }, [photos]);
-
-  useEffect(() => {
-    console.log('translations : ', translations);
-  }, []);
-
+  
   const loadMore = async () => {
     setIsLoadingMore(true);
     const nextPage = currentPage + 1;
