@@ -52,6 +52,10 @@
     {
       "title": "Fotos Galerie",
       "content": "Toon de foto-galerie van {{userName}}."
+    },
+    {
+      "title": "Contact",
+      "content": "Ik wil {{userName}} contacteren."
     }
   ],
   "placeholder": "Bericht aan {{assistantName}}",

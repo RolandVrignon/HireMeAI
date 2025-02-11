@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Tab } from '@headlessui/react';
-import { EnvelopeIcon, CalendarIcon, PhoneIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon, CalendarIcon } from '@heroicons/react/24/outline';
 
 interface ContactOptionsProps {
   translations: any;
-  whatsapp: string;
 }
 
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (
@@ -14,7 +13,7 @@ const WhatsAppIcon: React.FC<{ className?: string }> = ({ className }) => (
 );
 
 
-const ContactOptions: React.FC<ContactOptionsProps> = ({ translations, whatsapp }) => {
+const ContactOptions: React.FC<ContactOptionsProps> = ({ translations }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
@@ -69,7 +68,7 @@ const ContactOptions: React.FC<ContactOptionsProps> = ({ translations, whatsapp 
             <GoogleCalendarEmbed />
           </Tab.Panel>
           <Tab.Panel>
-            <WhatsAppPanel whatsapp={whatsapp} />
+            <WhatsAppPanel />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
@@ -165,8 +164,10 @@ const EmailForm: React.FC<{ translations: any }> = ({ translations }) => {
   );
 };
 
-const WhatsAppPanel: React.FC<{ whatsapp: string }> = ({ whatsapp } ) => {
-  const whatsappUrl = `https://wa.me/${whatsapp}`;
+const WhatsAppPanel: React.FC = () => {
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+  
+  const whatsappUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`;
 
   return (
     <div className="text-center p-4 bg-gray-500/10 dark:bg-gray-800/20 rounded-lg">

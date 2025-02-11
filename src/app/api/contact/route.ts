@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
       cc: email,
-      subject: `Nouveau message de ${name}`,
+      subject: `Portfolio ChatWithMe - Nouveau message de ${name}`,
       text: message,
       html: `
         <p><strong>De :</strong> ${name}</p>

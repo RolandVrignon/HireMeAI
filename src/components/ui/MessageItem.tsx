@@ -62,7 +62,7 @@ const MessageItem: React.FC<MessageItemProps> = React.memo(({ message, isFirst, 
                     )}
                     {part.toolInvocation.toolName === 'getContact' && (
                         <div className='w-full my-2'>
-                            <ContactOptions translations={translations} whatsapp={part.toolInvocation?.result?.whatsapp} />
+                            <ContactOptions translations={translations} />
                         </div>
                     )}
                 </>

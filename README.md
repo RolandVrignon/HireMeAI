@@ -104,6 +104,10 @@ NEXT_PUBLIC_GOOGLE_CALENDAR_ID="your-calendar-embed-url"
 # Optional - Email contact form integration
 EMAIL_USER="your.email@gmail.com"
 EMAIL_APP_PASSWORD="your-gmail-app-password"  # Gmail App Password, not your regular password
+
+#Optional - Whatsapp number integration
+NEXT_PUBLIC_WHATSAPP_NUMBER="33010101010"
+
 ```
 
 ### Setting up Gmail App Password

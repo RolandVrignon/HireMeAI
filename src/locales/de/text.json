@@ -52,6 +52,10 @@
     {
       "title": "Fotos Galerie",
       "content": "Zeige die Foto-Galerie von {{userName}}."
+    },
+    {
+      "title": "Kontakt",
+      "content": "Ich möchte {{userName}} kontaktieren."
     }
   ],
   "placeholder": "Nachricht an {{assistantName}}",
