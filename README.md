@@ -89,12 +89,45 @@ pnpm install
 
 4. Rename the `.env.example` file to `.env`.
 
-5. Add your OpenAI API key, bot name, and user name in the `.env` file:
+5. Add your environment variables in the `.env` file:
 ```bash
-MISTRAL_API_KEY= ## Mistral Api Key
+# Required - Mistral API key for the chatbot
+MISTRAL_API_KEY="your-mistral-api-key"
+
+# Required - Names displayed in the chat interface
 NEXT_PUBLIC_ASSISTANT_NAME="JohnGPT"
 NEXT_PUBLIC_USER_NAME="John"
+
+# Optional - Google Calendar integration
+NEXT_PUBLIC_GOOGLE_CALENDAR_ID="your-calendar-embed-url"
+
+# Optional - Email contact form integration
+EMAIL_USER="your.email@gmail.com"
+EMAIL_APP_PASSWORD="your-gmail-app-password"  # Gmail App Password, not your regular password
 ```
+
+### Setting up Gmail App Password
+
+To use the contact form feature, you need to set up a Gmail App Password:
+
+1. Go to your Google Account settings: https://myaccount.google.com/
+2. Enable 2-Step Verification if not already done
+3. Go to "Security" → "2-Step Verification" → "App passwords"
+4. Select "Other (Custom name)" from the dropdown
+5. Name it (e.g., "NextJS Contact Form")
+6. Copy the generated 16-character password
+7. Paste it as your `EMAIL_APP_PASSWORD` in `.env`
+
+### Setting up Google Calendar Integration
+
+To display your availability calendar:
+
+1. Go to Google Calendar
+2. Click the settings gear icon → "Settings"
+3. Select your calendar under "Settings for my calendars"
+4. Scroll to "Integrate calendar"
+5. Copy the "Embed code" URL
+6. Paste it as your `NEXT_PUBLIC_GOOGLE_CALENDAR_ID` in `.env`
 
 ## Running the Project 🏃‍♂️
 

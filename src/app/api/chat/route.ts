@@ -34,7 +34,9 @@ export async function POST(req: Request) {
           experimental_activeTools: [
             "getResume",  
             "getWeather",
-            "getPhotos"
+            "getPhotos",
+            "getExperience",
+            "getContact"
           ],
           experimental_transform: smoothStream({delayInMs: 25, chunking: "word"}),
           toolCallStreaming: true,

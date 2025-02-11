@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Experiences } from '../ai-components/Experiences';
 import { Weather } from '../ai-components/weather';
 import { PhotoGrid } from '../ai-components/PhotoGrid';
+import ContactOptions from './ContactOptions';
 
 export interface MessageItemProps {
     message: Message;
@@ -61,7 +62,7 @@ const MessageItem: React.FC<MessageItemProps> = React.memo(({ message, isFirst, 
                     )}
                     {part.toolInvocation.toolName === 'getContact' && (
                         <div className='w-full my-2'>
-                            <div className='bg-red-500 w-full h-20 rounded my-2' />
+                            <ContactOptions translations={translations} whatsapp={part.toolInvocation?.result?.whatsapp} />
                         </div>
                     )}
                 </>

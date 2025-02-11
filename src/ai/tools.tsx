@@ -60,10 +60,17 @@ const WeatherTool = createTool({
 });
 
 const ContactTool = createTool({
-    description: "Render the contact form.",
-    parameters: z.object({}),
-    execute: async () => {
-        return "true";
+    description: "Render the contact component.",
+    parameters: z.object({
+        whatsapp: z.string().describe("Whatsapp number of the user"),
+    }),
+    execute: async ({ whatsapp }) => {
+        const result = {
+            content: `You should now provide a really short and concise sentence in user's last message language to the user to introduce ${username}'s Contact form as this message already contains the contact form. Not more than 20 words !!!!`,
+            whatsapp: whatsapp,
+        }
+        
+        return result;
     },
 });
 
@@ -117,4 +124,5 @@ export const tools = {
     getExperience: ExperienceTool,
     getWeather: WeatherTool,
     getPhotos: PhotosTool,
+    getContact: ContactTool,
 };

@@ -20,6 +20,12 @@
   },
   "title": "Hello",
   "description": "Hello ! Moi c'est {{userName}}. Développeur fullstack passionné par la création de projets.\nN'hésite pas à me poser n'importe quelle question sur mes projets, mes compétences ou mes expériences ou même sur ma vie.",
+  "contact": {
+    "name": "Arthur Mensch",
+    "email": "arthur.mensch@mistral.ai",
+    "message": "Salut {{userName}}, je souhaite que vous rejoigniez Mistral AI, parlons-en !",
+    "send": "Envoyer un message"
+  },
   "questions": [
     {
       "title": "Informations",
@@ -52,6 +58,10 @@
     {
       "title": "Galerie photos",
       "content": "Afficher la galerie de photos de {{userName}}."
+    },
+    {
+      "title": "Contact",
+      "content": "Je veux contacter {{userName}}."
     }
   ],
   "placeholder": "Message à {{assistantName}}",

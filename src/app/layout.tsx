@@ -39,6 +39,11 @@ export default function RootLayout({
         <head>
           <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Righteous&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"></link>
+          <script 
+            type="text/javascript" 
+            src="https://assets.calendly.com/assets/external/widget.js" 
+            async
+          />
         </head>
         <body className={roboto.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

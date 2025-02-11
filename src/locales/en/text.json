@@ -18,6 +18,12 @@
     "loading" : "Loading...",
     "loadMore" : "Load More"
   },
+  "contact": {
+    "name": "Arthur Mensch",
+    "email": "arthur.mensch@mistral.ai",
+    "message": "Hi {{userName}}, I really want you at Mistral AI, let's talk about it !",
+    "send": "Send Message"
+  },
   "title": "👋 Hi, please chat with me before hiring me",
   "description": "Hi ! I'm {{userName}}. A fullstack software engineer and passionnate project builder.\nFeel free to ask me anything about my projects, my skills or my experiences or even about my life.",
   "questions": [
@@ -52,7 +58,11 @@
     {
       "title": "Photo Gallery",
       "content": "Display {{userName}}'s photo gallery."
-    }
+    },
+    {
+      "title": "Contact",
+      "content": "I want to contact {{userName}}."
+    } 
   ],
   "placeholder": "Message {{assistantName}}",
   "footer": "Made with love and coffee",
