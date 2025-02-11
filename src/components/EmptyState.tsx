@@ -15,7 +15,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({ handleSubmitPrePrompt, translat
         <div className="h-full w-full flex flex-col items-center justify-center px-4 gap-2">
             <div className="w-[80%] relative">
                 <Image
-                    src={resolvedTheme === 'dark' ? "/images/me-light-mode.png" : "/images/me-blue-mode.png"}
+                    src={"/images/me-dark-mode.png"}
                     alt="Me"
                     width={0}
                     height={0}

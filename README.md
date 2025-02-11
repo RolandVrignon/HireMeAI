@@ -1,10 +1,10 @@
 # Chat With Me Before Hiring Me 🤖
 
-**Chat With Me Before Hiring Me** is an interactive chatbot powered by Mistral AI, which allows users to upload their resumes in different languages for a more personalized experience. The chatbot can respond not only with text but also with interactive components, such as changing the theme or language of the website, or even displaying the resume. This application is built using the Vercel AI SDK (RSC), enabling the streaming of components for a richer experience than a traditional text-based chatbot.
+**Chat With Me Before Hiring Me** is an interactive chatbot powered by Mistral AI, which allows users to upload their resume for a more personalized experience. The chatbot can respond not only with text but also with interactive components, such as displaying the resume, photo gallery component or weather component (more to come). This application is built using the Vercel AI SDK (RSC), enabling the streaming of components for a richer experience than a traditional text-based chatbot.
 
 
-| ![Screenshot 1](./src/assets/img/img1.png) | ![Screenshot 2](./src/assets/img/img2.png) | ![Screenshot 3](./src/assets/img/img3.png) |
-|----------------------------------------|----------------------------------------|----------------------------------------|
+| ![Screenshot 1](./public/preview/img1.png) | ![Screenshot 2](./public/preview/img2.png) | ![Screenshot 3](./public/preview/img3.png) | ![Screenshot 4](./public/preview/img4.jpg)
+|----------------------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
 
 ## Table of Contents
 
@@ -44,9 +44,12 @@ Thanks to the use of Vercel AI SDK and React Server Components (RSC), the chatbo
 | Education Server Component | Interactive component to display and discuss educational background | 🟡 In Progress |
 | Professional Server Component | Dynamic component to showcase professional experience | 🔵 Planned |
 | Project Server Component | Interactive showcase of portfolio projects | 🔵 Planned |
-| Resume Displayer | Visual component to display and interact with the full resume | 🔵 Planned |
+| Resume Displayer | Visual component to display and interact with the full resume | 🟢 Completed |
 | Contact Server Component | Interactive component for contact information and networking | 🔵 Planned |
 | Enhanced Context Support | Add more context than just a resume (cover letter, portfolio links, etc.) | 🔵 Planned |
+| Weather Server Component | Display weather information for specified locations | 🟢 Completed |
+| Photo Gallery Server Component | Interactive gallery for displaying images and portfolios | 🟢 Completed |
+
 
 > Legend:
 > - 🟡 In Progress: Currently being developed
@@ -93,9 +96,6 @@ MISTRAL_API_KEY= ## Mistral Api Key
 NEXT_PUBLIC_ASSISTANT_NAME="JohnGPT"
 NEXT_PUBLIC_USER_NAME="John"
 ```
-- Replace `## OpenAI API Key` with your actual OpenAI API key.
-- Set `NEXT_PUBLIC_ASSISTANT_NAME` to the desired name of your bot.
-- Set `NEXT_PUBLIC_USER_NAME` to your name.
 
 ## Configuration ⚙️
 
@@ -146,9 +146,6 @@ Once the project is running, you can interact with the chatbot by typing questio
 
 - "Tell me about your education?"
 - "What is your professional experience?"
-- "Switch on French"
-
-The chatbot will provide a contextual response based on the resume content and can display interactive components like the **ThemeSwitcher** or **Resume visualization** when required.
 
 ## Contributing 🤝
 
