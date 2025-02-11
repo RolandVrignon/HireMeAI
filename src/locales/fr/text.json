@@ -18,14 +18,14 @@
     "loading" : "Chargement...",
     "loadMore" : "Voir plus"
   },
+  "contact": {
+    "name": "John Doe",
+    "email": "john.doe@acme.com",
+    "message": "Salut {{userName}}, je suis intéressé par ton profil, parlons-en.",
+    "send": "Envoyer"
+  },
   "title": "Hello",
   "description": "Hello ! Moi c'est {{userName}}. Développeur fullstack passionné par la création de projets.\nN'hésite pas à me poser n'importe quelle question sur mes projets, mes compétences ou mes expériences ou même sur ma vie.",
-  "contact": {
-    "name": "Arthur Mensch",
-    "email": "arthur.mensch@mistral.ai",
-    "message": "Salut {{userName}}, je souhaite que vous rejoigniez Mistral AI, parlons-en !",
-    "send": "Envoyer un message"
-  },
   "questions": [
     {
       "title": "Informations",
@@ -61,7 +61,7 @@
     },
     {
       "title": "Contact",
-      "content": "Je veux contacter {{userName}}."
+      "content": "Je veux contacter {{userName}} via le formulaire de contact."
     }
   ],
   "placeholder": "Message à {{assistantName}}",

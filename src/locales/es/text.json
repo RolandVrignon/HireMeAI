@@ -18,6 +18,12 @@
     "loading" : "Cargando...",
     "loadMore" : "Cargar más"
   },
+  "contact": {
+    "name": "John Doe",
+    "email": "john.doe@acme.com",
+    "message": "Hola {{userName}}, estoy interesado en tu perfil, hablemos de ello.",
+    "send": "Enviar"
+  },
   "title": "👋 Hola, por favor, chatea conmigo antes de contratarme",
   "description": "Selecciona un tema o pregúntame cualquier cosa sobre la experiencia en desarrollo de {{userName}}.\nTambién puedes preguntarme sobre mis proyectos, mis habilidades o mis experiencias o incluso sobre mi vida.",
   "questions": [
@@ -55,7 +61,7 @@
     },
     {
       "title": "Contacto",
-      "content": "Quiero contactar con {{userName}}."
+      "content": "Quiero contactar con {{userName}} via el formulario de contacto."
     }
   ],
   "placeholder": "Mensaje para {{assistantName}}",

@@ -19,10 +19,10 @@
     "loadMore" : "Load More"
   },
   "contact": {
-    "name": "Arthur Mensch",
-    "email": "arthur.mensch@mistral.ai",
-    "message": "Hi {{userName}}, I really want you at Mistral AI, let's talk about it !",
-    "send": "Send Message"
+    "name": "John Doe",
+    "email": "john.doe@acme.com",
+    "message": "Hi {{userName}}, I'm interested in your profile, let's talk about it.",
+    "send": "Send"
   },
   "title": "👋 Hi, please chat with me before hiring me",
   "description": "Hi ! I'm {{userName}}. A fullstack software engineer and passionnate project builder.\nFeel free to ask me anything about my projects, my skills or my experiences or even about my life.",
@@ -61,7 +61,7 @@
     },
     {
       "title": "Contact",
-      "content": "I want to contact {{userName}}."
+      "content": "I want to contact {{userName}} via the contact form."
     } 
   ],
   "placeholder": "Message {{assistantName}}",

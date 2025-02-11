@@ -18,6 +18,12 @@
     "loading" : "Laden...",
     "loadMore" : "Meer laden"
   },
+  "contact": {
+    "name": "John Doe",
+    "email": "john.doe@acme.com",
+    "message": "Hallo {{userName}}, ik ben geïnteresseerd in je profiel, laten we het hebben.",
+    "send": "Bericht sturen"
+  },
   "title": "👋 Hallo, chat eerst met mij voordat je me inhuurt",
   "description": "Kies een onderwerp of vraag me alles over de ervaring van {{userName}} als ontwikkelaar.\nJe kunt me ook alles over mijn projecten, mijn vaardigheden of mijn ervaringen of zelfs over mijn leven vragen.",
   "questions": [
@@ -55,7 +61,7 @@
     },
     {
       "title": "Contact",
-      "content": "Ik wil {{userName}} contacteren."
+      "content": "Ik wil {{userName}} contacteren via het contactformulier."
     }
   ],
   "placeholder": "Bericht aan {{assistantName}}",
