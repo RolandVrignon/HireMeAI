@@ -3,7 +3,7 @@
 **Chat With Me Before Hiring Me** is an interactive chatbot powered by Mistral AI, which allows users to upload their resume for a more personalized experience. The chatbot can respond not only with text but also with interactive components, such as displaying the resume, photo gallery component or weather component (more to come). This application is built using the Vercel AI SDK (RSC), enabling the streaming of components for a richer experience than a traditional text-based chatbot.
 
 
-| ![Screenshot 1](./public/preview/img1.png) | ![Screenshot 2](./public/preview/img2.png) | ![Screenshot 3](./public/preview/img3.png) | ![Screenshot 4](./public/preview/img4.jpg)
+| ![Screenshot 1](./public/preview/img1.jpg) | ![Screenshot 2](./public/preview/img2.jpg) | ![Screenshot 3](./public/preview/img3.jpg) | ![Screenshot 4](./public/preview/img4.jpg)
 |----------------------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
 
 ## Table of Contents
