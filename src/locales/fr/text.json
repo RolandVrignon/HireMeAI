@@ -14,8 +14,12 @@
     "label": "copier",
     "success": "Code copié dans le presse-papiers!"
   },
+  "loading" : {
+    "loading" : "Chargement...",
+    "loadMore" : "Voir plus"
+  },
   "title": "Hello",
-  "description": "Sélectionnez un sujet ou posez-moi n'importe quelle question sur l'expertise en développement de {{userName}}.",
+  "description": "Hello ! Moi c'est {{userName}}. Développeur fullstack passionné par la création de projets.\nN'hésite pas à me poser n'importe quelle question sur mes projets, mes compétences ou mes expériences ou même sur ma vie.",
   "questions": [
     {
       "title": "Informations",
@@ -26,12 +30,8 @@
       "content": "Quel est le temps dans ma ville ?"
     },
     {
-      "title": "Résumé",
+      "title": "CV / Résumé",
       "content": "Je veux voir le CV de {{userName}}."
-    },
-    {
-      "title": "Technologies",
-      "content": "Quelles sont les principales technologies et langages de programmation que {{userName}} maîtrise ?"
     },
     {
       "title": "Projets",
@@ -46,12 +46,12 @@
       "content": "Qu'est-ce qui motive {{userName}} en tant que développeur et quels sont ses objectifs de carrière ?"
     },
     {
-      "title": "Compétences",
-      "content": "Quelles sont les principales forces de {{userName}} en tant que développeur ?"
+      "title": "Formation",
+      "content": "Quelle est l'expérience éducative de {{userName}} et quelles formations a-t-il suivies ?"
     },
     {
-      "title": "Apprentissage",
-      "content": "Quelle est l'expérience éducative de {{userName}} et quelles formations a-t-il suivies ?"
+      "title": "Galerie photos",
+      "content": "Afficher la galerie de photos de {{userName}}."
     }
   ],
   "placeholder": "Message à {{assistantName}}",

@@ -6,14 +6,17 @@ import { PdfThumbnail } from '../ai-components/pdfThumbnail';
 import { Badge } from '@/components/ui/badge';
 import { Experiences } from '../ai-components/Experiences';
 import { Weather } from '../ai-components/weather';
+import { PhotoGrid } from '../ai-components/PhotoGrid';
+
 export interface MessageItemProps {
     message: Message;
     isFirst: boolean;
     isLoading: boolean;
     isLastAssistantMessage: boolean;
+    translations: any;
 }
 
-const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst, isLoading, isLastAssistantMessage }) => {
+const MessageItem: React.FC<MessageItemProps> = React.memo(({ message, isFirst, isLoading, isLastAssistantMessage, translations }) => {
     const formattedTime = message?.createdAt?.toLocaleTimeString([], {
         hour: '2-digit',
         minute: '2-digit',
@@ -23,6 +26,8 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst, isLoading, 
 
     const renderPart = (part: any) => {
         if (part.type === 'tool-invocation') {
+
+            console.log('part : ', part);
 
             return (
                 <>
@@ -51,7 +56,11 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst, isLoading, 
                             <Weather weatherAtLocation={part.toolInvocation?.result}/>
                         </div>
                     )}
-
+                    {part.toolInvocation.toolName === 'getPhotos' && (
+                        <div className='mb-4'>
+                            <PhotoGrid photos={part.toolInvocation?.result?.photos} translations={translations}/>
+                        </div>
+                    )}
                     {part.toolInvocation.toolName === 'getContact' && (
                         <div className='w-full my-2'>
                             <div className='bg-red-500 w-full h-20 rounded my-2' />
@@ -68,7 +77,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst, isLoading, 
 
     return (
         <div className={`flex ${isFirst ? "pb-2" : "py-2"} ${message.role === "user" ? "justify-end" : "justify-start"} items-end`}>
-            <div className={`flex flex-col w-[100%] rounded-2xl p-2 ${message.role === "user" ? "bg-blue-600 text-white dark:bg-white/15 dark:text-foreground" : "bg-gray-700/5 text-gray-700 dark:bg-white/5 dark:text-gray-200"} backdrop-blur-md markdown-body`}>
+            <div className={`flex flex-col w-[100%] rounded-2xl p-2 ${message.role === "user" ? "bg-blue-600 text-white dark:bg-white/15" : "bg-gray-700/5 text-gray-700 dark:bg-white/5"} dark:text-foreground backdrop-blur-md markdown-body`}>
                 <div className='font-antique'>
                     {isLoading && isLastAssistantMessage && message.role === 'assistant' ? (
                         <SkeletonCard />
@@ -88,6 +97,6 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, isFirst, isLoading, 
             </div>
         </div>
     );
-};
+});
 
 export default MessageItem;

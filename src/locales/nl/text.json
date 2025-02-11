@@ -14,8 +14,12 @@
     "label": "kopiëren",
     "success": "Code naar klembord gekopieerd!"
   },
+  "loading" : {
+    "loading" : "Laden...",
+    "loadMore" : "Meer laden"
+  },
   "title": "👋 Hallo, chat eerst met mij voordat je me inhuurt",
-  "description": "Kies een onderwerp of vraag me alles over {{userName}}'s ontwikkelingsdeskundigheid.",
+  "description": "Kies een onderwerp of vraag me alles over de ervaring van {{userName}} als ontwikkelaar.\nJe kunt me ook alles over mijn projecten, mijn vaardigheden of mijn ervaringen of zelfs over mijn leven vragen.",
   "questions": [
     {
       "title": "Informatie",
@@ -28,10 +32,6 @@
     {
       "title": "Resume",
       "content": "Ik wil het CV van {{userName}} zien."
-    },
-    {
-      "title": "Technologieën",
-      "content": "Wat zijn de belangrijkste technologieën en programmeertalen die {{userName}} beheerst?"
     },
     {
       "title": "Projecten",
@@ -50,8 +50,8 @@
       "content": "Wat zijn de belangrijkste sterke punten van {{userName}} als ontwikkelaar?"
     },
     {
-      "title": "Leren",
-      "content": "Wat is de opleidingsachtergrond van {{userName}} en welke trainingen heeft hij/zij gevolgd?"
+      "title": "Fotos Galerie",
+      "content": "Toon de foto-galerie van {{userName}}."
     }
   ],
   "placeholder": "Bericht aan {{assistantName}}",

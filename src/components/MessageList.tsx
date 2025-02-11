@@ -13,7 +13,7 @@ export interface MessageListProps {
     isFinished: boolean;
 }
 
-const MessageList: React.FC<MessageListProps> = ({ messages, isLoading, handleSubmitPrePrompt, translations, isFinished }) => {
+const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoading, handleSubmitPrePrompt, translations, isFinished }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const lastMessageRef = useRef<HTMLDivElement>(null);
     const endRef = useRef<HTMLDivElement>(null);
@@ -120,6 +120,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isLoading, handleSu
                                 isFirst={index === 0} 
                                 isLoading={isLoading}
                                 isLastAssistantMessage={isLastAssistantMessage}
+                                translations={translations}
                             />
                         </div>
                     );
@@ -145,6 +146,6 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isLoading, handleSu
             )}
         </div>
     );
-};
+});
 
 export default MessageList;

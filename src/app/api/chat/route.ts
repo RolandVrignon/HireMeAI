@@ -26,14 +26,15 @@ export async function POST(req: Request) {
     return createDataStreamResponse({
       execute: (dataStream) => {
         const result = streamText({
-          model: mistral("mistral-large-latest"),
+          model: mistral("mistral-small-latest"),
           system: systemMessage,
           messages: messagesFiltered,
           maxSteps: 5,
           tools,
           experimental_activeTools: [
             "getResume",  
-            "getWeather"
+            "getWeather",
+            "getPhotos"
           ],
           experimental_transform: smoothStream({delayInMs: 25, chunking: "word"}),
           toolCallStreaming: true,

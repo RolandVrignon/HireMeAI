@@ -14,8 +14,12 @@
     "label": "kopieren",
     "success": "Code in die Zwischenablage kopiert!"
   },
+  "loading" : {
+    "loading" : "Lädt...",
+    "loadMore" : "Mehr laden"
+  },
   "title": "👋 Hallo, bitte chatte mit mir, bevor du mich anstellst",
-  "description": "Wähle ein Thema oder frage mich alles über {{userName}}'s Entwicklungsexpertise.",
+  "description": "Wähle ein Thema oder frage mich alles über {{userName}}'s Entwicklungsexpertise.\nDu kannst mir alles über meine Projekte, meine Fähigkeiten oder meine Erfahrungen oder auch über mein Leben fragen.",
   "questions": [
     {
       "title": "Informationen",
@@ -30,10 +34,6 @@
       "content": "Ich möchte den Lebenslauf von {{userName}} sehen."
     },
     {
-      "title": "Technologien",
-      "content": "Welche sind die wichtigsten Technologien und Programmiersprachen, die {{userName}} beherrscht?"
-    },
-    {
       "title": "Projekte",
       "content": "Können Sie mir über die bedeutendsten Projekte von {{userName}} und deren technische Herausforderungen erzählen?"
     },
@@ -46,12 +46,12 @@
       "content": "Was treibt {{userName}} als Entwickler an und welche sind seine/ihre Karriereziele?"
     },
     {
-      "title": "Fähigkeiten",
-      "content": "Welche sind die wichtigsten Stärken von {{userName}} als Entwickler?"
-    },
-    {
       "title": "Lernen",
       "content": "Wie sieht die Bildungserfahrung von {{userName}} aus und welche Schulungen hat er/sie absolviert?"
+    },
+    {
+      "title": "Fotos Galerie",
+      "content": "Zeige die Foto-Galerie von {{userName}}."
     }
   ],
   "placeholder": "Nachricht an {{assistantName}}",

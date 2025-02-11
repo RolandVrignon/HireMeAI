@@ -14,8 +14,12 @@
     "label": "copiar",
     "success": "¡Código copiado al portapapeles!"
   },
+  "loading" : {
+    "loading" : "Cargando...",
+    "loadMore" : "Cargar más"
+  },
   "title": "👋 Hola, por favor, chatea conmigo antes de contratarme",
-  "description": "Selecciona un tema o pregúntame cualquier cosa sobre la experiencia en desarrollo de {{userName}}.",
+  "description": "Selecciona un tema o pregúntame cualquier cosa sobre la experiencia en desarrollo de {{userName}}.\nTambién puedes preguntarme sobre mis proyectos, mis habilidades o mis experiencias o incluso sobre mi vida.",
   "questions": [
     {
       "title": "Información",
@@ -28,10 +32,6 @@
     {
       "title": "Resumen",
       "content": "Quiero ver el currículum de {{userName}}."
-    },
-    {
-      "title": "Tecnologías",
-      "content": "¿Cuáles son las principales tecnologías y lenguajes de programación que domina {{userName}}?"
     },
     {
       "title": "Proyectos",
@@ -50,8 +50,8 @@
       "content": "¿Cuáles son las principales fortalezas de {{userName}} como desarrollador?"
     },
     {
-      "title": "Aprendizaje",
-      "content": "¿Cuál es la experiencia educativa de {{userName}} y qué formación ha recibido?"
+      "title": "Fotos Galería",
+      "content": "Muestra la galería de fotos de {{userName}}."
     }
   ],
   "placeholder": "Mensaje para {{assistantName}}",

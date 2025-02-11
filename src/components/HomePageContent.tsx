@@ -15,6 +15,10 @@ export default function HomePageContent() {
     const [isFinished, setIsFinished] = useState<boolean>(true);
     const { theme } = useTheme();
 
+    useEffect(() => {
+        console.log("Version 2.0");
+    }, []);
+
     const { language, setLanguage, translations, loadTranslations } = useContext(LanguageContext);
     const { messages, setMessages, input, setInput, handleInputChange, handleSubmit, stop } = useChat({
         api: '/api/chat',

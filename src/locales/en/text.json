@@ -14,8 +14,12 @@
     "label" : "copy",
     "success" : "Code copied to clipboard!"
   },
+  "loading" : {
+    "loading" : "Loading...",
+    "loadMore" : "Load More"
+  },
   "title": "👋 Hi, please chat with me before hiring me",
-  "description": "Select a topic or ask me anything about {{userName}}'s development expertise.",
+  "description": "Hi ! I'm {{userName}}. A fullstack software engineer and passionnate project builder.\nFeel free to ask me anything about my projects, my skills or my experiences or even about my life.",
   "questions": [
     {
       "title": "Informations",
@@ -30,10 +34,6 @@
       "content": "I want to see {{userName}}'s resume."
     },
     {
-      "title": "Technologies",
-      "content": "What are the main technologies and programming languages that {{userName}} masters ?"
-    },
-    {
       "title": "Projects",
       "content": "Can you tell me about {{userName}}'s most significant projects and their technical challenges?"
     },
@@ -46,12 +46,12 @@
       "content": "What drives {{userName}} as a developer and what are their career goals?"
     },
     {
-      "title": "Skills",
-      "content": "What are {{userName}}'s key strengths as a developer?"
-    },
-    {
       "title": "Learning",
       "content": "What is {{userName}}'s educational experience and what training has they undergone?"
+    },
+    {
+      "title": "Photo Gallery",
+      "content": "Display {{userName}}'s photo gallery."
     }
   ],
   "placeholder": "Message {{assistantName}}",
