@@ -68,7 +68,7 @@ const ContactOptions: React.FC<ContactOptionsProps> = ({ translations }) => {
             <GoogleCalendarEmbed />
           </Tab.Panel> */}
           <Tab.Panel>
-            <BookingPanel />
+            <WhatsAppPanel />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
@@ -151,7 +151,7 @@ const EmailForm: React.FC<{ translations: any }> = ({ translations }) => {
             : 'bg-blue-600 hover:bg-blue-700 text-white'
         }`}
       >
-        {status === 'sending' ? 'Sending...' : 'Send Message'}
+        {status === 'sending' ? <div className="animate-spin h-4 w-4 border-2 border-white rounded-full border-t-transparent mx-auto"/> : translations.contact.send}
       </button>
 
       {status === 'success' && (
@@ -164,110 +164,11 @@ const EmailForm: React.FC<{ translations: any }> = ({ translations }) => {
   );
 };
 
-const BookingPanel: React.FC = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-
-  // Générer des créneaux de 30 minutes entre 9h et 18h
-  const generateTimeSlots = () => {
-    const slots = [];
-    for (let hour = 9; hour < 18; hour++) {
-      slots.push(`${hour}:00`);
-      slots.push(`${hour}:30`);
-    }
-    return slots;
-  };
-
-  const handleBooking = async () => {
-    if (!selectedDate || !selectedTime) return;
-
-    setStatus('loading');
-    try {
-      const response = await fetch('/api/calendar/book', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          date: selectedDate,
-          time: selectedTime,
-        }),
-      });
-
-      if (!response.ok) throw new Error('Booking failed');
-      
-      setStatus('success');
-      setTimeout(() => setStatus('idle'), 3000);
-    } catch (error) {
-      setStatus('error');
-    }
-  };
-
-  return (
-    <div className="space-y-4 p-4 bg-gray-500/10 dark:bg-gray-800/20 rounded-lg">
-      <div>
-        <label className="block text-sm font-medium mb-2">Select Date</label>
-        <input
-          type="date"
-          className="w-full rounded-md border bg-white dark:bg-gray-800/20 p-2"
-          onChange={(e) => setSelectedDate(e.target.value ? new Date(e.target.value) : null)}
-          min={new Date().toISOString().split('T')[0]}
-        />
-      </div>
-
-      {selectedDate && (
-        <div>
-          <label className="block text-sm font-medium mb-2">Select Time</label>
-          <div className="grid grid-cols-3 gap-2">
-            {generateTimeSlots().map((time) => (
-              <button
-                key={time}
-                onClick={() => setSelectedTime(time)}
-                className={`p-2 rounded-md transition-colors ${
-                  selectedTime === time
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white dark:bg-gray-800/20 hover:bg-gray-100 dark:hover:bg-gray-700'
-                }`}
-              >
-                {time}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {selectedDate && selectedTime && (
-        <button
-          onClick={handleBooking}
-          disabled={status === 'loading'}
-          className={`w-full px-4 py-2 rounded-md transition-colors ${
-            status === 'loading'
-              ? 'bg-gray-400 cursor-not-allowed'
-              : 'bg-blue-600 hover:bg-blue-700 text-white'
-          }`}
-        >
-          {status === 'loading' ? 'Booking...' : 'Book Meeting'}
-        </button>
-      )}
-
-      {status === 'success' && (
-        <div className="text-green-600 text-center">Meeting booked successfully!</div>
-      )}
-      {status === 'error' && (
-        <div className="text-red-600 text-center">Failed to book meeting. Please try again.</div>
-      )}
-    </div>
-  );
-};
-
 const WhatsAppPanel: React.FC = () => {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
-
-  const whatsappUrl = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`;
-
   return (
     <div className="text-center p-4 bg-gray-500/10 dark:bg-gray-800/20 rounded-lg">
       <a
-        href={whatsappUrl}
+        href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-2 bg-[#25d366] hover:bg-green-600 text-white px-6 py-3 rounded-full transition-colors"
