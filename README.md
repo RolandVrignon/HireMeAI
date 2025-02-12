@@ -1,8 +1,8 @@
-# AI_PortfolioAsChatbot 🤖
+# HireMeAI 🤖
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**AI_PortfolioAsChatbot** is an interactive chatbot powered by Mistral AI, which allows users to upload their resume for a more personalized experience. The chatbot can respond not only with text but also with interactive components, such as displaying the resume, photo gallery component or weather component (more to come). This application is built using the Vercel AI SDK (RSC), enabling the streaming of components for a richer experience than a traditional text-based chatbot.
+**HireMeAI** is an AI-powered chatbot to showcase your resume and interact with recruiters powered by Mistral AI.
 
 
 | ![Screenshot 1](./public/preview/img1.jpg) | ![Screenshot 2](./public/preview/img2.jpg) | ![Screenshot 3](./public/preview/img3.jpg) | ![Screenshot 4](./public/preview/img4.jpg)
@@ -25,7 +25,7 @@
 
 ## Project Description 📝
 
-**AI_PortfolioAsChatbot** allows recruiters or users to ask a chatbot questions based on a resume uploaded in a specific folder. You can upload your resume in various languages, enabling the chatbot to provide contextual responses based on the selected language and the content of the resume.
+**HireMeAI** allows recruiters or users to ask a chatbot questions based on a resume uploaded in a specific folder. You can upload your resume in various languages, enabling the chatbot to provide contextual responses based on the selected language and the content of the resume.
 
 Thanks to the use of Vercel AI SDK and React Server Components (RSC), the chatbot can do much more than provide textual answers. It can interact with specific components, such as the **ThemeSwitcher**, **LanguageSwitcher**, and **resume visualization**. This approach allows for a rich and interactive user experience.
 
@@ -226,7 +226,7 @@ Feel free to create an issue for:
 - Clarification on how to implement a feature
 - Discussion about potential improvements
 
-We aim to review all contributions within a week. Thank you for helping improve AI_PortfolioAsChatbot! 🙏
+We aim to review all contributions within a week. Thank you for helping improve HireMeAI! 🙏
 
 ## License 📜
 
