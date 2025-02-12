@@ -1,6 +1,6 @@
 # 🔮 HireMeAI
 
-🚀 **HireMeAI** is an **AI-powered chatbot** designed to **help recruiters interact with your resume in an engaging way**. Using **Mistral AI** and **Vercel AI SDK**, this chatbot goes beyond text-based interactions by incorporating **dynamic components** such as resume visualization, contact form, photo gallery and more.
+**HireMeAI** is an **AI-powered chatbot** designed to **help recruiters interact with your resume in an engaging way**. Using **Mistral AI** and **Vercel AI SDK**, this chatbot goes beyond text-based interactions by incorporating **dynamic components** such as resume visualization, contact form, photo gallery and more.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/RolandVrignon/HireMeAI?style=social)](https://github.com/RolandVrignon/HireMeAI/stargazers)
