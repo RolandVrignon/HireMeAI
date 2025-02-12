@@ -76,7 +76,7 @@ const MessageItem: React.FC<MessageItemProps> = React.memo(({ message, isFirst, 
 
     return (
         <div className={`flex ${isFirst ? "pb-2" : "py-2"} ${message.role === "user" ? "justify-end" : "justify-start"} items-end`}>
-            <div className={`flex flex-col w-[100%] rounded-2xl p-2 ${message.role === "user" ? "bg-blue-600 text-white dark:bg-white/15" : "bg-gray-700/5 text-gray-700 dark:bg-white/5"} dark:text-foreground backdrop-blur-md markdown-body`}>
+            <div className={`flex flex-col w-[100%] rounded-2xl p-2 ${message.role === "user" ? "bg-[#09090B] text-white dark:bg-white/15" : "bg-gray-700/5 text-gray-700 dark:bg-white/5"} dark:text-foreground backdrop-blur-md markdown-body`}>
                 <div>
                     {isLoading && isLastAssistantMessage && message.role === 'assistant' ? (
                         <SkeletonCard />

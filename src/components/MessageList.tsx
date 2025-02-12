@@ -139,7 +139,7 @@ const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoadin
                         setAutoScrollEnabled(true);
                         scrollToBottom();
                     }}
-                    className="fixed bottom-4 left-1/2 z-50 transform -translate-x-1/2 h-10 w-10 p-1 flex items-center justify-center rounded-full bg-blue-600 dark:bg-zinc-800 text-white shadow-lg dark:hover:bg-zinc-900 hover:bg-blue-700 focus:outline-none"
+                    className="fixed bottom-4 left-1/2 z-50 transform -translate-x-1/2 h-10 w-10 p-1 flex items-center justify-center rounded-full bg-[#09090B] dark:bg-zinc-800 text-white shadow-lg dark:hover:bg-zinc-900 hover:bg-[#3b3b3d] focus:outline-none"
                 >
                     <ChevronDown />
                 </button>
