@@ -2,15 +2,13 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**HireMeAI** is an AI-powered chatbot to showcase your resume and interact with recruiters powered by Mistral AI.
-
+🚀 **HireMeAI** is an **AI-powered chatbot** designed to **help recruiters interact with your resume in an engaging way**. Using **Mistral AI** and **Vercel AI SDK**, this chatbot goes beyond text-based interactions by incorporating **dynamic components** such as resume visualization, contact form, photo gallery and more.
 
 | ![Screenshot 1](./public/preview/img1.jpg) | ![Screenshot 2](./public/preview/img2.jpg) | ![Screenshot 3](./public/preview/img3.jpg) | ![Screenshot 4](./public/preview/img4.jpg)
 |----------------------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
 
 ## Table of Contents
 
-- [Project Description 📝](#project-description)
 - [Features ✨](#features)
 - [Upcoming Features 🚀](#upcoming-features)
 - [AI Model 🧠](#ai-model)
@@ -23,12 +21,6 @@
 - [Contributing 🤝](#contributing)
 - [License 📜](#license)
 
-## Project Description 📝
-
-**HireMeAI** allows recruiters or users to ask a chatbot questions based on a resume uploaded in a specific folder. You can upload your resume in various languages, enabling the chatbot to provide contextual responses based on the selected language and the content of the resume.
-
-Thanks to the use of Vercel AI SDK and React Server Components (RSC), the chatbot can do much more than provide textual answers. It can interact with specific components, such as the **ThemeSwitcher**, **LanguageSwitcher**, and **resume visualization**. This approach allows for a rich and interactive user experience.
-
 ## Features ✨
 
 - **Multilingual Support**: Upload and display your resume in multiple languages.
@@ -38,24 +30,14 @@ Thanks to the use of Vercel AI SDK and React Server Components (RSC), the chatbo
     - **Theme switching**: Switch between dark and light themes.
     - **Language switching**: Change the website's language dynamically.
 
-## Upcoming Features 🚀
+## 🔮 Upcoming Features
 
-| Feature | Description | Status |
-|---------|------------|--------|
-| Education Server Component | Interactive component to display and discuss educational background | 🟡 In Progress |
-| Professional Server Component | Dynamic component to showcase professional experience | 🔵 Planned |
-| Project Server Component | Interactive showcase of portfolio projects | 🔵 Planned |
-| Resume Displayer | Visual component to display and interact with the full resume | 🟢 Completed |
-| Contact Server Component | Interactive component for contact information and networking | 🔵 Planned |
-| Enhanced Context Support | Add more context than just a resume (cover letter, portfolio links, etc.) | 🔵 Planned |
-| Weather Server Component | Display weather information for specified locations | 🟢 Completed |
-| Photo Gallery Server Component | Interactive gallery for displaying images and portfolios | 🟢 Completed |
-
-
-> Legend:
-> - 🟡 In Progress: Currently being developed
-> - 🔵 Planned: On the roadmap
-> - 🟢 Completed: Ready to use
+- [ ] **Education Server Component** – Display and discuss educational background
+- [ ] **Professional Server Component** – Showcase work experience dynamically
+- [ ] **Project Showcase** – Interactive way to present portfolio projects
+- [x] **Resume Displayer** – Visual resume integration ✅ (Completed)
+- [ ] **Enhanced Context Support** – Add cover letter, portfolio links, and more
+- [x] **Weather Component** – Display real-time weather information ✅ (Completed)
 
 These upcoming features will enhance the interactive capabilities of the chatbot, allowing for more dynamic and engaging conversations about different aspects of the resume and additional professional context.
 
@@ -74,12 +56,12 @@ Before you start, you'll need the following installed on your machine:
 
 To install the project dependencies, follow these steps:
 ```bash
-git clone https://github.com/your-username/chat_with_me_before_hiring_me.git
+git clone https://github.com/RolandVrignon/HireMeAI.git
 ```
 
 2. Navigate into the project directory:
 ```bash
-cd chat_with_me_before_hiring_me
+cd HireMeAI
 ```
 
 3. Install the dependencies using `pnpm`:
