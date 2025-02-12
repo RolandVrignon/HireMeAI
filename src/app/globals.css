@@ -77,6 +77,69 @@
   display: none;  /* Masque la scrollbar sur les navigateurs basés sur Webkit (Chrome, Safari, etc.) */
 }
 
+.glass-gradient-border {
+  position: relative;               /* nécessaire pour positionner ::before */
+  border-radius: 1.5rem;           /* ex. ~ rounded-3xl */
+  backdrop-filter: blur(10px);     /* flou en arrière-plan */
+}
+
+/* Version light mode */
+@media (prefers-color-scheme: light) {
+
+
+  .glass-gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;                        /* occupe toute la surface */
+    border-radius: inherit;          /* même arrondi que le parent */
+    background: linear-gradient(to top left, #00000015, #00000005, #00000020);
+    padding: 2px;                    /* épaisseur de la "bordure" dégradée */
+
+    /* Masque qui "crée un trou" au centre */
+    -webkit-mask: 
+      linear-gradient(#fff, #fff) content-box, 
+      linear-gradient(#fff, #fff) border-box;
+    -webkit-mask-composite: xor;
+
+    mask: 
+      linear-gradient(#fff, #fff) content-box, 
+      linear-gradient(#fff, #fff) border-box;
+    mask-composite: exclude;
+
+    pointer-events: none;            /* clic à travers */
+    z-index: -1;                     /* derrière le contenu du main */
+  }
+}
+
+/* Version dark mode */
+@media (prefers-color-scheme: dark) {
+
+  .glass-gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(to top left, #ffffff65, #ffffff07, #ffffff8c);
+    padding: 2px;
+
+    -webkit-mask: 
+      linear-gradient(#fff, #fff) content-box, 
+      linear-gradient(#fff, #fff) border-box;
+    -webkit-mask-composite: xor;
+
+    mask: 
+      linear-gradient(#fff, #fff) content-box, 
+      linear-gradient(#fff, #fff) border-box;
+    mask-composite: exclude;
+
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;

@@ -79,7 +79,8 @@ export default function HomePageContent() {
     return (
         <AuroraBackground blur={true}>
             <div className="container flex flex-col h-[100dvh] p-2 md:px-8 w-full gap-2">
-                <main className="flex-1 w-full bg-blue-700/5 dark:bg-white/5 backdrop-blur-md rounded-3xl overflow-hidden relative p-2">
+                <main className="flex-1 w-full glass-gradient-border overflow-hidden p-2 text-white bg-black/5">
+                    <div className="absolute inset-0 bg-[url('/textures/noise.svg')] opacity-40 pointer-events-none" />
                     <div className="rounded-2xl overflow-hidden h-full mask">
                         {messages.length === 0 ? (
                             <EmptyState
@@ -97,6 +98,9 @@ export default function HomePageContent() {
                         )}
                     </div>
                 </main>
+
+
+
                 <div className="w-full">
                     <InputForm
                         ref={inputFormRef}

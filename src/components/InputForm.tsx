@@ -58,8 +58,9 @@ const InputForm = forwardRef<InputFormRef, InputFormProps>(({
     };
 
     return (
-        <div className="group max-h-[20vh] relative flex w-full items-end">
-            <div className="flex w-full flex-col transition-colors contain-inline-size cursor-text rounded-3xl px-2 py-1 bg-blue-700/5 dark:bg-white/5 backdrop-blur-md">
+        <div className="group max-h-[30vh] relative flex w-full items-end">
+            <div className="flex w-full flex-col transition-colors contain-inline-size cursor-text rounded-3xl px-2 py-1 bg-black/5 glass-gradient-border overflow-hidden">
+                <div className="absolute inset-0 bg-[url('/textures/noise.svg')] opacity-40 pointer-events-none" />
                 <form ref={formRef} onSubmit={submitMessage} className="flex min-h-[44px] items-end px-2">
                     <div className="max-w-full flex-1">
                         <Textarea
@@ -80,7 +81,6 @@ const InputForm = forwardRef<InputFormRef, InputFormProps>(({
                             aria-label="Send message"
                             disabled={!input.trim() || (isLoading || !isFinished)}
                         >
-                            <Send className="h-4 w-4" />
                         </Button>
                     </div>
                 </form>
