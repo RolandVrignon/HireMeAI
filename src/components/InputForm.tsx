@@ -59,8 +59,8 @@ const InputForm = forwardRef<InputFormRef, InputFormProps>(({
 
     return (
         <div className="group max-h-[30vh] relative flex w-full items-end">
-            <div className="flex w-full flex-col transition-colors contain-inline-size cursor-text rounded-3xl px-2 py-1 bg-white/40 dark:bg-black/5 glass-gradient-border overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/textures/noise.svg')] opacity-40 pointer-events-none" />
+            <div className="flex w-full flex-col transition-colors contain-inline-size cursor-text rounded-3xl px-2 py-1 bg-white/5 dark:bg-black/5 glass-gradient-border overflow-hidden backdrop-blur-2xl">
+                <div className="absolute inset-0 bg-[url('/textures/noise.svg')] opacity-10 pointer-events-none" />            
                 <form ref={formRef} onSubmit={submitMessage} className="flex min-h-[44px] items-end px-2">
                     <div className="max-w-full flex-1">
                         <Textarea
@@ -77,7 +77,7 @@ const InputForm = forwardRef<InputFormRef, InputFormProps>(({
                         <Button
                             type="submit"
                             size="icon"
-                            className="flex h-10 w-10 items-center justify-center rounded-full bg-black/80 text-white hover:opacity-70 dark:bg-white dark:text-black disabled:bg-[#a7a7a7] disabled:text-[#f4f4f4] dark:disabled:bg-zinc-600 dark:disabled:text-zinc-400"
+                            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2457ff] text-white hover:opacity-70 dark:bg-white dark:text-black disabled:bg-[#a7a7a7] disabled:text-[#f4f4f4] dark:disabled:bg-zinc-600 dark:disabled:text-zinc-400"
                             aria-label="Send message"
                             disabled={!input.trim() || (isLoading || !isFinished)}
                         >

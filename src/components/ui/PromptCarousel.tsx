@@ -33,7 +33,7 @@ const PromptCarousel: React.FC<PromptCarouselProps> = ({ handleSubmitPrePrompt, 
                 content: prompt.content
             }))}
             direction="right"
-            speed="normal"
+            speed="fast"
             pauseOnHover={false}
             handleSubmitPrePrompt={handleSubmitPrePrompt}
         />

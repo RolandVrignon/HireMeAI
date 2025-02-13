@@ -8,21 +8,23 @@ import { Experiences } from '../ai-components/Experiences';
 import { Weather } from '../ai-components/weather';
 import { PhotoGrid } from '../ai-components/PhotoGrid';
 import ContactOptions from './ContactOptions';
-
+import PromptCarousel from './PromptCarousel';
 export interface MessageItemProps {
     message: Message;
     isFirst: boolean;
     isLoading: boolean;
     isLastAssistantMessage: boolean;
     translations: any;
+    isFinished: boolean;
+    handleSubmitPrePrompt: (content: string) => void;
 }
 
-const MessageItem: React.FC<MessageItemProps> = React.memo(({ message, isFirst, isLoading, isLastAssistantMessage, translations }) => {
+const MessageItem: React.FC<MessageItemProps> = React.memo(({ message, isFirst, isLoading, isLastAssistantMessage, translations, isFinished, handleSubmitPrePrompt }) => {
     const formattedTime = message?.createdAt?.toLocaleTimeString([], {
         hour: '2-digit',
         minute: '2-digit',
     });
-    
+
     const role = message.role === "user" ? "Me" : process.env.NEXT_PUBLIC_ASSISTANT_NAME;
 
     const renderPart = (part: any) => {
@@ -30,9 +32,9 @@ const MessageItem: React.FC<MessageItemProps> = React.memo(({ message, isFirst, 
 
             return (
                 <>
-                    <Badge variant="secondary" className='mt-4 mb-2 antique font-light bg-green-300/40 text-green-950 dark:bg-green-800/40 dark:text-green-300'>
+                    {/* <Badge variant="secondary" className='mt-4 mb-2 antique font-light bg-green-300/40 text-green-950 dark:bg-green-800/40 dark:text-green-300'>
                         {'>'}  {part.toolInvocation.toolName}()
-                    </Badge>
+                    </Badge> */}
                     {part.toolInvocation.toolName === 'getResume' && (
                         <>
                             <div className='mb-4'>
@@ -52,12 +54,12 @@ const MessageItem: React.FC<MessageItemProps> = React.memo(({ message, isFirst, 
                     )}
                     {part.toolInvocation.toolName === 'getWeather' && (
                         <div className='mb-4'>
-                            <Weather weatherAtLocation={part.toolInvocation?.result}/>
+                            <Weather weatherAtLocation={part.toolInvocation?.result} />
                         </div>
                     )}
                     {part.toolInvocation.toolName === 'getPhotos' && (
                         <div className='mb-4'>
-                            <PhotoGrid photos={part.toolInvocation?.result?.photos} translations={translations}/>
+                            <PhotoGrid photos={part.toolInvocation?.result?.photos} translations={translations} />
                         </div>
                     )}
                     {part.toolInvocation.toolName === 'getContact' && (
@@ -75,22 +77,29 @@ const MessageItem: React.FC<MessageItemProps> = React.memo(({ message, isFirst, 
     };
 
     return (
-        <div className={`flex ${isFirst ? "pb-2" : "py-2"} ${message.role === "user" ? "justify-end" : "justify-start"} items-end`}>
-            <div className={`flex flex-col w-[100%] rounded-2xl p-2 ${message.role === "user" ? "bg-[#09090B] text-white dark:bg-white/15" : "bg-gray-700/5 text-gray-700 dark:bg-white/5"} dark:text-foreground backdrop-blur-md markdown-body`}>
-                <div>
-                    {isLoading && isLastAssistantMessage && message.role === 'assistant' ? (
-                        <SkeletonCard />
-                    ) : (
-                        message.parts?.map((part, index) => (
-                            <React.Fragment key={index}>
-                                {renderPart(part)}
-                            </React.Fragment>
-                        ))
+        <div className={`flex ${isFirst && "pb-2"} ${message.role === "user" ? "justify-end" : "justify-start"} items-end`}>
+            <div className='flex flex-col w-full'>
+                <div className={`flex flex-col w-[100%] rounded-2xl p-2 ${message.role === "user" ? "bg-[#2457ff] text-white dark:bg-white/15" : "bg-gray-700/5 text-gray-700 dark:bg-white/5"} dark:text-foreground backdrop-blur-md markdown-body`}>
+                    <div>
+                        {isLoading && isLastAssistantMessage && message.role === 'assistant' ? (
+                            <SkeletonCard />
+                        ) : (
+                            message.parts?.map((part, index) => (
+                                <React.Fragment key={index}>
+                                    {renderPart(part)}
+                                </React.Fragment>
+                            ))
+                        )}
+                    </div>
+                    {formattedTime && (
+                        <div className="flex w-full justify-end font-doto text-xs mt-2">
+                            {role} - {formattedTime}
+                        </div>
                     )}
                 </div>
-                {formattedTime && (
-                    <div className="flex w-full justify-end font-doto text-xs mt-2">
-                        {role} - {formattedTime}
+                {(isFinished && message.role !== 'user' && isLastAssistantMessage) && (
+                    <div className="w-full mt-3">
+                        <PromptCarousel handleSubmitPrePrompt={handleSubmitPrePrompt} translations={translations} />
                     </div>
                 )}
             </div>

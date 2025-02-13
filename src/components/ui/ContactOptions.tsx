@@ -17,15 +17,15 @@ const ContactOptions: React.FC<ContactOptionsProps> = ({ translations }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
-    <div className="w-full max-w-3xl mx-auto font-roboto text-sm font-light">
+    <div className="w-full  max-w-3xl mx-auto font-roboto text-sm font-light">
       <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-        <Tab.List className="flex space-x-1 rounded-xl bg-gray-500/10 dark:bg-gray-800/20 p-1">
+        <Tab.List className="flex space-x-1 rounded-xl bg-gray-500/10 dark:bg-white/5 p-1">
           <Tab
             className={({ selected }) =>
               `w-full rounded-lg py-2.5
               ${selected 
-                ? 'bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400' 
-                : 'hover:bg-gray-200 dark:hover:bg-gray-600'}`
+                ? 'bg-white/30 dark:bg-white/10 shadow' 
+                : 'hover:bg-gray-200 dark:hover:bg-white/20'}`
             }
           >
             <div className="flex items-center justify-center gap-2">
@@ -50,8 +50,8 @@ const ContactOptions: React.FC<ContactOptionsProps> = ({ translations }) => {
             className={({ selected }) =>
               `w-full rounded-lg py-2.5
               ${selected 
-                ? 'bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400' 
-                : 'hover:bg-gray-200 dark:hover:bg-gray-600'}`
+                ? 'bg-white/30 dark:bg-white/10 shadow' 
+                : 'hover:bg-gray-200 dark:hover:bg-white/20'}`
             }
           >
             <div className="flex items-center justify-center gap-2">
@@ -113,8 +113,8 @@ const EmailForm: React.FC<{ translations: any }> = ({ translations }) => {
       <div>
         <input
           type="text"
-          className="w-full rounded-md border bg-gray-500/10 dark:border-gray-700 
-                     bg-white dark:bg-gray-800/20 p-2"
+          className="w-full rounded-md  bg-gray-500/10 
+                     dark:bg-white/5 p-2"
           value={formData.name}
           onChange={(e) => setFormData({...formData, name: e.target.value})}
           placeholder={translations.contact.name}
@@ -124,8 +124,8 @@ const EmailForm: React.FC<{ translations: any }> = ({ translations }) => {
       <div>
         <input
           type="email"
-          className="w-full rounded-md border bg-gray-500/10 dark:border-gray-700 
-                     bg-white dark:bg-gray-800/20 p-2"
+          className="w-full rounded-md  bg-gray-500/10 
+                     dark:bg-white/5 p-2"
           value={formData.email}
           onChange={(e) => setFormData({...formData, email: e.target.value})}
           placeholder={translations.contact.email}
@@ -134,8 +134,8 @@ const EmailForm: React.FC<{ translations: any }> = ({ translations }) => {
       </div>
       <div>
         <textarea
-          className="w-full rounded-md border bg-gray-500/10 dark:border-gray-700 
-                     bg-white dark:bg-gray-800/20 p-2 h-32"
+          className="w-full rounded-md  bg-gray-500/10
+                     dark:bg-white/5 p-2 h-32"
           value={formData.message}
           onChange={(e) => setFormData({...formData, message: e.target.value})}
           required
@@ -148,7 +148,7 @@ const EmailForm: React.FC<{ translations: any }> = ({ translations }) => {
         className={`w-full px-4 py-2 rounded-md transition-colors ${
           status === 'sending'
             ? 'bg-gray-400 cursor-not-allowed'
-            : 'bg-blue-600 hover:bg-blue-700 text-white'
+            : 'bg-[#2457ff] dark:bg-white/30 hover:bg-[#343435] dark:hover:bg-white dark:text-black text-white'
         }`}
       >
         {status === 'sending' ? <div className="animate-spin h-4 w-4 border-2 border-white rounded-full border-t-transparent mx-auto"/> : translations.contact.send}
@@ -166,7 +166,7 @@ const EmailForm: React.FC<{ translations: any }> = ({ translations }) => {
 
 const WhatsAppPanel: React.FC = () => {
   return (
-    <div className="text-center p-4 bg-gray-500/10 dark:bg-gray-800/20 rounded-lg">
+    <div className="text-center p-4 bg-gray-500/10 dark:bg-white/5 rounded-lg">
       <a
         href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
         target="_blank"
