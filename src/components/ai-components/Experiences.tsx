@@ -35,7 +35,7 @@ export const Experiences: React.FC<ExperiencesProps> = ({ experiences }) => {
                 </div>
             ) : (
                 experiences.map((experience, index) => (
-                    <Tilt key={index} className="relative rounded-lg p-2 dark:bg-white/5 text-gray-700 dark:text-white backdrop-blur-md">
+                    <Tilt key={index} className="relative rounded-xl p-2 dark:bg-white/5 text-gray-700 dark:text-white backdrop-blur-md">
                         <div className="flex justify-between items-start mb-2">
                         <div>
                             {experience.company && (

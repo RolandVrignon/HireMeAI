@@ -251,7 +251,7 @@ export function Weather({
   return (
     <div
       className={cx(
-        'flex flex-col gap-4 rounded-2xl p-4 skeleton-bg max-w-[500px]',
+        'flex flex-col gap-4 rounded-xl p-4 skeleton-bg max-w-[500px]',
         {
           'bg-blue-400': isDay,
         },

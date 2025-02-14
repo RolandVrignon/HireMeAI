@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
-
+import { Tilt } from '@/components/ui/tilt';
 interface Photo {
   url: string;
   alt: string;
@@ -57,7 +57,7 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
     return (
       <div className="w-full h-48 grid grid-cols-3 gap-2">
         {[...Array(9)].map((_, i) => (
-          <Skeleton key={i} className="aspect-square w-full rounded-sm" />
+          <Skeleton key={i} className="aspect-square w-full rounded-xl" />
         ))}
       </div>
     );
@@ -68,25 +68,27 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
       return (
         <Skeleton 
           key={index}
-          className="aspect-square w-full rounded-sm"
+          className="aspect-square w-full rounded-xl"
         />
       );
     }
 
     return (
-      <div 
-        key={index}
-        className="relative aspect-square overflow-hidden rounded-sm cursor-pointer"
-        onClick={() => setSelectedPhoto(photo)}
-      >
-        <Image
-          src={photo.url}
-          alt={photo.alt}
-          fill
-          className="object-cover transition-transform duration-300 hover:scale-110"
-          sizes="(max-width: 768px) 33vw, 33vw"
-        />
-      </div>
+      <Tilt rotationFactor={14} isRevese={true}>
+        <div 
+          key={index}
+          className="relative aspect-square overflow-hidden rounded-xl cursor-pointer"
+          onClick={() => setSelectedPhoto(photo)}
+        >
+          <Image
+            src={photo.url}
+            alt={photo.alt}
+            fill
+            className="object-cover transition-transform duration-300"
+              sizes="(max-width: 768px) 33vw, 33vw"
+            />
+          </div>
+      </Tilt>
     );
   };
 
@@ -99,7 +101,7 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
       {isLoadingMore && (
         <div className="grid grid-cols-3 gap-2 mt-2">
           {[...Array(9)].map((_, i) => (        
-            <Skeleton key={i} className="aspect-square w-full rounded-sm" />
+            <Skeleton key={i} className="aspect-square w-full rounded-xl" />
           ))}
         </div>
       )}
@@ -116,25 +118,27 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
         </div>
       )}
 
-      <Dialog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
-        <DialogContent className="max-w-[90vw] max-h-[90vh] w-full h-full p-0 overflow-hidden bg-transparent border-0">
-          <DialogTitle className="sr-only">
-            Photo View
-          </DialogTitle>
-          {selectedPhoto && (
-            <div className="relative w-full h-full min-h-[50vh]">
-              <Image
-                src={selectedPhoto.url}
-                alt={selectedPhoto.alt}
-                fill
-                className="object-contain"
-                sizes="90vw"
-                priority
-              />
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+      <Tilt>
+        <Dialog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
+          <DialogContent className="max-w-[90vw] max-h-[90vh] w-full h-full p-0 overflow-hidden bg-transparent border-0">
+            <DialogTitle className="sr-only">
+              Photo View
+            </DialogTitle>
+            {selectedPhoto && (
+              <div className="relative w-full h-full min-h-[50vh]">
+                <Image
+                  src={selectedPhoto.url}
+                  alt={selectedPhoto.alt}
+                  fill
+                  className="object-contain"
+                  sizes="90vw"
+                  priority
+                />
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
+      </Tilt>
     </div>
   );
 };

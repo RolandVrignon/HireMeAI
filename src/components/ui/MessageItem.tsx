@@ -39,35 +39,35 @@ const MessageItem: React.FC<MessageItemProps> = React.memo(({ message, isFirst, 
                     </Badge> */}
                     {part.toolInvocation.toolName === 'getResume' && (
                         <>
-                            <div className='mb-4'>
+                            <div className='w-full mb-4'>
                                 <PdfThumbnail />
                             </div>
                         </>
                     )}
                     {part.toolInvocation.toolName === 'getExperience' && part.toolInvocation?.result?.experiences.length > 0 && (
                         <>
-                            <div className='mb-4'>
+                            <div className='w-full mb-4'>
                                 <Experiences experiences={part.toolInvocation?.args?.experiences} />
                             </div>
                         </>
                     )}
                     {part.toolInvocation.toolName === 'getWeather' && (
-                        <div className='mb-4'>
+                        <div className='w-full mb-4'>
                             <Weather weatherAtLocation={part.toolInvocation?.result} />
                         </div>
                     )}
                     {part.toolInvocation.toolName === 'getPhotos' && (
-                        <div className='mb-4'>
+                        <div className='w-full mb-4'>
                             <PhotoGrid photos={part.toolInvocation?.result?.photos} translations={translations} />
                         </div>
                     )}
                     {part.toolInvocation.toolName === 'getContact' && (
-                        <div className='w-full my-2'>
+                        <div className='w-full mb-4'>
                             <ContactOptions translations={translations} />
                         </div>
                     )}
                     {part.toolInvocation.toolName === 'getFootball' && part.toolInvocation?.result?.matches.length > 0 && (
-                        <div className='w-full my-2'>
+                        <div className='w-full mb-4'>
                             <Football matches={part.toolInvocation?.result?.matches} translations={translations} />
                         </div>
                     )}

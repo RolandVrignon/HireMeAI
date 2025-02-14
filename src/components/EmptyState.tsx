@@ -3,30 +3,35 @@ import React from 'react';
 import { useTheme } from 'next-themes';
 import PromptCarousel from './ui/PromptCarousel';
 import TypewriterTitle from './ui/typewritertitle';
+import { UIInterface } from '@/types/types';
 
 interface EmptyStateProps {
     handleSubmitPrePrompt: (content: string) => void,
     translations: any,
+    ui: UIInterface
 }
 
-const EmptyState: React.FC<EmptyStateProps> = ({ handleSubmitPrePrompt, translations }) => {
-    const { theme, resolvedTheme } = useTheme();
-    console.log('theme:', theme)
-    console.log('resolvedTheme:', resolvedTheme)
+const EmptyState: React.FC<EmptyStateProps> = ({ handleSubmitPrePrompt, translations, ui }) => {
 
-    const imageSrc = resolvedTheme === 'dark' ? '/images/me-dark-mode.png' : '/images/me-light-mode.png';
-    console.log('imageSrc:', imageSrc)
-    
     return (
         <div className="h-full w-full flex flex-col items-start justify-center px-4 gap-2">
             <div className="w-[100%] relative">
                 <Image
-                    src={"/images/me-dark-mode.png"}
+                    src="/images/me-light-mode.png"
                     alt="Me"
                     width={0}
                     height={0}
                     sizes="100vw"
-                    className="w-full h-auto mb-2"
+                    className="w-full h-auto mb-2 block dark:hidden"
+                    priority
+                />
+                <Image
+                    src="/images/me-dark-mode.png" 
+                    alt="Me"
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    className="w-full h-auto mb-2 hidden dark:block"
                     priority
                 />
             </div>

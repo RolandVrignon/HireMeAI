@@ -34,7 +34,7 @@ export default function RootLayout({
           />
         </head>
         <body className={roboto.className}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
           </ThemeProvider>
         </body>

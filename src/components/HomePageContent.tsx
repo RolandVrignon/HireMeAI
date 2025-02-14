@@ -32,7 +32,7 @@ export default function HomePageContent() {
     const [pendingSubmit, setPendingSubmit] = useState(false);
 
     const [ui, setUI] = useState<UIInterface>({
-        theme: theme === 'dark' || theme === 'light' ? theme : 'dark',
+        theme: theme === 'dark' ? 'dark' : 'light',
         language: language,
         url: ''
     });
@@ -46,7 +46,7 @@ export default function HomePageContent() {
     useEffect(() => {
         setUI(prev => ({
             ...prev,
-            theme: theme === 'dark' || theme === 'light' ? theme : 'dark',
+            theme: theme === 'dark' ? 'dark' : 'light',
         }));
     }, [theme]);
 
@@ -86,6 +86,7 @@ export default function HomePageContent() {
                             <EmptyState
                                 handleSubmitPrePrompt={handleSubmitPrePrompt}
                                 translations={translations}
+                                ui={ui}
                             />
                         ) : (
                             <MessageList

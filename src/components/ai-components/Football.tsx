@@ -45,7 +45,7 @@ const Football: React.FC<FootballProps> = ({ matches, translations }) => {
   return (
     <div className="flex flex-col gap-2">
       {matches.map((match, index) => (
-        <Tilt key={index} className="flex flex-col gap-3 bg-black/5 text-gray-700 dark:bg-white/5 dark:text-white rounded-lg p-2">
+        <Tilt key={index} className="flex flex-col gap-3 bg-black/5 text-gray-700 dark:bg-white/5 dark:text-white rounded-xl p-2">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
                 <img 
