@@ -21,7 +21,7 @@ export async function POST(req: Request) {
       return new Response("Error processing resume", { status: 500 });
     }
 
-    const systemMessage = `You are a helpful assistant. Here is my resume:\n\n${resumeText}\n\nYou should absolutely use tools if a tool fullfills users request, otherwise provide normal, non JSON, well formatted text responses that answer the user's question and are concise.`;
+    const systemMessage = `You are a helpful assistant. Here is my resume:\n\n${resumeText}\n\nYou should absolutely use tools if a tool fullfills users request, otherwise provide normal, non JSON, well formatted text responses that answer the user's question and are concise.\n\nYou should not answer questions that are not related to Roland or any tools provided.\n\nYou must answer in the language of the user's last message.`;
 
     return createDataStreamResponse({
       execute: (dataStream) => {
@@ -31,13 +31,6 @@ export async function POST(req: Request) {
           messages: messagesFiltered,
           maxSteps: 5,
           tools,
-          experimental_activeTools: [
-            "getResume",  
-            "getWeather",
-            "getPhotos",
-            "getExperience",
-            "getContact"
-          ],
           experimental_transform: smoothStream({delayInMs: 25, chunking: "word"}),
           toolCallStreaming: true,
           experimental_telemetry: {

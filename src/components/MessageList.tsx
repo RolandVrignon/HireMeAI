@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import MessageItem from './ui/MessageItem';
-import PromptCarousel from './ui/PromptCarousel';
-import { ClientMessage } from '@/types/types';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
 import { ChevronDown } from 'lucide-react';
 import { Message } from 'ai';
+import { useTheme } from 'next-themes';
+import TypewriterTitle from '@/components/ui/typewritertitle';
 export interface MessageListProps {
     messages: Message[];
     isLoading: boolean;
@@ -23,10 +23,10 @@ const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoadin
     const [showArrow, setShowArrow] = useState<boolean>(false);
     const [autoScrollEnabled, setAutoScrollEnabled] = useState<boolean>(true);
     const lastScrollTop = useRef<number>(0);
-
+    const { theme } = useTheme();
     const scrollToLastUserMessage = useCallback(() => {
         const container = containerRef.current;
-        // Trouver le dernier message utilisateur
+
         const lastUserMessageId = [...messages]
             .reverse()
             .find(msg => msg.role === 'user')?.id;
@@ -34,21 +34,21 @@ const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoadin
         if (container && lastUserMessageId && messageRefs.current[lastUserMessageId]) {
             const messageElement = messageRefs.current[lastUserMessageId];
             const messageTop = messageElement.offsetTop;
-            
+
             container.scrollTo({
                 top: messageTop,
                 behavior: 'smooth'
             });
         }
     }, [messages]);
-    
+
 
     useEffect(() => {
         if (showArrow) {
             setShowArrow(false);
         }
     }, [!isLoading]);
-    
+
 
     useEffect(() => {
         if (messages.length > 0 && messages[messages.length - 1].role === 'user') {
@@ -60,14 +60,14 @@ const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoadin
         const viewport = containerRef.current;
         const endElement = endRef.current;
         const endScrollElement = endScrollRef.current;
-        
+
         if (!viewport || !endElement || !endScrollElement) return;
 
         const handleScroll = () => {
             requestAnimationFrame(() => {
                 const endRect = endElement.getBoundingClientRect();
                 const endScrollRect = endScrollElement.getBoundingClientRect();
-                
+
                 setShowArrow(endRect.top < endScrollRect.top);
             });
         };
@@ -135,18 +135,18 @@ const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoadin
                 className="h-full smooth-scroll overflow-auto hide-scrollbar"
             >
                 <div className="flex flex-col min-h-full">
-                    <div ref={scrollAreaTopRef} className="sticky top-0 min-h-1 w-full z-[1000]" />
-                    
+                    {/* <div ref={scrollAreaTopRef} className="sticky top-0 min-h-1 w-full z-[1000]" /> */}
+
                     <div className="flex-1 flex flex-col">
                         {messages.length > 0 && messages[messages.length - 1].role === 'user' && (
                             <div className="flex-1" />
                         )}
-                        
+
                         <div className="flex flex-col gap-2">
                             {displayMessages.map((message: Message, index: number) => {
                                 const isLastMessage = index === displayMessages.length - 1;
                                 const isLastAssistantMessage = isLastMessage && message.role === 'assistant';
-                                
+
                                 return (
                                     <div
                                         key={message.id || index}
@@ -156,9 +156,9 @@ const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoadin
                                             }
                                         }}
                                     >
-                                        <MessageItem 
-                                            message={message} 
-                                            isFirst={index === 0} 
+                                        <MessageItem
+                                            message={message}
+                                            isFirst={index === 0}
                                             isLoading={isLoading}
                                             isLastAssistantMessage={isLastAssistantMessage}
                                             translations={translations}
@@ -170,11 +170,13 @@ const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoadin
                             })}
                         </div>
 
-                        <div ref={endScrollRef} className="h-[1px] w-full"/>
+                        <div ref={endScrollRef} className="h-[1px] w-full" />
                         {messages.length > 0 && messages[messages.length - 1].role !== 'user' && (
-                            <div className="flex-1 min-h-[100vh]" />
+                            <div className="flex-1 min-h-[100vh] p-[5%] flex justify-start items-end font-doto text-gray-700 dark:text-white">
+                                <TypewriterTitle translations={translations}/>
+                            </div>
                         )}
-                        <div ref={endRef} className="h-[1px] w-full sticky bottom-0"/>
+                        <div ref={endRef} className="h-[1px] w-full sticky bottom-0" />
                     </div>
                 </div>
             </ScrollArea>

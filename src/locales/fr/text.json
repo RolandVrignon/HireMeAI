@@ -14,9 +14,9 @@
     "label": "copier",
     "success": "Code copié dans le presse-papiers!"
   },
-  "loading" : {
-    "loading" : "Chargement...",
-    "loadMore" : "Voir plus"
+  "loading": {
+    "loading": "Chargement...",
+    "loadMore": "Voir plus"
   },
   "contact": {
     "name": "John Doe",
@@ -24,6 +24,31 @@
     "message": "Salut {{userName}}, je suis intéressé par ton profil, parlons-en.",
     "send": "Envoyer"
   },
+  "football": {
+    "referee": "Arbitre"
+  },
+  "typewriter": [
+    "Transformer les rêves en code",
+    "Construire l'avenir, une ligne à la fois",
+    "Créer des symphonies digitales",
+    "Transformer le chaos en élégance",
+    "Libérer le pouvoir de l'imagination",
+    "Bidouiller le code pour créer de la magie",
+    "Résoudre des problèmes avec créativité",
+    "Transformer le café en code",
+    "Explorer des possibilités infinies",
+    "Concevoir des expériences qui comptent",
+    "Rendre l'impossible possible",
+    "Créer des solutions qui ressemblent à de l'art",
+    "Hacker mon chemin vers l'innovation",
+    "Écrire l'avenir en code",
+    "Embrasser l'échec comme carburant pour la croissance",
+    "Coder, collaborer, innover",
+    "Construire des ponts dans le monde numérique",
+    "Inspiré par les défis, motivé par la passion",
+    "Penser en dehors de l'algorithme",
+    "Le monde est mon IDE"
+  ],
   "title": "Hello",
   "description": "Hello ! Moi c'est {{userName}}. Développeur fullstack passionné par la création de projets.\nN'hésite pas à me poser n'importe quelle question sur mes projets, mes compétences ou mes expériences ou même sur ma vie.",
   "questions": [
@@ -62,6 +87,10 @@
     {
       "title": "Contact",
       "content": "Je veux contacter {{userName}} via le formulaire de contact."
+    },
+    {
+      "title": "Football",
+      "content": "Quels sont les 3 derniers matchs de l'équipe préférée de {{userName}} ?"
     }
   ],
   "placeholder": "Message à {{assistantName}}",

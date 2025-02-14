@@ -14,15 +14,40 @@
     "label": "kopieren",
     "success": "Code in die Zwischenablage kopiert!"
   },
-  "loading" : {
-    "loading" : "Lädt...",
-    "loadMore" : "Mehr laden"
+  "loading": {
+    "loading": "Lädt...",
+    "loadMore": "Mehr laden"
   },
   "contact": {
     "name": "John Doe",
     "email": "john.doe@acme.com",
     "message": "Hi {{userName}}, ich bin an deinem Profil interessiert, lass uns darüber reden.",
     "send": "Senden"
+  },
+  "typewriter": [
+    "Code-Träume in Realität umsetzen",
+    "Die Zukunft, Zeile für Zeile, bauen",
+    "Digitale Symphonien erschaffen",
+    "Chaos in Eleganz verwandeln",
+    "Die Macht der Vorstellungskraft freisetzen",
+    "Mit Code experimentieren, um Magie zu erschaffen",
+    "Probleme mit Kreativität lösen",
+    "Kaffee in Code verwandeln",
+    "Unendliche Möglichkeiten erkunden",
+    "Erlebnisse gestalten, die zählen",
+    "Das Unmögliche möglich machen",
+    "Lösungen erschaffen, die wie Kunst wirken",
+    "Meinen Weg zur Innovation hacken",
+    "Die Zukunft in Code schreiben",
+    "Fehler als Wachstumsquelle umarmen",
+    "Code, zusammenarbeiten, innovieren",
+    "Brücken in der digitalen Welt bauen",
+    "Von Herausforderungen inspiriert, von Leidenschaft angetrieben",
+    "Außerhalb des Algorithmus denken",
+    "Die Welt ist meine IDE"
+  ],
+  "football": {
+    "referee": "Schiedsrichter"
   },
   "title": "👋 Hallo, bitte chatte mit mir, bevor du mich anstellst",
   "description": "Wähle ein Thema oder frage mich alles über {{userName}}'s Entwicklungsexpertise.\nDu kannst mir alles über meine Projekte, meine Fähigkeiten oder meine Erfahrungen oder auch über mein Leben fragen.",
@@ -62,6 +87,10 @@
     {
       "title": "Kontakt",
       "content": "Ich möchte {{userName}} kontaktieren via dem Kontaktformular."
+    },
+    {
+      "title": "Football",
+      "content": "Ich möchte über {{userName}}'s Football-Erfahrungen reden."
     }
   ],
   "placeholder": "Nachricht an {{assistantName}}",

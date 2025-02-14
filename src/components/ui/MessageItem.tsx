@@ -9,6 +9,8 @@ import { Weather } from '../ai-components/weather';
 import { PhotoGrid } from '../ai-components/PhotoGrid';
 import ContactOptions from './ContactOptions';
 import PromptCarousel from './PromptCarousel';
+import Football from '../ai-components/Football';
+
 export interface MessageItemProps {
     message: Message;
     isFirst: boolean;
@@ -42,11 +44,8 @@ const MessageItem: React.FC<MessageItemProps> = React.memo(({ message, isFirst, 
                             </div>
                         </>
                     )}
-                    {part.toolInvocation.toolName === 'getExperience' && (
+                    {part.toolInvocation.toolName === 'getExperience' && part.toolInvocation?.result?.experiences.length > 0 && (
                         <>
-                            <div className='mb-4'>
-                                <MarkdownInterpretor content={part.toolInvocation?.args?.introduction} />
-                            </div>
                             <div className='mb-4'>
                                 <Experiences experiences={part.toolInvocation?.args?.experiences} />
                             </div>
@@ -65,6 +64,11 @@ const MessageItem: React.FC<MessageItemProps> = React.memo(({ message, isFirst, 
                     {part.toolInvocation.toolName === 'getContact' && (
                         <div className='w-full my-2'>
                             <ContactOptions translations={translations} />
+                        </div>
+                    )}
+                    {part.toolInvocation.toolName === 'getFootball' && part.toolInvocation?.result?.matches.length > 0 && (
+                        <div className='w-full my-2'>
+                            <Football matches={part.toolInvocation?.result?.matches} translations={translations} />
                         </div>
                     )}
                 </>

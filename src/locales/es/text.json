@@ -14,9 +14,9 @@
     "label": "copiar",
     "success": "¡Código copiado al portapapeles!"
   },
-  "loading" : {
-    "loading" : "Cargando...",
-    "loadMore" : "Cargar más"
+  "loading": {
+    "loading": "Cargando...",
+    "loadMore": "Cargar más"
   },
   "contact": {
     "name": "John Doe",
@@ -24,6 +24,31 @@
     "message": "Hola {{userName}}, estoy interesado en tu perfil, hablemos de ello.",
     "send": "Enviar"
   },
+  "football": {
+    "referee": "Árbitro"
+  },
+  "typewriter": [
+    "Convertir sueños en código",
+    "Construir el futuro, una línea a la vez",
+    "Crear sinfonías digitales",
+    "Transformar el caos en elegancia",
+    "Liberar el poder de la imaginación",
+    "Jugar con el código para crear magia",
+    "Resolver problemas con creatividad",
+    "Transformar el café en código",
+    "Explorar posibilidades infinitas",
+    "Diseñar experiencias que importan",
+    "Hacer lo imposible posible",
+    "Crear soluciones que parecen arte",
+    "Hackear mi camino hacia la innovación",
+    "Escribir el futuro en código",
+    "Abrazar el fracaso como combustible para el crecimiento",
+    "Codificar, colaborar, innovar",
+    "Construir puentes en el mundo digital",
+    "Inspirado por los desafíos, impulsado por la pasión",
+    "Pensar fuera del algoritmo",
+    "El mundo es mi IDE"
+  ],
   "title": "👋 Hola, por favor, chatea conmigo antes de contratarme",
   "description": "Selecciona un tema o pregúntame cualquier cosa sobre la experiencia en desarrollo de {{userName}}.\nTambién puedes preguntarme sobre mis proyectos, mis habilidades o mis experiencias o incluso sobre mi vida.",
   "questions": [
@@ -62,6 +87,10 @@
     {
       "title": "Contacto",
       "content": "Quiero contactar con {{userName}} via el formulario de contacto."
+    },
+    {
+      "title": "Football",
+      "content": "¿Cuáles son los últimos 3 partidos de la selección de fútbol de {{userName}}?"
     }
   ],
   "placeholder": "Mensaje para {{assistantName}}",

@@ -18,11 +18,36 @@
     "loading" : "Loading...",
     "loadMore" : "Load More"
   },
+  "typewriter": [
+    "code dreams into reality",
+    "build the future, one line at a time",
+    "crafting digital symphonies",
+    "transform chaos into elegance",
+    "unlocking the power of imagination",
+    "tinkering with code to create magic",
+    "solve problems with creativity",
+    "turning coffee into code",
+    "exploring endless possibilities",
+    "designing experiences that matter",
+    "making the impossible possible",
+    "creating solutions that feel like art",
+    "hacking my way to innovation",
+    "writing the future in code",
+    "embracing failure as fuel for growth",
+    "code, collaborate, innovate",
+    "building bridges in the digital world",
+    "inspired by challenges, driven by passion",
+    "thinking outside the algorithm",
+    "the world is my IDE"
+  ],
   "contact": {
     "name": "John Doe",
     "email": "john.doe@acme.com",
     "message": "Hi {{userName}}, I'm interested in your profile, let's talk about it.",
     "send": "Send"
+  },
+  "football": {
+    "referee": "Referee"
   },
   "title": "👋 Hi, please chat with me before hiring me",
   "description": "Hi ! I'm {{userName}}. A fullstack software engineer and passionnate project builder.\nFeel free to ask me anything about my projects, my skills or my experiences or even about my life.",
@@ -62,7 +87,11 @@
     {
       "title": "Contact",
       "content": "I want to contact {{userName}} via the contact form."
-    } 
+    },
+    {
+      "title": "Football",
+      "content": "What is the last 3 matches of Roland's Football team ?"
+    }
   ],
   "placeholder": "Message {{assistantName}}",
   "footer": "Made with love and coffee",

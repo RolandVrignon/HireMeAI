@@ -14,9 +14,9 @@
     "label": "kopiëren",
     "success": "Code naar klembord gekopieerd!"
   },
-  "loading" : {
-    "loading" : "Laden...",
-    "loadMore" : "Meer laden"
+  "loading": {
+    "loading": "Laden...",
+    "loadMore": "Meer laden"
   },
   "contact": {
     "name": "John Doe",
@@ -24,6 +24,31 @@
     "message": "Hallo {{userName}}, ik ben geïnteresseerd in je profiel, laten we het hebben.",
     "send": "Bericht sturen"
   },
+  "football": {
+    "referee": "Scheidsrechter"
+  },
+  "typewriter": [
+    "Dromen omzetten in code",
+    "De toekomst bouwen, één regel tegelijk",
+    "Digitale symfonieën creëren",
+    "Chaos omzetten in elegantie",
+    "De kracht van verbeelding ontsluiten",
+    "Met code experimenteren om magie te creëren",
+    "Problemen oplossen met creativiteit",
+    "Koffie omzetten in code",
+    "Eindeloze mogelijkheden verkennen",
+    "Ervaringen ontwerpen die er toe doen",
+    "Het onmogelijke mogelijk maken",
+    "Oplossingen creëren die als kunst aanvoelen",
+    "Mijn weg naar innovatie hacken",
+    "De toekomst in code schrijven",
+    "Falen omarmen als brandstof voor groei",
+    "Codeer, werk samen, innoveer",
+    "Bruggen bouwen in de digitale wereld",
+    "Geïnspireerd door uitdagingen, gedreven door passie",
+    "Buiten het algoritme denken",
+    "De wereld is mijn IDE"
+  ],
   "title": "👋 Hallo, chat eerst met mij voordat je me inhuurt",
   "description": "Kies een onderwerp of vraag me alles over de ervaring van {{userName}} als ontwikkelaar.\nJe kunt me ook alles over mijn projecten, mijn vaardigheden of mijn ervaringen of zelfs over mijn leven vragen.",
   "questions": [
@@ -62,6 +87,10 @@
     {
       "title": "Contact",
       "content": "Ik wil {{userName}} contacteren via het contactformulier."
+    },
+    {
+      "title": "Football",
+      "content": "Wat zijn de 3 laatste wedstrijden van de favoriete voetbalploeg van {{userName}}?"
     }
   ],
   "placeholder": "Bericht aan {{assistantName}}",
