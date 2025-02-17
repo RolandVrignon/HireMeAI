@@ -53,12 +53,8 @@
   "description": "Hello ! Moi c'est {{userName}}. Développeur fullstack passionné par la création de projets.\nN'hésite pas à me poser n'importe quelle question sur mes projets, mes compétences ou mes expériences ou même sur ma vie.",
   "questions": [
     {
-      "title": "Informations",
-      "content": "Je veux les informations personnelles de {{userName}}."
-    },
-    {
       "title": "Météo",
-      "content": "Quel est le temps dans ma ville ?"
+      "content": "Quel est le temps ?"
     },
     {
       "title": "CV / Résumé",

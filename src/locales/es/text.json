@@ -53,12 +53,8 @@
   "description": "Selecciona un tema o pregúntame cualquier cosa sobre la experiencia en desarrollo de {{userName}}.\nTambién puedes preguntarme sobre mis proyectos, mis habilidades o mis experiencias o incluso sobre mi vida.",
   "questions": [
     {
-      "title": "Información",
-      "content": "Quiero la información personal de {{userName}}."
-    },
-    {
       "title": "Clima",
-      "content": "¿Cuál es el clima en mi ciudad?"
+      "content": "¿Cuál es el clima?"
     },
     {
       "title": "Resumen",

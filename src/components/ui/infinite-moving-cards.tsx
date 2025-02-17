@@ -88,7 +88,7 @@ export const InfiniteMovingCards = ({
             key={`${item.title}-${idx}`}
           >
             <div
-              className={cn('group rounded-full bg-gray-700/5 text-black dark:text-white dark:bg-white/5 dark:hover:bg-white/10 dark:backdrop-blur-md text-base transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5')}
+              className={cn('group rounded-full bg-gray-700/5 text-black dark:text-white dark:bg-white/5 dark:hover:bg-white/10 dark:backdrop-blur-md text-base transition-all ease-in font-bold hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5')}
               onClick={() => handleItemClick(item.content)}
             >
               <div className="flex items-center justify-center px-2 py-1 transition ease-out">

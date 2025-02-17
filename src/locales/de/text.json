@@ -53,12 +53,8 @@
   "description": "Wähle ein Thema oder frage mich alles über {{userName}}'s Entwicklungsexpertise.\nDu kannst mir alles über meine Projekte, meine Fähigkeiten oder meine Erfahrungen oder auch über mein Leben fragen.",
   "questions": [
     {
-      "title": "Informationen",
-      "content": "Ich möchte die persönlichen Informationen von {{userName}}."
-    },
-    {
       "title": "Wetter",
-      "content": "Wie ist das Wetter in meiner Stadt?"
+      "content": "Wie ist das Wetter ?"
     },
     {
       "title": "Lebenslauf",

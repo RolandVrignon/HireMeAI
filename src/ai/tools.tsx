@@ -13,14 +13,14 @@ async function getImageDimensions(filepath: string) {
 }
 
 const CompetitionEnum = z.enum([
-    'QCAF', 'ASL', 'QAFC', 'AAL', 'APL', 'ABL', 'BJPP', 'BJL', 
-    'BSB', 'BSA', 'CPD', 'CSL', 'CLP', 'PRVA', 'DELP', 'DSU', 
+    'QCAF', 'ASL', 'QAFC', 'AAL', 'APL', 'ABL', 'BJPP', 'BJL',
+    'BSB', 'BSA', 'CPD', 'CSL', 'CLP', 'PRVA', 'DELP', 'DSU',
     'ELC', 'PL', 'FLC', 'EL1', 'ENL', 'EL2', 'FAC', 'COM',
-    'VEI', 'FL2', 'FPL', 'FL1', 'REG', 'GSC', 'BL3', 'BLREL', 
-    'BL1', 'BL2', 'DFB', 'GSL', 'HNB', 'ILH', 'SA', 'SB', 
-    'CIT', 'ISC', 'IPL', 'JJL', 'LMX', 'KNV', 'DED', 'DJL', 
-    'TIP', 'QOFC', 'PPD', 'PPL', 'RL1', 'RFPL', 'CLI', 
-    'CA', 'QCBL', 'SD', 'CDR', 'PD', 'ALL', 'SSL', 'TSL', 
+    'VEI', 'FL2', 'FPL', 'FL1', 'REG', 'GSC', 'BL3', 'BLREL',
+    'BL1', 'BL2', 'DFB', 'GSL', 'HNB', 'ILH', 'SA', 'SB',
+    'CIT', 'ISC', 'IPL', 'JJL', 'LMX', 'KNV', 'DED', 'DJL',
+    'TIP', 'QOFC', 'PPD', 'PPL', 'RL1', 'RFPL', 'CLI',
+    'CA', 'QCBL', 'SD', 'CDR', 'PD', 'ALL', 'SSL', 'TSL',
     'UPL', 'MLS', 'SUCU', 'OLY', 'WC', 'QCCF'
 ]);
 
@@ -104,187 +104,227 @@ const competitionDetails: Record<string, CompetitionInfo> = {
 };
 
 let footballCompetitionDescription = 'The competition where the team plays mostly. Available codes:\n' +
-'- International & World: WC (FIFA World Cup), OLY (Summer Olympics)\n' +
-'- England: PL (Premier League), ELC (Championship), EL1 (League One), EL2 (League Two), ENL (National League), FAC (FA Cup), FLC (League Cup), COM (Community Shield)\n' +
-'- France: FL1 (Ligue 1), FL2 (Ligue 2), FPL (Playoffs)\n' +
-'- Germany: BL1 (Bundesliga), BL2 (2. Bundesliga), BL3 (3. Bundesliga), DFB (DFB-Pokal), GSC (Super Cup), REG (Regionalliga), BLREL (Relegation)\n' +
-'- Italy: SA (Serie A), SB (Serie B), ISC (Serie C), CIT (Coppa Italia), IPL (Playoffs)\n' +
-'- Spain: PD (Primera Division), SD (Segunda División), CDR (Copa del Rey)\n' +
-'- Other European Leagues: PPL (Primeira Liga Portugal), DED (Eredivisie Netherlands), BJL (Jupiler Pro League Belgium), ABL (Bundesliga Austria), DSU (Superliga Denmark), SSL (Super League Switzerland), UPL (Premier League Ukraine), RFPL (Premier League Russia)\n' +
-'- Americas: BSA (Brasileirão Série A), BSB (Brasileirão Série B), MLS (Major League Soccer), LMX (Liga MX), CLI (Copa Libertadores), CA (Copa America)\n' +
-'- Asian & Others: CSL (Chinese Super League), JJL (J.League Japan), AAL (A-League Australia)\n' +
-'- World Cup Qualifiers: QCAF (Africa), QAFC (Asia), QUFA (Europe), QOFC (Oceania), QCBL (South America), QCCF (North America)'
+    '- International & World: WC (FIFA World Cup), OLY (Summer Olympics)\n' +
+    '- England: PL (Premier League), ELC (Championship), EL1 (League One), EL2 (League Two), ENL (National League), FAC (FA Cup), FLC (League Cup), COM (Community Shield)\n' +
+    '- France: FL1 (Ligue 1), FL2 (Ligue 2), FPL (Playoffs)\n' +
+    '- Germany: BL1 (Bundesliga), BL2 (2. Bundesliga), BL3 (3. Bundesliga), DFB (DFB-Pokal), GSC (Super Cup), REG (Regionalliga), BLREL (Relegation)\n' +
+    '- Italy: SA (Serie A), SB (Serie B), ISC (Serie C), CIT (Coppa Italia), IPL (Playoffs)\n' +
+    '- Spain: PD (Primera Division), SD (Segunda División), CDR (Copa del Rey)\n' +
+    '- Other European Leagues: PPL (Primeira Liga Portugal), DED (Eredivisie Netherlands), BJL (Jupiler Pro League Belgium), ABL (Bundesliga Austria), DSU (Superliga Denmark), SSL (Super League Switzerland), UPL (Premier League Ukraine), RFPL (Premier League Russia)\n' +
+    '- Americas: BSA (Brasileirão Série A), BSB (Brasileirão Série B), MLS (Major League Soccer), LMX (Liga MX), CLI (Copa Libertadores), CA (Copa America)\n' +
+    '- Asian & Others: CSL (Chinese Super League), JJL (J.League Japan), AAL (A-League Australia)\n' +
+    '- World Cup Qualifiers: QCAF (Africa), QAFC (Asia), QUFA (Europe), QOFC (Oceania), QCBL (South America), QCCF (North America)'
 
 const username = process.env.NEXT_PUBLIC_USER_NAME;
 
-const ResumeTool = createTool({
-    description: `Render ${username}'s resume.`,
-    parameters: z.object({}),
-    execute: async () => {
-        const resume = `You should now provide a really short and concise sentence in user's last message language to the user to introduce ${username}'s resume as this message already provides the resume to the user. Not more than 20 words !!!!`;
-        return resume;
-    }
-});
-
-const ExperienceTool = createTool({
-    description: `This tool allows the chatbot to render ${username}'s professional experience. Use this tool sparingly and strategically to enhance responses when relevant. It's beneficial to showcase the experience to provide concrete examples of skills and achievements, but avoid overuse. The tool should complement natural conversation rather than dominate it.`,
-    parameters: z.object({
-        experiences: z.array(z.object({
-            company: z.string().describe("Company or organization name"),
-            position: z.string().describe("Job title or position"),
-            startDate: z.string().describe("Start date of employment"),
-            endDate: z.string().describe("End date of employment"),
-            website: z.string().optional().describe("Website of the company")
-        }))
-    }),
-    execute: async ({ experiences }) => {
-        const result = {
-            content: `This message has triggered the rendering of ${username}'s professional experience. You should now provide a really short and concise sentence in user's last message language to the user to introduce ${username}'s professional experience as this message already provides thes experiences to the user. Not more than 20 words !!!!`,
-            experiences: experiences
+const ResumeTool = {
+    name: 'getResume',
+    description: `Render ${username}'s resume. Use this tool when users want to see or learn about the resume.`,
+    tool: createTool({
+        description: `Render ${username}'s resume.`,
+        parameters: z.object({}),
+        execute: async () => {
+            const resume = `You should now provide a really short and concise sentence in user's last message language to the user to introduce ${username}'s resume as this message already provides the resume to the user. Not more than 20 words !!!!`;
+            return resume;
         }
-        return result;
-    }
-});
+    })
+};
 
-const WeatherTool = createTool({
-    description: 'Get the current weather at a location',
-    parameters: z.object({
-        latitude: z.number(),
-        longitude: z.number(),
-    }),
-    execute: async ({ latitude, longitude }) => {
-        const response = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto`,
-        );
-
-        const weatherData = await response.json();
-        return weatherData;
-    },
-});
-
-const ContactTool = createTool({
-    description: "Display the contact form.",
-    parameters: z.object({}),
-    execute: async () => {
-        const contact = `You should now provide a really short and concise sentence in user's last message language to the user to introduce ${username}'s Contact form as this message already contains the contact form. Not more than 20 words !!!!`;
-        return contact;
-    },
-});
-
-const PhotosTool = createTool({
-    description: `This tool allows the chatbot to display ${username}'s photo gallery. Use this tool to show relevant photos when discussing projects, experiences, or personal achievements.`,
-    parameters: z.object({}),
-    execute: async () => {
-        const photosDir = path.join(process.cwd(), 'public/photos');
-        const files = fs.readdirSync(photosDir);
-
-        const shuffleArray = (array: string[]) => {
-            let seed = Math.floor(Date.now() / (1000 * 60 * 60));
-
-            const seededRandom = () => {
-                const newSeed = (seed * 9301 + 49297) % 233280;
-                seed = newSeed;
-                return newSeed / 233280;
-            };
-
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(seededRandom() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+const ExperienceTool = {
+    name: 'getExperience',
+    description: `Display ${username}'s professional experience. Use this tool when discussing career history, work achievements, or professional background.`,
+    tool: createTool({
+        description: `This tool allows the chatbot to render ${username}'s professional experience. Use this tool sparingly and strategically to enhance responses when relevant. It's beneficial to showcase the experience to provide concrete examples of skills and achievements, but avoid overuse. The tool should complement natural conversation rather than dominate it.`,
+        parameters: z.object({
+            experiences: z.array(z.object({
+                company: z.string().describe("Company or organization name"),
+                position: z.string().describe("Job title or position"),
+                startDate: z.string().describe("Start date of employment"),
+                endDate: z.string().describe("End date of employment"),
+                website: z.string().optional().describe("Website of the company")
+            }))
+        }),
+        execute: async ({ experiences }) => {
+            const result = {
+                content: `This message has triggered the rendering of ${username}'s professional experience. You should now provide a really short and concise sentence in user's last message language to the user to introduce ${username}'s professional experience as this message already provides thes experiences to the user. Not more than 20 words !!!!`,
+                experiences: experiences
             }
-            return array;
-        };
+            return result;
+        }
+    })
+};
 
-        const shuffledFiles = shuffleArray(files.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file)));
+const WeatherTool = {
+    name: 'getWeather',
+    description: 'Get the current weather at a location. If you don\'t have the location, you should ask the user the city he wants to know the weather of.',
+    tool: createTool({
+        description: 'Get the current weather at a location.',
+        parameters: z.object({
+            latitude: z.number(),
+            longitude: z.number(),
+        }),
+        execute: async ({ latitude, longitude }) => {
+            const response = await fetch(
+                `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m&hourly=temperature_2m&daily=sunrise,sunset&timezone=auto`,
+            );
 
-        const photos = await Promise.all(shuffledFiles
-            .map(async (file, index) => {
-                const dimensions = await getImageDimensions(`${photosDir}/${file}`);
-                return {
-                    url: `/photos/${file}`,
-                    alt: `Photo ${index + 1}`,
-                    width: dimensions.width,
-                    height: dimensions.height
+            const weatherData = await response.json();
+            return weatherData;
+        },
+    }),
+}
+
+const DisplayLocationTool = {
+    name: 'getLocation',
+    description: 'If the user ask for the weather but doesn\'t provide a location, this tool should display a list of 4 famous random cities in the world.',
+    tool: createTool({
+        description: 'Display a list of 4 famous random cities in the world. The cities should be in the user\'s language.',
+        parameters: z.object({
+            cities: z.array(z.string()).describe('Array of 4 famous random cities in the world'),
+        }),
+        execute: async ({ cities }) => {
+            const result = {
+                content: 'Tell the user that he has provide a city he wants to know the weather of or click on one of the following cities. Don\'t mention the cities in your response.',
+                cities: cities
+            }
+            return result;
+        }
+    })
+}
+
+const ContactTool = {
+    name: 'getContact',
+    description: `Display the contact form to get in touch with ${username}. Use this when users want to reach out or communicate.`,
+    tool: createTool({
+        description: "Display the contact form.",
+        parameters: z.object({}),
+        execute: async () => {
+            const contact = `You should now provide a really short and concise sentence in user's last message language to the user to introduce ${username}'s Contact form as this message already contains the contact form. Not more than 20 words !!!!`;
+            return contact;
+        },
+    })
+};
+
+const PhotosTool = {
+    name: 'getPhotos',
+    description: `Display ${username}'s photo gallery.`,
+    tool: createTool({
+        description: `This tool allows the chatbot to display ${username}'s photo gallery.`,
+        parameters: z.object({}),
+        execute: async () => {
+            const photosDir = path.join(process.cwd(), 'public/photos');
+            const files = fs.readdirSync(photosDir);
+
+            const shuffleArray = (array: string[]) => {
+                let seed = Math.floor(Date.now() / (1000 * 60 * 60));
+
+                const seededRandom = () => {
+                    const newSeed = (seed * 9301 + 49297) % 233280;
+                    seed = newSeed;
+                    return newSeed / 233280;
                 };
-            }));
 
-        const result = {
-            content: `You should now provide a really short and concise sentence in user's last message language to the user to introduce ${username}'s Photography hobby as this message already contains the photos. Not more than 20 words !!!!`,
-            photos: photos
-        }
-
-        return result;
-    }
-});
-
-const FootballTool = createTool({
-    description: 'Get the history of games of a football team',
-    parameters: z.object({
-        team: z.array(z.string()).describe('Array of all possibles team name variations (e.g. ["PSG", "Paris Saint-Germain", "Paris SG", ...] for PSG, adapt to the users team name)'),
-        competition: CompetitionEnum.describe(footballCompetitionDescription),
-    }),
-    execute: async ({ team, competition }) => {
-        const API_KEY = process.env.FOOTBALL_DATA_API_KEY;
-        const BASE_URL = 'https://api.football-data.org/v4';
-
-        let competitionId = competitionDetails[competition].id;
-
-        const teamsResponse = await fetch(
-            `${BASE_URL}/competitions/${competitionId}/teams`,
-            {
-                headers: {
-                    'X-Auth-Token': API_KEY as string,
-                },
-            }
-        );
-
-        const teamsData = await teamsResponse.json();
-
-        // Find matching team from the list
-        const matchingTeam = teamsData.teams?.find((t: any) => 
-            team.some(searchName => 
-                t.name.toLowerCase().includes(searchName.toLowerCase()) ||
-                t.shortName?.toLowerCase().includes(searchName.toLowerCase()) ||
-                t.tla?.toLowerCase() === searchName.toLowerCase()
-            )
-        );
-
-        if (!matchingTeam) {
-            return { 
-                content: `You should now provide a really short and concise sentence in user's last message language to the user to prevent him that we didn't find the team he is talking about in our database. Not more than 20 words !!!!`,
-                matches: []
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(seededRandom() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
             };
-        }
 
-        console.log('Found matching team:', matchingTeam);
+            const shuffledFiles = shuffleArray(files.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file)));
 
+            const photos = await Promise.all(shuffledFiles
+                .map(async (file, index) => {
+                    const dimensions = await getImageDimensions(`${photosDir}/${file}`);
+                    return {
+                        url: `/photos/${file}`,
+                        alt: `Photo ${index + 1}`,
+                        width: dimensions.width,
+                        height: dimensions.height
+                    };
+                }));
 
-        const teamId = matchingTeam.id;
-
-        // Get the matches
-        const matchesResponse = await fetch(
-            `${BASE_URL}/teams/${teamId}/matches?status=FINISHED&limit=3`,
-            {
-                headers: {
-                    'X-Auth-Token': API_KEY as string,
-                },
+            const result = {
+                content: `You should now provide a really short and concise sentence in user's last message language to the user to introduce ${username}'s Photography hobby as this message already contains the photos. Not more than 20 words !!!!`,
+                photos: photos
             }
-        );
 
-        const matchesData = await matchesResponse.json();
+            return result;
+        }
+    })
+};
 
-        const result = {
-            content: `You should now provide a really short and concise sentence in user's last message language to the user to introduce the result of the matches. Not more than 20 words !!!! Example: "Here are the last 3 matches of ${team}. Don't mention the games just say that you found the last 3 matches of the team.`,
-            matches: matchesData.matches
-        }   
+const FootballTool = {
+    name: 'getFootball',
+    description: 'Get the match history for football teams. Use this when discussing sports results or team performance. If you don\'t have the team name, you should ask the user the team name.',
+    tool: createTool({
+        description: 'Get the history of games of a football team',
+        parameters: z.object({
+            team: z.array(z.string()).describe('Array of all possibles team name variations (e.g. ["PSG", "Paris Saint-Germain", "Paris SG", ...] for PSG, adapt to the users team name)'),
+            competition: CompetitionEnum.describe(footballCompetitionDescription),
+        }),
+        execute: async ({ team, competition }) => {
+            const API_KEY = process.env.FOOTBALL_DATA_API_KEY;
+            const BASE_URL = 'https://api.football-data.org/v4';
 
-        return result;
-    },
-});
+            let competitionId = competitionDetails[competition].id;
+
+            const teamsResponse = await fetch(
+                `${BASE_URL}/competitions/${competitionId}/teams`,
+                {
+                    headers: {
+                        'X-Auth-Token': API_KEY as string,
+                    },
+                }
+            );
+
+            const teamsData = await teamsResponse.json();
+
+            // Find matching team from the list
+            const matchingTeam = teamsData.teams?.find((t: any) =>
+                team.some(searchName =>
+                    t.name.toLowerCase().includes(searchName.toLowerCase()) ||
+                    t.shortName?.toLowerCase().includes(searchName.toLowerCase()) ||
+                    t.tla?.toLowerCase() === searchName.toLowerCase()
+                )
+            );
+
+            if (!matchingTeam) {
+                return {
+                    content: `You should now provide a really short and concise sentence in user's last message language to the user to prevent him that we didn't find the team he is talking about in our database. Not more than 20 words !!!!`,
+                    matches: []
+                };
+            }
+
+            const teamId = matchingTeam.id;
+
+            // Get the matches
+            const matchesResponse = await fetch(
+                `${BASE_URL}/teams/${teamId}/matches?status=FINISHED&limit=3`,
+                {
+                    headers: {
+                        'X-Auth-Token': API_KEY as string,
+                    },
+                }
+            );
+
+            const matchesData = await matchesResponse.json();
+
+            const result = {
+                content: `Games data are already provided to the user. You have now to provide a really short and concise sentence to introduce the result and that he can find the result just below. Do not mention the games again in your response. Not more than 20 words !!!! Example of sentence in 11 words, not more : "You will find here below the last 3 games of ${team[0]}." Translate the sentence in user's last message language.`,
+                matches: matchesData.matches
+            }
+
+            return result;
+        },
+    })
+};
 
 export const tools = {
     getResume: ResumeTool,
     getExperience: ExperienceTool,
     getWeather: WeatherTool,
+    getLocation: DisplayLocationTool,
     getPhotos: PhotosTool,
     getContact: ContactTool,
     getFootball: FootballTool,

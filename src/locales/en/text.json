@@ -53,12 +53,8 @@
   "description": "Hi ! I'm {{userName}}. A fullstack software engineer and passionnate project builder.\nFeel free to ask me anything about my projects, my skills or my experiences or even about my life.",
   "questions": [
     {
-      "title": "Informations",
-      "content": "I want {{userName}}'s personal infos."
-    },
-    {
       "title": "Meteo",
-      "content": "What is the weather in my city ?"
+      "content": "What is the weather ?"
     },
     {
       "title": "Resume",

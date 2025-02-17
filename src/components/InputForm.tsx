@@ -59,7 +59,7 @@ const InputForm = forwardRef<InputFormRef, InputFormProps>(({
 
     return (
         <div className="group max-h-[30vh] relative flex w-full items-end">
-            <div className="flex w-full flex-col transition-colors contain-inline-size cursor-text rounded-3xl px-2 py-1 bg-white/5 dark:bg-black/5 overflow-hidden backdrop-blur-2xl border border-[#2457ff] dark:border-yellow-500 border-1">
+            <div className={`flex w-full flex-col transition-colors contain-inline-size cursor-text rounded-3xl px-2 py-1 bg-white/5 dark:bg-black/5 overflow-hidden backdrop-blur-2xl border ${isLoading || !isFinished ? "opacity-50 border-gray-300 dark:border-zinc-800" : "border-[#2457ff] dark:border-yellow-500  border-1"} `}>
                 <div className="absolute inset-0 bg-[url('/textures/noise.svg')] opacity-10 pointer-events-none" />            
                 <form ref={formRef} onSubmit={submitMessage} className="flex min-h-[44px] items-end px-2">
                     <div className="max-w-full flex-1">
@@ -84,7 +84,7 @@ const InputForm = forwardRef<InputFormRef, InputFormProps>(({
                         </Button>
                     </div>
                 </form>
-                <Link href="https://github.com/RolandVrignon" target="_blank" className="font-doto text-xs w-full text-gray-400 text-center">
+                <Link href="https://github.com/RolandVrignon" target="_blank" className="font-doto font-bold text-xs w-full text-gray-400 text-center">
                     {translations.footer}
                 </Link>
             </div>

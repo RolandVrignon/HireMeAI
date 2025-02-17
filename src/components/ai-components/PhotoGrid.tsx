@@ -26,6 +26,7 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [loadingPhotos, setLoadingPhotos] = useState<number[]>([]);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const photosPerPage = 9;
 
   useEffect(() => {
@@ -35,6 +36,13 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
     }
   }, [photos]);
   
+  useEffect(() => {
+    if (displayedPhotos.length > 0 && loadedImages.size === displayedPhotos.length) {
+      const event = new CustomEvent('imagesLoaded');
+      window.dispatchEvent(event);
+    }
+  }, [loadedImages, displayedPhotos]);
+
   const loadMore = async () => {
     setIsLoadingMore(true);
     const nextPage = currentPage + 1;
@@ -51,6 +59,10 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
     setCurrentPage(nextPage);
     setIsLoadingMore(false);
     setLoadingPhotos([]);
+  };
+
+  const handleImageLoad = (url: string) => {
+    setLoadedImages(prev => new Set([...prev, url]));
   };
 
   if (isLoading) {
@@ -74,9 +86,8 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
     }
 
     return (
-      <Tilt rotationFactor={14} isRevese={true}>
+      <Tilt key={index} rotationFactor={14} isRevese={true}>
         <div 
-          key={index}
           className="relative aspect-square overflow-hidden rounded-xl cursor-pointer"
           onClick={() => setSelectedPhoto(photo)}
         >
@@ -85,9 +96,10 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
             alt={photo.alt}
             fill
             className="object-cover transition-transform duration-300"
-              sizes="(max-width: 768px) 33vw, 33vw"
-            />
-          </div>
+            sizes="(max-width: 768px) 33vw, 33vw"
+            onLoad={() => handleImageLoad(photo.url)}
+          />
+        </div>
       </Tilt>
     );
   };

@@ -124,7 +124,7 @@ export const PdfThumbnail = () => {
   return (
     <div
       onClick={handleOpenPdf}
-      className={!isPdfAvailable ? "hidden" : `mask cursor-pointer border-4 border-gray-300 rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden`}
+      className={!isPdfAvailable ? "hidden" : `mask cursor-pointer border-4 border-gray-300 dark:border-zinc-800 rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden`}
     >
       <div className="h-[150px] w-full overflow-hidden">
         {thumbnailSrc ? (
@@ -137,11 +137,11 @@ export const PdfThumbnail = () => {
           <canvas ref={canvasRef} className="hidden" />
         )}
       </div>
-      <div className="p-2 bg-gray-200 gap-2 flex flex-col">
-        <div className="text-sm font-semibold text-gray-700">
+      <div className="p-2 bg-gray-200 dark:bg-zinc-800 gap-2 flex flex-col">
+        <div className="text-sm font-doto font-semibold text-gray-700 dark:text-white">
           {pdfUrl ? pdfUrl.split('/').pop() : ``}
         </div>
-        <div className="text-xs text-gray-500">
+        <div className="text-xs text-gray-500 dark:text-gray-400">
           {fileSize ? formatFileSize(fileSize) : "Unknown size"} • {pageCount || "-"} pages
         </div>
       </div>

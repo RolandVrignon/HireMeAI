@@ -3,6 +3,7 @@
 import cx from 'classnames';
 import { format, isWithinInterval } from 'date-fns';
 import { useEffect, useState } from 'react';
+import Clock from 'react-clock';
 
 interface WeatherAtLocation {
   latitude: number;
@@ -220,6 +221,21 @@ export function Weather({
 
   const [isMobile, setIsMobile] = useState(false);
 
+  const [value, setValue] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => setValue(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const localTime = new Date(value.getTime() + weatherAtLocation.utc_offset_seconds * 1000);
+  const formattedTime = localTime.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    timeZone: 'UTC'
+  });
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -249,63 +265,68 @@ export function Weather({
   );
 
   return (
-    <div
-      className={cx(
-        'flex flex-col gap-4 rounded-xl p-4 skeleton-bg max-w-[500px]',
-        {
-          'bg-blue-400': isDay,
-        },
-        {
-          'bg-indigo-900': !isDay,
-        },
-      )}
-    >
-      <div className="flex flex-row justify-between items-center">
-        <div className="flex flex-row gap-2 items-center">
-          <div
-            className={cx(
-              'size-10 rounded-full skeleton-div',
-              {
-                'bg-yellow-300': isDay,
-              },
-              {
-                'bg-indigo-100': !isDay,
-              },
-            )}
-          />
-          <div className="text-4xl font-medium text-blue-50">
-            {n(weatherAtLocation.current.temperature_2m)}
-            {weatherAtLocation.current_units.temperature_2m}
-          </div>
-        </div>
-
-        <div className="text-blue-50">{`H:${n(currentHigh)}° L:${n(currentLow)}°`}</div>
-      </div>
-
-      <div className="flex flex-row justify-between">
-        {displayTimes.map((time, index) => (
-          <div key={time} className="flex flex-col items-center gap-1">
-            <div className="text-blue-100 text-xs">
-              {format(new Date(time), 'ha')}
-            </div>
+      <div
+        className={cx(
+          'flex flex-col gap-4 rounded-xl p-4 skeleton-bg w-full',
+          {
+            'bg-blue-400': isDay,
+          },
+          {
+            'bg-indigo-900': !isDay,
+          },
+        )}
+      >
+        <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-row gap-2 items-center">
             <div
               className={cx(
-                'size-6 rounded-full skeleton-div',
+                'size-10 rounded-full skeleton-div',
                 {
                   'bg-yellow-300': isDay,
                 },
                 {
-                  'bg-indigo-200': !isDay,
+                  'bg-indigo-100': !isDay,
                 },
               )}
             />
-            <div className="text-blue-50 text-sm">
-              {n(displayTemperatures[index])}
-              {weatherAtLocation.hourly_units.temperature_2m}
+            <div className="text-4xl font-medium text-blue-50">
+              {n(weatherAtLocation.current.temperature_2m)}
+              {weatherAtLocation.current_units.temperature_2m}
             </div>
           </div>
-        ))}
+          
+          <div className="text-blue-50">
+            <div className="flex gap-4">
+              <span>{formattedTime}</span>
+              <span>{`H:${n(currentHigh)}° L:${n(currentLow)}°`}</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-row justify-between">
+          {displayTimes.map((time, index) => (
+            <div key={time} className="flex flex-col items-center gap-1">
+              <div className="text-blue-100 text-xs">
+                {format(new Date(time), 'ha')}
+              </div>
+              <div
+                className={cx(
+                  'size-6 rounded-full skeleton-div',
+                  {
+                    'bg-yellow-300': isDay,
+                  },
+                  {
+                    'bg-indigo-200': !isDay,
+                  },
+                )}
+              />
+              <div className="text-blue-50 text-sm">
+                {n(displayTemperatures[index])}
+                {weatherAtLocation.hourly_units.temperature_2m}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
   );
 }

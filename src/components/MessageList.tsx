@@ -11,11 +11,11 @@ export interface MessageListProps {
     handleSubmitPrePrompt: (content: string) => void;
     translations: any;
     isFinished: boolean;
+    containerRef: React.RefObject<HTMLDivElement>;
+    messageRefs: React.RefObject<{ [key: string]: HTMLDivElement | null }>;
 }
 
-const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoading, handleSubmitPrePrompt, translations, isFinished }) => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const messageRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});  // Pour stocker plusieurs refs
+const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoading, handleSubmitPrePrompt, translations, isFinished, containerRef, messageRefs }) => {
     const lastMessageRef = useRef<HTMLDivElement>(null);
     const endScrollRef = useRef<HTMLDivElement>(null);
     const endRef = useRef<HTMLDivElement>(null);
@@ -24,37 +24,12 @@ const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoadin
     const [autoScrollEnabled, setAutoScrollEnabled] = useState<boolean>(true);
     const lastScrollTop = useRef<number>(0);
     const { theme } = useTheme();
-    const scrollToLastUserMessage = useCallback(() => {
-        const container = containerRef.current;
-
-        const lastUserMessageId = [...messages]
-            .reverse()
-            .find(msg => msg.role === 'user')?.id;
-
-        if (container && lastUserMessageId && messageRefs.current[lastUserMessageId]) {
-            const messageElement = messageRefs.current[lastUserMessageId];
-            const messageTop = messageElement.offsetTop;
-
-            container.scrollTo({
-                top: messageTop,
-                behavior: 'smooth'
-            });
-        }
-    }, [messages]);
-
 
     useEffect(() => {
         if (showArrow) {
             setShowArrow(false);
         }
     }, [!isLoading]);
-
-
-    useEffect(() => {
-        if (messages.length > 0 && messages[messages.length - 1].role === 'user') {
-            scrollToLastUserMessage();
-        }
-    }, [messages, scrollToLastUserMessage]);
 
     useEffect(() => {
         const viewport = containerRef.current;
@@ -104,7 +79,7 @@ const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoadin
 
     const scrollToBottom = () => {
         const container = containerRef.current;
-        const endElement = endRef.current;
+        const endElement = endScrollRef.current;
 
         if (container && endElement) {
             const containerHeight = container.clientHeight;
@@ -151,10 +126,11 @@ const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoadin
                                     <div
                                         key={message.id || index}
                                         ref={(el) => {
-                                            if (message.id) {
+                                            if (message.id && messageRefs.current) {
                                                 messageRefs.current[message.id] = el;
                                             }
                                         }}
+                                        className="message-item"
                                     >
                                         <MessageItem
                                             message={message}
@@ -172,7 +148,7 @@ const MessageList: React.FC<MessageListProps> = React.memo(({ messages, isLoadin
 
                         <div ref={endScrollRef} className="h-[1px] w-full" />
                         {messages.length > 0 && messages[messages.length - 1].role !== 'user' && (
-                            <div className="flex-1 min-h-[100vh] p-[5%] flex justify-start items-end font-doto text-gray-700 dark:text-white">
+                            <div className="flex-1 min-h-[80vh] p-[5%] flex justify-start items-end font-doto text-gray-700 dark:text-white">
                                 <TypewriterTitle translations={translations}/>
                             </div>
                         )}

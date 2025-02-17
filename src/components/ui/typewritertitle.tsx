@@ -9,11 +9,32 @@ interface TypewriterTitleProps {
 
 const TypewriterTitle: React.FC<TypewriterTitleProps> = ({ name = process.env.NEXT_PUBLIC_ASSISTANT_NAME, className, translations }) => {
     
-    const text = translations.typewriter;
+    const text = [
+        "code dreams into reality",
+        "build the future, one line at a time",
+        "crafting digital symphonies",
+        "transform chaos into elegance",
+        "unlocking the power of imagination",
+        "tinkering with code to create magic",
+        "solve problems with creativity",
+        "turning coffee into code",
+        "exploring endless possibilities",
+        "designing experiences that matter",
+        "making the impossible possible",
+        "creating solutions that feel like art",
+        "hacking my way to innovation",
+        "writing the future in code",
+        "embracing failure as fuel for growth",
+        "code, collaborate, innovate",
+        "building bridges in the digital world",
+        "inspired by challenges, driven by passion",
+        "thinking outside the algorithm",
+        "the world is my IDE"
+    ];
     
     return (
         <div className="flex flex-col font-doto">
-            <div className="flex dark:text-white text-gray-700">
+            <div className="flex dark:text-white text-gray-700 font-bold">
                 {name}
                 <span className="ml-1">© {new Date().getFullYear()}</span>
             </div>
