@@ -87,6 +87,10 @@
     {
       "title": "Football",
       "content": "Quels sont les 3 derniers matchs de l'équipe préférée de {{userName}} ?"
+    },
+    {
+      "title": "GitHub",
+      "content": "Montre-moi l'activité GitHub de {{userName}}."
     }
   ],
   "placeholder": "Message à {{assistantName}}",

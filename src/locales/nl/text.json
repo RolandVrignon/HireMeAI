@@ -87,6 +87,10 @@
     {
       "title": "Football",
       "content": "Wat zijn de 3 laatste wedstrijden van de favoriete voetbalploeg van {{userName}}?"
+    },
+    {
+      "title": "GitHub",
+      "content": "Toon me de GitHub-activiteit van {{userName}}."
     }
   ],
   "placeholder": "Bericht aan {{assistantName}}",

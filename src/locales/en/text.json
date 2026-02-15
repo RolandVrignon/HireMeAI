@@ -1,22 +1,22 @@
 {
-  "languages" : {
-    "en" : "English",
-    "fr" : "French",
-    "es" : "Spanish",
-    "nl" : "Dutch",
-    "de" : "German"
+  "languages": {
+    "en": "English",
+    "fr": "French",
+    "es": "Spanish",
+    "nl": "Dutch",
+    "de": "German"
   },
   "themes": {
     "dark": "dark",
     "light": "light"
   },
   "copy": {
-    "label" : "copy",
-    "success" : "Code copied to clipboard!"
+    "label": "copy",
+    "success": "Code copied to clipboard!"
   },
-  "loading" : {
-    "loading" : "Loading...",
-    "loadMore" : "Load More"
+  "loading": {
+    "loading": "Loading...",
+    "loadMore": "Load More"
   },
   "typewriter": [
     "code dreams into reality",
@@ -81,26 +81,22 @@
       "content": "Display {{userName}}'s photo gallery."
     },
     {
-      "title": "Contact",
-      "content": "I want to contact {{userName}} via the contact form."
-    },
-    {
-      "title": "Football",
-      "content": "What is the last 3 matches of Roland's Football team ?"
+      "title": "GitHub Activity",
+      "content": "Show me {{userName}}'s GitHub activity."
     }
   ],
   "placeholder": "Message {{assistantName}}",
   "footer": "Made with love and coffee",
   "functions": {
     "language": {
-            "success": "Language changed to {{language}}",
-            "error": "Language already set to {{language}}",
-            "loading": "Changing Language"
+      "success": "Language changed to {{language}}",
+      "error": "Language already set to {{language}}",
+      "loading": "Changing Language"
     },
     "theme": {
-        "success": "Theme changed to {{theme}} mode",
-        "error": "Theme already set to {{theme}} mode",
-        "loading": "Changing theme"
+      "success": "Theme changed to {{theme}} mode",
+      "error": "Theme already set to {{theme}} mode",
+      "loading": "Changing theme"
     }
   }
 }

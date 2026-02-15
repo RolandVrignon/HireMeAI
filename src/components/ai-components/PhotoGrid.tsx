@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
-import { Tilt } from '@/components/ui/tilt';
+import { Tilt } from "@/components/ui/tilt";
 interface Photo {
   url: string;
   alt: string;
@@ -19,7 +19,10 @@ interface PhotoGridProps {
   translations: any;
 }
 
-export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) => {
+export const PhotoGrid: React.FC<PhotoGridProps> = ({
+  photos,
+  translations,
+}) => {
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const [isLoading, setIsLoading] = useState(!photos);
   const [displayedPhotos, setDisplayedPhotos] = useState<Photo[]>([]);
@@ -35,10 +38,13 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
       setDisplayedPhotos(photos.slice(0, photosPerPage));
     }
   }, [photos]);
-  
+
   useEffect(() => {
-    if (displayedPhotos.length > 0 && loadedImages.size === displayedPhotos.length) {
-      const event = new CustomEvent('imagesLoaded');
+    if (
+      displayedPhotos.length > 0 &&
+      loadedImages.size === displayedPhotos.length
+    ) {
+      const event = new CustomEvent("imagesLoaded");
       window.dispatchEvent(event);
     }
   }, [loadedImages, displayedPhotos]);
@@ -48,21 +54,27 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
     const nextPage = currentPage + 1;
     const startIndex = (nextPage - 1) * photosPerPage;
     const endIndex = startIndex + photosPerPage;
-    
-    const newPhotosIndexes = Array.from({ length: photosPerPage }, (_, i) => startIndex + i);
+
+    const newPhotosIndexes = Array.from(
+      { length: photosPerPage },
+      (_, i) => startIndex + i,
+    );
     setLoadingPhotos(newPhotosIndexes);
-    
+
     // Simulate loading delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    setDisplayedPhotos([...displayedPhotos, ...photos.slice(startIndex, endIndex)]);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    setDisplayedPhotos([
+      ...displayedPhotos,
+      ...photos.slice(startIndex, endIndex),
+    ]);
     setCurrentPage(nextPage);
     setIsLoadingMore(false);
     setLoadingPhotos([]);
   };
 
   const handleImageLoad = (url: string) => {
-    setLoadedImages(prev => new Set([...prev, url]));
+    setLoadedImages((prev) => new Set([...prev, url]));
   };
 
   if (isLoading) {
@@ -78,16 +90,13 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
   const renderPhotoOrSkeleton = (photo: Photo, index: number) => {
     if (loadingPhotos.includes(index)) {
       return (
-        <Skeleton 
-          key={index}
-          className="aspect-square w-full rounded-xl"
-        />
+        <Skeleton key={index} className="aspect-square w-full rounded-xl" />
       );
     }
 
     return (
       <Tilt key={index} rotationFactor={14} isRevese={true}>
-        <div 
+        <div
           className="relative aspect-square overflow-hidden rounded-xl cursor-pointer"
           onClick={() => setSelectedPhoto(photo)}
         >
@@ -107,12 +116,14 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
   return (
     <div className="w-full">
       <div className="grid grid-cols-3 gap-2">
-        {displayedPhotos.map((photo, index) => renderPhotoOrSkeleton(photo, index))}
+        {displayedPhotos.map((photo, index) =>
+          renderPhotoOrSkeleton(photo, index),
+        )}
       </div>
 
       {isLoadingMore && (
         <div className="grid grid-cols-3 gap-2 mt-2">
-          {[...Array(9)].map((_, i) => (        
+          {[...Array(9)].map((_, i) => (
             <Skeleton key={i} className="aspect-square w-full rounded-xl" />
           ))}
         </div>
@@ -120,24 +131,27 @@ export const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, translations }) =>
 
       {photos.length > displayedPhotos.length && (
         <div className="w-full flex justify-center mt-4">
-          <Badge 
+          <Badge
             onClick={loadMore}
             variant="outline"
             className="px-6 font-doto cursor-pointer rounded-full dark:bg-white/10 bg-black/10 dark:text-white border-none"
           >
-            {isLoadingMore ? translations.loading.loading : translations.loading.loadMore}
+            {isLoadingMore
+              ? translations.loading.loading
+              : translations.loading.loadMore}
           </Badge>
         </div>
       )}
 
       <Tilt>
-        <Dialog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
-          <DialogContent className="max-w-[90vw] max-h-[90vh] w-full h-full p-0 overflow-hidden bg-transparent border-0">
-            <DialogTitle className="sr-only">
-              Photo View
-            </DialogTitle>
+        <Dialog
+          open={!!selectedPhoto}
+          onOpenChange={() => setSelectedPhoto(null)}
+        >
+          <DialogContent className="max-w-[90vw] max-h-[90dvh] w-full h-full p-0 overflow-hidden bg-transparent border-0">
+            <DialogTitle className="sr-only">Photo View</DialogTitle>
             {selectedPhoto && (
-              <div className="relative w-full h-full min-h-[50vh]">
+              <div className="relative w-full h-full min-h-[50dvh]">
                 <Image
                   src={selectedPhoto.url}
                   alt={selectedPhoto.alt}

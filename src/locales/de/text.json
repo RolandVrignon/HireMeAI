@@ -87,6 +87,10 @@
     {
       "title": "Football",
       "content": "Ich möchte über {{userName}}'s Football-Erfahrungen reden."
+    },
+    {
+      "title": "GitHub",
+      "content": "Zeig mir die GitHub-Aktivität von {{userName}}."
     }
   ],
   "placeholder": "Nachricht an {{assistantName}}",

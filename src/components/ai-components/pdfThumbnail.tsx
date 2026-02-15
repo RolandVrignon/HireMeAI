@@ -7,9 +7,8 @@ import "pdfjs-dist/web/pdf_viewer.css";
 // Configure le worker PDF.js à partir du dossier public
 GlobalWorkerOptions.workerSrc = "/pdf.worker.mjs";
 
-
 export const PdfThumbnail = () => {
-  const [pdfUrl, setPdfUrl] = useState<string | null>('/resume.pdf');
+  const [pdfUrl, setPdfUrl] = useState<string | null>("/resume.pdf");
   const [isPdfAvailable, setIsPdfAvailable] = useState<boolean>(true);
   const [thumbnailSrc, setThumbnailSrc] = useState<string | null>(null);
   const [fileSize, setFileSize] = useState<number | null>(null);
@@ -17,14 +16,13 @@ export const PdfThumbnail = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const renderTaskRef = useRef<any>(null); // Pour suivre les tâches de rendu en cours
 
-
   const getFileSize = async (url: string) => {
     const headResponse = await fetch(url, { method: "HEAD" });
     const contentLength = headResponse.headers.get("content-length");
     if (contentLength) {
       setFileSize(parseInt(contentLength, 10));
     }
-  }
+  };
 
   const formatFileSize = (sizeInBytes: number): string => {
     if (sizeInBytes === 0) return "0 Bytes";
@@ -38,10 +36,9 @@ export const PdfThumbnail = () => {
     let isMounted = true; // Add mounted flag
 
     const checkAndGenerateThumbnail = async () => {
-
       if (!pdfUrl) return;
       if (!canvasRef.current) return; // Early return if canvas not available
-      
+
       try {
         const canvas = canvasRef.current;
         const pdf = await getDocument(pdfUrl).promise;
@@ -53,7 +50,7 @@ export const PdfThumbnail = () => {
         // Check if component is still mounted before updating canvas
         if (!isMounted || !canvas) return;
 
-        const context = canvas.getContext('2d');
+        const context = canvas.getContext("2d");
         if (!context) return; // Early return if context not available
 
         canvas.height = viewport.height;
@@ -115,8 +112,6 @@ export const PdfThumbnail = () => {
     };
   }, [pdfUrl]);
 
-
-
   const handleOpenPdf = () => {
     if (pdfUrl) window.open(pdfUrl, "_blank");
   };
@@ -124,7 +119,11 @@ export const PdfThumbnail = () => {
   return (
     <div
       onClick={handleOpenPdf}
-      className={!isPdfAvailable ? "hidden" : `mask cursor-pointer border-4 border-gray-300 dark:border-zinc-800 rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden`}
+      className={
+        !isPdfAvailable
+          ? "hidden"
+          : `mask cursor-pointer border-4 border-gray-300 dark:border-zinc-800 rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden`
+      }
     >
       <div className="h-[150px] w-full overflow-hidden">
         {thumbnailSrc ? (
@@ -134,15 +133,16 @@ export const PdfThumbnail = () => {
             className="w-full object-cover transition-transform duration-300 hover:scale-[1.02]"
           />
         ) : (
-          <canvas ref={canvasRef} className="hidden" />
+          <canvas ref={canvasRef} className="absolute -left-[9999px]" />
         )}
       </div>
       <div className="p-2 bg-gray-200 dark:bg-zinc-800 gap-2 flex flex-col">
         <div className="text-sm font-doto font-semibold text-gray-700 dark:text-white">
-          {pdfUrl ? pdfUrl.split('/').pop() : ``}
+          {pdfUrl ? pdfUrl.split("/").pop() : ``}
         </div>
         <div className="text-xs text-gray-500 dark:text-gray-400">
-          {fileSize ? formatFileSize(fileSize) : "Unknown size"} • {pageCount || "-"} pages
+          {fileSize ? formatFileSize(fileSize) : "Unknown size"} •{" "}
+          {pageCount || "-"} pages
         </div>
       </div>
     </div>
