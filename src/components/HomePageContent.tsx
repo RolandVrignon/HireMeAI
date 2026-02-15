@@ -182,17 +182,30 @@ export default function HomePageContent() {
     handleSubmit(e);
   };
 
-  const scrollToLastUserMessage = (message: Message, smooth = true) => {
-    const messageElement = messageRefs.current[message.id];
-    if (messageElement && containerRef.current) {
-      const container = containerRef.current;
-      const offsetTop = messageElement.offsetTop;
-      container.scrollTo({
-        top: offsetTop,
-        behavior: smooth ? "smooth" : "instant",
+  const scrollToLastUserMessage = useCallback(
+    (message: Message, smooth = true) => {
+      const doScroll = () => {
+        const messageElement = messageRefs.current[message.id];
+        const container = containerRef.current;
+        if (messageElement && container) {
+          const containerRect = container.getBoundingClientRect();
+          const messageRect = messageElement.getBoundingClientRect();
+          const scrollTop =
+            container.scrollTop + (messageRect.top - containerRect.top);
+          container.scrollTo({
+            top: scrollTop,
+            behavior: smooth ? "smooth" : "instant",
+          });
+        }
+      };
+
+      // Double rAF to ensure DOM layout is fully computed (including heavy components)
+      requestAnimationFrame(() => {
+        requestAnimationFrame(doScroll);
       });
-    }
-  };
+    },
+    [],
+  );
 
   return (
     <AuroraBackground>
