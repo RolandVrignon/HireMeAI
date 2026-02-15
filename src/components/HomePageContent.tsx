@@ -110,15 +110,18 @@ export default function HomePageContent() {
     };
 
     container.addEventListener("scroll", checkOverlap);
-    // Also check on resize and after renders
     window.addEventListener("resize", checkOverlap);
     checkOverlap();
+
+    // Re-check after a short delay to account for DOM updates (e.g. PromptCarousel appearing)
+    const timeout = setTimeout(checkOverlap, 300);
 
     return () => {
       container.removeEventListener("scroll", checkOverlap);
       window.removeEventListener("resize", checkOverlap);
+      clearTimeout(timeout);
     };
-  }, [messages]);
+  }, [messages, isFinished]);
 
   useEffect(() => {
     const handleImagesLoaded = () => {
