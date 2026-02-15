@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  output: "standalone",
   images: {
     domains: [
       "api.microlink.io", // Microlink Image Preview

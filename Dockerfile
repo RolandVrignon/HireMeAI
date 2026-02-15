@@ -1,30 +1,45 @@
-# Utiliser une image de base officielle Node.js (avec Alpine pour réduire la taille de l'image)
 FROM node:20-alpine AS base
-
-# Définir le répertoire de travail dans le conteneur
+RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 
-# Copier uniquement les fichiers nécessaires pour installer les dépendances
-COPY package.json package-lock.json* ./ 
+# --- Dependencies ---
+FROM base AS deps
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
-# Installer les dépendances
-RUN npm install --frozen-lockfile
-
-# Copier tout le code de l'application
+# --- Build ---
+FROM base AS builder
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Construire l'application
-RUN npm run build
+# Public vars — inlined at build time by Next.js (not sensitive)
+ENV NEXT_PUBLIC_ASSISTANT_NAME=RolandGPT
+ENV NEXT_PUBLIC_USER_NAME=Roland
+ENV NEXT_PUBLIC_GITHUB_USERNAME=Rolandvrignon
+ENV NEXT_PUBLIC_WHATSAPP_NUMBER="+33769701268"
 
-# Étape de production : démarrer l'application
-FROM node:20-alpine AS production
+RUN pnpm build
+
+# --- Production ---
+FROM node:20-alpine AS runner
 WORKDIR /app
 
-# Copier les fichiers nécessaires depuis l'étape précédente
-COPY --from=base /app /app
+ENV NODE_ENV=production
+ENV HOSTNAME=0.0.0.0
+ENV PORT=3000
 
-# Installer uniquement les dépendances de production
-RUN npm prune --production
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
-# Définir la commande par défaut pour démarrer l'application
-CMD ["npm", "run", "start"]
+# Copy public assets (photos, resume, images, textures)
+COPY --from=builder /app/public ./public
+
+# Copy standalone output
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]

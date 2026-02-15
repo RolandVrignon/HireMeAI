@@ -1,4 +1,9 @@
 node_modules
+.next
+.git
+.gitignore
+.env
+.env.local
 npm-debug.log
 .DS_Store
-.git
+README.md

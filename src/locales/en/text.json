@@ -43,42 +43,42 @@
   "contact": {
     "name": "John Doe",
     "email": "john.doe@acme.com",
-    "message": "Hi {{userName}}, I'm interested in your profile, let's talk about it.",
+    "message": "Hi {{userName}}, I'm interested in your profile. Let's connect!",
     "send": "Send"
   },
   "football": {
     "referee": "Referee"
   },
-  "title": "👋 Hi, please chat with me before hiring me",
-  "description": "Hi ! I'm {{userName}}. A fullstack software engineer and passionnate project builder.\nFeel free to ask me anything about my projects, my skills or my experiences or even about my life.",
+  "title": "Chat with me, then hire me",
+  "description": "Hey, I'm {{userName}} — a fullstack software engineer and passionate project builder.\nAsk me anything about my projects, skills, experience, or even my life outside of code.",
   "questions": [
     {
-      "title": "Meteo",
-      "content": "What is the weather ?"
+      "title": "Weather",
+      "content": "What's the weather like right now?"
     },
     {
       "title": "Resume",
-      "content": "I want to see {{userName}}'s resume."
+      "content": "Show me {{userName}}'s resume."
     },
     {
       "title": "Projects",
-      "content": "Can you tell me about {{userName}}'s most significant projects and their technical challenges?"
+      "content": "Tell me about {{userName}}'s most impressive projects and their technical challenges."
     },
     {
       "title": "Experience",
-      "content": "What is {{userName}}'s professional experience ?"
+      "content": "Walk me through {{userName}}'s professional experience."
     },
     {
       "title": "Motivation",
-      "content": "What drives {{userName}} as a developer and what are their career goals?"
+      "content": "What drives {{userName}} as a developer and where is their career headed?"
     },
     {
-      "title": "Learning",
-      "content": "What is {{userName}}'s educational experience and what training has they undergone?"
+      "title": "Education",
+      "content": "What's {{userName}}'s educational background and what training have they completed?"
     },
     {
       "title": "Photo Gallery",
-      "content": "Display {{userName}}'s photo gallery."
+      "content": "Show me {{userName}}'s photo gallery."
     },
     {
       "title": "GitHub Activity",
@@ -90,12 +90,12 @@
   "functions": {
     "language": {
       "success": "Language changed to {{language}}",
-      "error": "Language already set to {{language}}",
-      "loading": "Changing Language"
+      "error": "Language is already set to {{language}}",
+      "loading": "Changing language"
     },
     "theme": {
       "success": "Theme changed to {{theme}} mode",
-      "error": "Theme already set to {{theme}} mode",
+      "error": "Theme is already set to {{theme}} mode",
       "loading": "Changing theme"
     }
   }
